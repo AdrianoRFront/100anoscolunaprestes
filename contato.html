@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Memorial Coluna Prestes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --creme:         #F5F0E8;
+  --creme-dark:    #EAE2D0;
+  --creme-mid:     #DDD4BC;
+  --vermelho:      #8B1A1A;
+  --vermelho-vivo: #B52B2B;
+  --preto:         #141008;
+  --preto-suave:   #2A2016;
+  --ouro:          #8A6B22;
+  --ouro-claro:    #C9A84C;
+  --fonte-titulo:  'Playfair Display', Georgia, serif;
+  --fonte-corpo:   'Crimson Text', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fonte-corpo); background: var(--creme); color: var(--preto); font-size: 18px; line-height: 1.75; overflow-x: hidden; }
+
+/* ═══ NAVBAR ══════════════════════════════════════════════════════════════ */
+nav {
+  background: var(--preto); border-bottom: 3px solid var(--vermelho);
+  position: sticky; top: 0; z-index: 200; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,.5);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo-main { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2; }
+.nav-logo-sub  { font-size: 10px; color: #888; letter-spacing: 4px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.nav-links { display: flex; list-style: none; border-left: 1px solid #2A2416; }
+.nav-links li a {
+  color: #A89880; text-decoration: none; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 8px 14px; font-family: var(--fonte-corpo);
+  border-right: 1px solid #2A2416; transition: color .2s, background .2s;
+  height: 68px; display: flex; align-items: center;
+}
+.nav-links li a:hover { color: var(--ouro-claro); background: rgba(201,168,76,.06); }
+.nav-links li a.ativo { color: var(--ouro-claro); border-bottom: 2px solid var(--vermelho); }
+
+/* ═══ BOTÕES ══════════════════════════════════════════════════════════════ */
+.btn-prim  { display: inline-block; background: var(--vermelho); color: var(--creme); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: background .2s; border: none; cursor: pointer; }
+.btn-prim:hover { background: var(--vermelho-vivo); }
+.btn-sec   { display: inline-block; border: 1px solid var(--ouro); color: var(--ouro-claro); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all .2s; background: transparent; cursor: pointer; }
+.btn-sec:hover { background: var(--ouro); color: var(--preto); }
+.btn-ghost { display: inline-block; border: 1px solid rgba(245,240,232,.25); color: var(--creme); padding: 11px 28px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all .2s; background: transparent; cursor: pointer; }
+.btn-ghost:hover { background: rgba(245,240,232,.1); }
+
+/* ═══ BREADCRUMB ══════════════════════════════════════════════════════════ */
+.breadcrumb { background: var(--preto-suave); border-bottom: 1px solid rgba(201,168,76,.12); padding: .7rem 3rem; }
+.breadcrumb-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.breadcrumb a { color: #666; text-decoration: none; transition: color .2s; }
+.breadcrumb a:hover { color: var(--ouro-claro); }
+.breadcrumb-sep { color: var(--vermelho); font-size: 8px; }
+.breadcrumb-atual { color: var(--ouro-claro); }
+
+/* ═══ PAGE HERO ══════════════════════════════════════════════════════════ */
+.page-hero {
+  background: var(--preto); padding: 4.5rem 3rem;
+  position: relative; overflow: hidden; text-align: center;
+}
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,26,26,.04) 40px, rgba(139,26,26,.04) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,26,26,.04) 40px, rgba(139,26,26,.04) 41px);
+}
+.ph-frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,.12); pointer-events: none; }
+.ph-frame::before { content: ''; position: absolute; top: -1px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+.ph-frame::after  { content: ''; position: absolute; bottom: -1px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+.ph-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.ph-eyebrow { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 1rem; font-family: var(--fonte-corpo); opacity: .8; }
+.ph-h1 { font-family: var(--fonte-titulo); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; color: var(--creme); line-height: 1.1; }
+.ph-h1 em { color: var(--vermelho-vivo); font-style: italic; display: block; font-size: .55em; letter-spacing: 6px; margin-top: .4rem; font-weight: 400; }
+.ph-orn { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1.5rem auto; }
+.ph-orn-line    { width: 60px; height: 1px; background: var(--vermelho); }
+.ph-orn-diamond { width: 7px; height: 7px; background: var(--vermelho); transform: rotate(45deg); }
+.ph-desc { color: #B0A490; font-size: 1rem; font-style: italic; max-width: 520px; margin: 0 auto; }
+
+/* ═══ UTILITÁRIOS ═════════════════════════════════════════════════════════ */
+.sec-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); display: block; margin-bottom: .8rem; }
+.sec-label.light { color: var(--ouro-claro); }
+p.corpo { color: var(--preto-suave); margin-bottom: 1.2rem; line-height: 1.85; }
+
+/* ═══ CARDS DE CONTATO RÁPIDO ═════════════════════════════════════════════ */
+.contato-rapido {
+  background: var(--preto); padding: 3.5rem 3rem;
+  border-bottom: 1px solid rgba(201,168,76,.08);
+}
+.contato-rapido-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: rgba(201,168,76,.1); border: 0.5px solid rgba(201,168,76,.15);
+}
+.contato-card {
+  background: #0E0C08; padding: 2.2rem 1.8rem;
+  transition: background .2s; cursor: default;
+  display: flex; flex-direction: column; gap: .8rem;
+}
+.contato-card:hover { background: rgba(139,26,26,.1); }
+.contato-card-icone {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(201,168,76,.2);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: .4rem;
+}
+.contato-card-tipo { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); }
+.contato-card-valor { font-family: var(--fonte-titulo); font-size: 1rem; color: var(--creme); font-weight: 700; line-height: 1.3; }
+.contato-card-valor a { color: var(--ouro-claro); text-decoration: none; transition: border-color .2s; border-bottom: 1px solid transparent; }
+.contato-card-valor a:hover { border-color: var(--ouro-claro); }
+.contato-card-detalhe { font-size: .82rem; color: #666; line-height: 1.5; }
+
+/* ═══ SEÇÃO PRINCIPAL: FORMULÁRIO + INFO ═════════════════════════════════ */
+.main-section { padding: 5rem 3rem; background: var(--creme-dark); }
+.main-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+}
+
+/* ─── FORMULÁRIO ──────────────────────────────────────────────────────── */
+.form-wrap {
+  background: var(--creme); border: 0.5px solid var(--creme-mid);
+  padding: 2.8rem; border-top: 4px solid var(--vermelho);
+}
+.form-titulo { font-family: var(--fonte-titulo); font-size: 1.5rem; font-weight: 700; color: var(--preto); margin-bottom: .4rem; }
+.form-sub { font-size: .9rem; color: var(--preto-suave); font-style: italic; margin-bottom: 2rem; }
+
+/* Abas de assunto */
+.assunto-tabs { display: flex; gap: 0; margin-bottom: 2rem; border: 0.5px solid var(--creme-mid); overflow: hidden; }
+.assunto-tab {
+  flex: 1; padding: .7rem .5rem; background: var(--creme);
+  border: none; border-right: 0.5px solid var(--creme-mid); cursor: pointer;
+  font-family: var(--fonte-corpo); font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: #888; transition: all .2s; text-align: center;
+}
+.assunto-tab:last-child { border-right: none; }
+.assunto-tab:hover { color: var(--vermelho); background: rgba(139,26,26,.03); }
+.assunto-tab.ativo { background: var(--vermelho); color: var(--creme); }
+
+/* Campos */
+.form-row { margin-bottom: 1.2rem; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+.form-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-bottom: .5rem; }
+.form-input {
+  width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme);
+  padding: .8rem 1rem; font-family: var(--fonte-corpo); font-size: .97rem;
+  color: var(--preto); outline: none; transition: border-color .2s;
+}
+.form-input:focus { border-color: var(--vermelho); }
+.form-select {
+  width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme);
+  padding: .8rem 1rem; font-family: var(--fonte-corpo); font-size: .97rem;
+  color: var(--preto); outline: none; cursor: pointer;
+}
+.form-textarea {
+  width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme);
+  padding: .8rem 1rem; font-family: var(--fonte-corpo); font-size: .97rem;
+  color: var(--preto); resize: vertical; min-height: 140px;
+  outline: none; transition: border-color .2s;
+}
+.form-textarea:focus { border-color: var(--vermelho); }
+.form-nota { font-size: .8rem; color: #999; font-style: italic; margin-top: .4rem; }
+.form-check { display: flex; align-items: flex-start; gap: .7rem; cursor: pointer; font-size: .88rem; color: var(--preto-suave); line-height: 1.5; margin-top: 1rem; }
+.form-check input { margin-top: 3px; accent-color: var(--vermelho); flex-shrink: 0; }
+
+/* Resposta do formulário */
+.form-sucesso {
+  display: none; background: rgba(58,122,90,.08);
+  border: 1px solid rgba(58,122,90,.25); padding: 1.5rem;
+  text-align: center; margin-top: 1.5rem;
+}
+.form-sucesso p { color: #3A7A5A; font-size: .95rem; }
+
+/* ─── PAINEL DE INFORMAÇÕES ───────────────────────────────────────────── */
+.info-wrap {}
+
+.info-bloco {
+  padding: 1.8rem; background: var(--creme);
+  border: 0.5px solid var(--creme-mid); margin-bottom: 1.5rem;
+  border-left: 3px solid var(--vermelho);
+}
+.info-bloco-titulo {
+  font-family: var(--fonte-titulo); font-size: 1.05rem; font-weight: 700;
+  color: var(--preto); margin-bottom: 1.2rem; display: flex; align-items: center; gap: .7rem;
+}
+.info-bloco-titulo svg { color: var(--vermelho); flex-shrink: 0; }
+
+.info-linha { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: .9rem; }
+.info-linha:last-child { margin-bottom: 0; }
+.info-key {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--vermelho); font-family: var(--fonte-corpo);
+  min-width: 90px; flex-shrink: 0; padding-top: 3px;
+}
+.info-val { font-size: .92rem; color: var(--preto-suave); line-height: 1.55; }
+.info-val a { color: var(--ouro); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.info-val a:hover { border-color: var(--ouro); }
+.info-val strong { color: var(--preto); }
+
+/* Horários em destaque */
+.horario-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--creme-mid); border: 0.5px solid var(--creme-mid); margin-top: 1rem;
+}
+.horario-item { background: var(--creme); padding: .9rem 1rem; }
+.horario-dia  { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-bottom: 3px; }
+.horario-hora { font-size: .9rem; color: var(--preto); font-weight: 600; font-family: var(--fonte-titulo); }
+.horario-obs  { font-size: .78rem; color: #999; font-style: italic; margin-top: 2px; }
+
+/* Aviso de fechamento */
+.aviso-fechado {
+  background: rgba(139,26,26,.06); border: 0.5px solid rgba(139,26,26,.2);
+  padding: .8rem 1rem; display: flex; align-items: center; gap: .7rem;
+  margin-top: 1rem;
+}
+.aviso-fechado svg { color: var(--vermelho); flex-shrink: 0; }
+.aviso-fechado p { font-size: .85rem; color: var(--vermelho); line-height: 1.5; }
+
+/* ═══ SEÇÃO DOS DOIS MEMORIAIS ════════════════════════════════════════════ */
+.memoriais-contato { padding: 5rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+.memoriais-contato::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,.025) 60px, rgba(201,168,76,.025) 61px);
+}
+.memoriais-contato-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; position: relative;
+}
+.memorial-contato-card { border: 0.5px solid rgba(201,168,76,.15); overflow: hidden; }
+.memorial-contato-header {
+  background: var(--vermelho); padding: 1.8rem 2rem;
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.memorial-num {
+  font-family: var(--fonte-titulo); font-size: 3.5rem; font-weight: 900;
+  color: rgba(245,240,232,.15); line-height: 1; flex-shrink: 0;
+}
+.memorial-header-info {}
+.memorial-header-info h3 { font-family: var(--fonte-titulo); font-size: 1.3rem; color: var(--creme); font-weight: 700; margin-bottom: 4px; }
+.memorial-header-info p { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,240,232,.6); font-family: var(--fonte-corpo); }
+
+.memorial-contato-body { background: #0E0C08; padding: 2rem; }
+.memorial-info-item { display: flex; gap: 1rem; align-items: flex-start; padding: .8rem 0; border-bottom: 1px solid rgba(201,168,76,.07); }
+.memorial-info-item:last-child { border-bottom: none; padding-bottom: 0; }
+.memorial-info-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--ouro-claro); opacity: .7; margin-top: 1px; }
+.memorial-info-key { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); margin-bottom: 3px; }
+.memorial-info-val { font-size: .9rem; color: #B0A490; line-height: 1.5; }
+.memorial-info-val a { color: var(--ouro-claro); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.memorial-info-val a:hover { border-color: var(--ouro-claro); }
+
+.memorial-mapa {
+  height: 180px; background: #0A0806; border-top: 1px solid rgba(201,168,76,.08);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .2s; position: relative;
+}
+.memorial-mapa:hover { background: #141008; }
+.memorial-mapa p { font-size: .8rem; color: #444; font-style: italic; position: absolute; bottom: .8rem; text-align: center; left: 0; right: 0; }
+.memorial-mapa-btn {
+  position: absolute; bottom: 2.5rem;
+  background: var(--vermelho); color: var(--creme); border: none;
+  padding: 7px 18px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  font-family: var(--fonte-corpo); cursor: pointer; transition: background .2s;
+}
+.memorial-mapa-btn:hover { background: var(--vermelho-vivo); }
+
+/* ═══ SEÇÃO IMPRENSA ══════════════════════════════════════════════════════ */
+.imprensa-section { padding: 5rem 3rem; background: var(--creme); }
+.imprensa-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.imprensa-texto {}
+.imprensa-texto h2 { font-family: var(--fonte-titulo); font-size: 1.8rem; font-weight: 700; color: var(--preto); margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--vermelho); }
+.imprensa-texto p { color: var(--preto-suave); margin-bottom: 1rem; line-height: 1.85; }
+.imprensa-destaque { border-left: 3px solid var(--vermelho); padding: .8rem 1.5rem; background: rgba(139,26,26,.04); font-style: italic; color: var(--vermelho); font-size: 1rem; margin: 1.5rem 0; }
+.imprensa-kit { background: var(--preto-suave); padding: 2rem; margin-top: 2rem; }
+.imprensa-kit h4 { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1rem; margin-bottom: 1rem; }
+.kit-item {
+  display: flex; align-items: center; gap: 1rem; padding: .7rem 0;
+  border-bottom: 1px solid rgba(201,168,76,.08); cursor: pointer;
+  transition: background .2s; padding-left: .5rem;
+}
+.kit-item:hover { background: rgba(201,168,76,.05); }
+.kit-item:last-child { border-bottom: none; }
+.kit-icone { width: 32px; height: 32px; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.kit-info {}
+.kit-nome { font-size: .9rem; color: var(--creme); font-family: var(--fonte-titulo); font-weight: 700; }
+.kit-detalhe { font-size: .78rem; color: #666; }
+.kit-baixar { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ouro); font-family: var(--fonte-corpo); white-space: nowrap; margin-left: auto; padding-right: .5rem; }
+
+.imprensa-contato { background: var(--creme-dark); padding: 2rem; border: 0.5px solid var(--creme-mid); }
+.imprensa-contato h4 { font-family: var(--fonte-titulo); font-size: 1rem; color: var(--preto); margin-bottom: 1rem; padding-bottom: .8rem; border-bottom: 1px solid var(--creme-mid); }
+.imprensa-contato-item { display: flex; gap: .7rem; align-items: center; padding: .6rem 0; }
+.imprensa-contato-item svg { color: var(--vermelho); flex-shrink: 0; }
+.imprensa-contato-item p { font-size: .9rem; color: var(--preto-suave); }
+.imprensa-contato-item a { color: var(--ouro); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.imprensa-contato-item a:hover { border-color: var(--ouro); }
+
+/* ═══ REDES SOCIAIS ═══════════════════════════════════════════════════════ */
+.redes-section { padding: 4rem 3rem; background: var(--creme-dark); border-top: 1px solid var(--creme-mid); }
+.redes-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.redes-texto {}
+.redes-texto h3 { font-family: var(--fonte-titulo); font-size: 1.3rem; color: var(--preto); margin-bottom: .4rem; }
+.redes-texto p { font-size: .9rem; color: var(--preto-suave); font-style: italic; }
+.redes-lista { display: flex; gap: 1rem; flex-wrap: wrap; }
+.rede-btn {
+  display: flex; align-items: center; gap: .7rem;
+  border: 0.5px solid var(--creme-mid); background: var(--creme);
+  padding: .8rem 1.4rem; text-decoration: none;
+  font-family: var(--fonte-corpo); font-size: 11px;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--preto-suave);
+  transition: all .2s;
+}
+.rede-btn:hover { border-color: var(--vermelho); color: var(--vermelho); }
+.rede-btn svg { flex-shrink: 0; }
+
+/* ═══ FAQ ═════════════════════════════════════════════════════════════════ */
+.faq-section { padding: 5rem 3rem; background: var(--creme); }
+.faq-wrap { max-width: 860px; margin: 0 auto; }
+.faq-titulo { font-family: var(--fonte-titulo); font-size: 1.8rem; font-weight: 700; color: var(--preto); padding-bottom: 1.2rem; border-bottom: 2px solid var(--vermelho); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+.faq-item { border-bottom: 0.5px solid var(--creme-mid); overflow: hidden; }
+.faq-pergunta {
+  width: 100%; text-align: left; background: transparent; border: none;
+  padding: 1.4rem 0; display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; cursor: pointer; font-family: var(--fonte-titulo); font-size: 1rem;
+  font-weight: 700; color: var(--preto); transition: color .2s;
+}
+.faq-pergunta:hover { color: var(--vermelho); }
+.faq-pergunta.aberto { color: var(--vermelho); }
+.faq-icone {
+  width: 24px; height: 24px; border: 1px solid var(--creme-mid);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: all .2s; font-size: 1.1rem; color: var(--preto-suave);
+}
+.faq-pergunta.aberto .faq-icone { background: var(--vermelho); border-color: var(--vermelho); color: var(--creme); transform: rotate(45deg); }
+.faq-resposta { display: none; padding: 0 0 1.5rem; }
+.faq-resposta.aberto { display: block; }
+.faq-resposta p { font-size: .95rem; color: var(--preto-suave); line-height: 1.8; margin-bottom: .8rem; }
+.faq-resposta p:last-child { margin-bottom: 0; }
+.faq-resposta a { color: var(--vermelho); text-decoration: none; border-bottom: 1px solid rgba(139,26,26,.3); transition: border-color .2s; }
+.faq-resposta a:hover { border-color: var(--vermelho); }
+
+/* ═══ MAPA FULL ═══════════════════════════════════════════════════════════ */
+.mapa-full { background: var(--preto-suave); border-top: 3px solid var(--vermelho); }
+.mapa-full-placeholder {
+  height: 400px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.mapa-full-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(20,16,8,.92); padding: 1.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid rgba(201,168,76,.15);
+}
+.mapa-full-info {}
+.mapa-full-info h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: 1.05rem; margin-bottom: 4px; }
+.mapa-full-info p  { font-size: .85rem; color: #888; }
+
+/* ═══ CTA FINAL ═══════════════════════════════════════════════════════════ */
+.cta-section { background: var(--vermelho); padding: 4.5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0,0,0,.03) 30px, rgba(0,0,0,.03) 31px); }
+.cta-section > * { position: relative; }
+.cta-section h2 { font-family: var(--fonte-titulo); font-size: clamp(1.5rem,3vw,2rem); color: var(--creme); margin-bottom: .6rem; }
+.cta-section p  { color: rgba(245,240,232,.8); font-style: italic; margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ═══ FOOTER ══════════════════════════════════════════════════════════════ */
+footer { background: var(--preto); padding: 4rem 3rem 2rem; border-top: 3px solid var(--vermelho); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid #2A2416; }
+.f-logo { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1.3rem; font-weight: 700; margin-bottom: .8rem; }
+.footer-brand p { font-size: .9rem; color: #666; line-height: 1.6; }
+.footer-col h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: .9rem; margin-bottom: 1rem; letter-spacing: 1px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 6px; }
+.footer-col ul li a { color: #666; text-decoration: none; font-size: .85rem; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--ouro-claro); }
+.footer-bottom { max-width: 1200px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: #444; }
+.wp-badge { border: 0.5px solid #333; color: #555; font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Memorial Coluna Prestes</span>
+    <span class="nav-logo-sub">1924 · Santo Ângelo · Brasil</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" >Sobre</a></li>
+    <li><a href="linha-do-tempo.html" >Linha do Tempo</a></li>
+    <li><a href="memoriais.html" >Memoriais</a></li>
+    <li><a href="agenda.html" >Agenda</a></li>
+    <li><a href="depoimentos.html" >Depoimentos</a></li>
+    <li><a href="biblioteca.html" >Biblioteca</a></li>
+    <li><a href="contato.html" class="ativo">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb-sep">✦</span>
+    <span class="breadcrumb-atual">Contato</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-frame"></div>
+  <div class="ph-content">
+    <p class="ph-eyebrow">Fale Conosco</p>
+    <h1 class="ph-h1">
+      Contato
+      <em>Visitas · Pesquisa · Imprensa</em>
+    </h1>
+    <div class="ph-orn">
+      <div class="ph-orn-line"></div><div class="ph-orn-diamond"></div><div class="ph-orn-line"></div>
+    </div>
+    <p class="ph-desc">Estamos disponíveis para receber visitantes, responder pesquisadores, atender a imprensa e receber parceiros. Escolha o canal mais adequado para a sua necessidade.</p>
+  </div>
+</section>
+
+<!-- ═══ CONTATO RÁPIDO ════════════════════════════════════════════════════ -->
+<section class="contato-rapido">
+  <div class="contato-rapido-grid">
+
+    <div class="contato-card">
+      <div class="contato-card-icone">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M3 4h14a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="#C9A84C" stroke-width="1.2"/>
+          <path d="M2 5l8 6 8-6" stroke="#C9A84C" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <span class="contato-card-tipo">E-mail geral</span>
+      <div class="contato-card-valor">
+        <a href="/cdn-cgi/l/email-protection#99faf6f7edf8edf6d9f4fcf4f6ebf0f8f5faf6f5ecf7f8e9ebfceaedfceab7f6ebfeb7fbeb">contato@memorial<br>colunaprestes.org.br</a>
+      </div>
+      <p class="contato-card-detalhe">Resposta em até 48h úteis</p>
+    </div>
+
+    <div class="contato-card">
+      <div class="contato-card-icone">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 4h4l1.5 3.5-2 1.5c1 2 2.5 3.5 4.5 4.5l1.5-2L17 13v4s-2 1-4 1C6 18 2 11 2 8c0-2 1-4 2-4z" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="contato-card-tipo">Telefone</span>
+      <div class="contato-card-valor">(55) 3312-0000</div>
+      <p class="contato-card-detalhe">Seg–Sex · 9h–12h e 14h–17h<br>Sáb · 9h–12h</p>
+    </div>
+
+    <div class="contato-card">
+      <div class="contato-card-icone">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="#C9A84C" stroke-width="1.2"/>
+          <circle cx="10" cy="7" r="2" stroke="#C9A84C" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <span class="contato-card-tipo">Endereço</span>
+      <div class="contato-card-valor">Antiga Estação Ferroviária<br>Santo Ângelo — RS</div>
+      <p class="contato-card-detalhe">CEP 98.801-000 · Centro</p>
+    </div>
+
+    <div class="contato-card">
+      <div class="contato-card-icone">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="8" stroke="#C9A84C" stroke-width="1.2"/>
+          <path d="M10 5v5l3 3" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="contato-card-tipo">Horário de visita</span>
+      <div class="contato-card-valor">Seg–Sex 9h–17h<br>Sáb 9h–12h</div>
+      <p class="contato-card-detalhe">Entrada gratuita<br>Fechado domingos e feriados</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ FORMULÁRIO + PAINEL INFO ══════════════════════════════════════════ -->
+<section class="main-section">
+  <div class="main-grid">
+
+    <!-- FORMULÁRIO -->
+    <div class="form-wrap">
+      <h2 class="form-titulo">Envie sua Mensagem</h2>
+      <p class="form-sub">Preencha o formulário abaixo e nossa equipe responde em até 48 horas úteis.</p>
+
+      <!-- Abas de assunto -->
+      <div class="assunto-tabs">
+        <button class="assunto-tab ativo" onclick="trocarAba(this, 'geral')">Geral</button>
+        <button class="assunto-tab" onclick="trocarAba(this, 'visita')">Visita</button>
+        <button class="assunto-tab" onclick="trocarAba(this, 'pesquisa')">Pesquisa</button>
+        <button class="assunto-tab" onclick="trocarAba(this, 'imprensa')">Imprensa</button>
+        <button class="assunto-tab" onclick="trocarAba(this, 'parceria')">Parceria</button>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-row" style="margin-bottom:0;">
+          <label class="form-label">Nome completo</label>
+          <input type="text" class="form-input" placeholder="Seu nome">
+        </div>
+        <div class="form-row" style="margin-bottom:0;">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="seu@email.com">
+        </div>
+      </div>
+
+      <div class="form-row" style="margin-top:1.2rem;">
+        <label class="form-label">Telefone / WhatsApp (opcional)</label>
+        <input type="tel" class="form-input" placeholder="(00) 00000-0000">
+      </div>
+
+      <!-- Campo dinâmico por aba -->
+      <div id="campo-visita" class="form-row" style="display:none;">
+        <label class="form-label">Data preferencial de visita</label>
+        <input type="text" class="form-input" placeholder="Ex: Primeira semana de agosto, qualquer dia útil">
+      </div>
+
+      <div id="campo-grupo" class="form-row" style="display:none;">
+        <label class="form-label">Número de pessoas no grupo</label>
+        <select class="form-select">
+          <option>Visita individual</option>
+          <option>Pequeno grupo (2–10 pessoas)</option>
+          <option>Grupo escolar (11–30 alunos)</option>
+          <option>Grupo grande (+ de 30 pessoas)</option>
+        </select>
+      </div>
+
+      <div id="campo-instituicao" class="form-row" style="display:none;">
+        <label class="form-label">Instituição</label>
+        <input type="text" class="form-input" placeholder="Universidade, escola, veículo, empresa…">
+      </div>
+
+      <div id="campo-pesquisa-tipo" class="form-row" style="display:none;">
+        <label class="form-label">Tipo de material de interesse</label>
+        <select class="form-select">
+          <option>Documentos e correspondências</option>
+          <option>Acervo fotográfico</option>
+          <option>Mapas históricos</option>
+          <option>Periódicos da época</option>
+          <option>Acervo bibliográfico</option>
+          <option>Todos os tipos</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Assunto</label>
+        <select class="form-select" id="select-assunto">
+          <option>Informações gerais sobre o Memorial</option>
+          <option>Agendamento de visita individual</option>
+          <option>Agendamento de visita em grupo / escolar</option>
+          <option>Consulta ao acervo para pesquisa</option>
+          <option>Solicitação de imagens para publicação</option>
+          <option>Inscrição nas oficinas</option>
+          <option>Envio de depoimento</option>
+          <option>Proposta de parceria</option>
+          <option>Contato para a imprensa</option>
+          <option>Doação ao acervo</option>
+          <option>Outro</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">Mensagem</label>
+        <textarea class="form-textarea" placeholder="Descreva sua solicitação com o máximo de detalhes possível…" id="textarea-msg"></textarea>
+        <p class="form-nota" id="form-dica">Quanto mais detalhes você fornecer, mais objetiva será nossa resposta.</p>
+      </div>
+
+      <label class="form-check">
+        <input type="checkbox" checked>
+        Concordo que minhas informações sejam usadas exclusivamente para responder a esta solicitação, conforme a <a href="#" style="color:var(--ouro);">Política de Privacidade</a>.
+      </label>
+
+      <div style="margin-top:1.8rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+        <button class="btn-prim" style="flex:1;" onclick="enviarFormulario()">Enviar mensagem</button>
+        <button class="btn-sec" style="white-space:nowrap;" onclick="this.closest('.form-wrap').querySelectorAll('input,textarea,select').forEach(el=>el.value='')">Limpar</button>
+      </div>
+
+      <div class="form-sucesso" id="form-sucesso">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="color:#3A7A5A;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p style="margin-top:.8rem;"><strong>Mensagem enviada com sucesso!</strong><br>Nossa equipe responderá em até 48 horas úteis.</p>
+      </div>
+    </div>
+
+    <!-- PAINEL DE INFORMAÇÕES -->
+    <div class="info-wrap">
+
+      <!-- Horários -->
+      <div class="info-bloco">
+        <h3 class="info-bloco-titulo">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M9 5v4l3 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Horários de Funcionamento
+        </h3>
+        <div class="horario-grid">
+          <div class="horario-item">
+            <p class="horario-dia">Segunda — Sexta</p>
+            <p class="horario-hora">9h–12h  ·  14h–17h</p>
+          </div>
+          <div class="horario-item">
+            <p class="horario-dia">Sábado</p>
+            <p class="horario-hora">9h–12h</p>
+            <p class="horario-obs">Somente manhã</p>
+          </div>
+          <div class="horario-item">
+            <p class="horario-dia">Domingo</p>
+            <p class="horario-hora">Fechado</p>
+          </div>
+          <div class="horario-item">
+            <p class="horario-dia">Feriados</p>
+            <p class="horario-hora">Fechado</p>
+            <p class="horario-obs">Consultar exceções</p>
+          </div>
+        </div>
+        <div class="aviso-fechado">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 5v4M8 11v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <p>A visita é <strong>gratuita</strong> e não requer agendamento para grupos de até 5 pessoas. Grupos maiores devem agendar com antecedência mínima de 7 dias.</p>
+        </div>
+      </div>
+
+      <!-- Endereço -->
+      <div class="info-bloco">
+        <h3 class="info-bloco-titulo">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C6.8 2 5 3.8 5 6c0 3.5 4 10 4 10s4-6.5 4-10c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="9" cy="6" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          Localização
+        </h3>
+        <div class="info-linha">
+          <span class="info-key">Endereço</span>
+          <span class="info-val">Antiga Estação Ferroviária<br>Centro — Santo Ângelo/RS<br>CEP 98.801-000</span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">Como chegar</span>
+          <span class="info-val">A 3 minutos a pé da Praça Pinheiro Machado, centro histórico de Santo Ângelo. Há estacionamento nas ruas do entorno.</span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">De Porto Alegre</span>
+          <span class="info-val">Aprox. 490 km pela BR-285 e RS-344. Tempo estimado: 5h30 de carro.</span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">De Santa Rosa</span>
+          <span class="info-val">Aprox. 90 km pela RS-344. Tempo estimado: 1h de carro.</span>
+        </div>
+      </div>
+
+      <!-- Contatos específicos -->
+      <div class="info-bloco">
+        <h3 class="info-bloco-titulo">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="7" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M3 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Contatos Específicos
+        </h3>
+        <div class="info-linha">
+          <span class="info-key">Geral</span>
+          <span class="info-val"><a href="/cdn-cgi/l/email-protection#7615191802170219361b131b19041f171a15191a0318170604130502130558190411581404"><span class="__cf_email__" data-cfemail="8ae9e5e4feebfee5cae7efe7e5f8e3ebe6e9e5e6ffe4ebfaf8eff9feeff9a4e5f8eda4e8f8">[email&#160;protected]</span></a></span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">Pesquisa</span>
+          <span class="info-val"><a href="/cdn-cgi/l/email-protection#5a2a3f292b2f33293b1a373f373528333b363935362f343b2a283f292e3f297435283d743828"><span class="__cf_email__" data-cfemail="5b2b3e282a2e32283a1b363e363429323a373834372e353a2b293e282f3e287534293c753929">[email&#160;protected]</span></a></span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">Imprensa</span>
+          <span class="info-val"><a href="/cdn-cgi/l/email-protection#abc2c6dbd9cec5d8caebc6cec6c4d9c2cac7c8c4c7dec5cadbd9ced8dfced885c4d9cc85c9d9"><span class="__cf_email__" data-cfemail="157c786567707b6674557870787a677c7479767a79607b74656770666170663b7a67723b7767">[email&#160;protected]</span></a></span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">Oficinas</span>
+          <span class="info-val"><a href="/cdn-cgi/l/email-protection#a2cdc4cbc1cbccc3d1e2cfc7cfcdd0cbc3cec1cdced7ccc3d2d0c7d1d6c7d18ccdd0c58cc0d0"><span class="__cf_email__" data-cfemail="711e171812181f1002311c141c1e0318101d121e1d041f10010314020514025f1e03165f1303">[email&#160;protected]</span></a></span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key">Telefone</span>
+          <span class="info-val"><strong>(55) 3312-0000</strong> · Seg–Sáb horário de funcionamento</span>
+        </div>
+      </div>
+
+      <!-- Acessibilidade -->
+      <div class="info-bloco" style="border-left-color:var(--ouro);">
+        <h3 class="info-bloco-titulo" style="color:var(--ouro);">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="4" r="2" stroke="#C9A84C" stroke-width="1.2"/><path d="M5 8h8M9 8v6M6 14h6" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Acessibilidade
+        </h3>
+        <div class="info-linha">
+          <span class="info-key" style="color:var(--ouro);">Acesso</span>
+          <span class="info-val">Rampa de acesso pela entrada principal</span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key" style="color:var(--ouro);">Banheiros</span>
+          <span class="info-val">Adaptado para PCDs disponível</span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key" style="color:var(--ouro);">Sinalização</span>
+          <span class="info-val">Sinalização em Braille nos principais pontos da exposição</span>
+        </div>
+        <div class="info-linha">
+          <span class="info-key" style="color:var(--ouro);">Grupos</span>
+          <span class="info-val">Atendimento especial para grupos com necessidades específicas — agendar com antecedência</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ DOIS MEMORIAIS ════════════════════════════════════════════════════ -->
+<section class="memoriais-contato">
+  <div style="max-width:1200px; margin:0 auto 3rem; position:relative;">
+    <span class="sec-label light">Dois Espaços, Uma Memória</span>
+    <h2 style="font-family:var(--fonte-titulo); font-size:clamp(1.7rem,3vw,2.2rem); font-weight:700; color:var(--creme); display:block; margin-bottom:.5rem;">Onde Nos Encontrar</h2>
+    <p style="color:#C0B49E; font-size:.97rem; max-width:650px;">O Memorial Coluna Prestes tem dois espaços físicos no Brasil — em Santo Ângelo/RS e em Palmas/TO.</p>
+  </div>
+  <div class="memoriais-contato-grid">
+
+    <!-- Santo Ângelo -->
+    <div class="memorial-contato-card">
+      <div class="memorial-contato-header">
+        <div class="memorial-num">01</div>
+        <div class="memorial-header-info">
+          <h3>Santo Ângelo</h3>
+          <p>Rio Grande do Sul · Memorial Principal</p>
+        </div>
+      </div>
+      <div class="memorial-contato-body">
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.8 1 4 2.8 4 5c0 3.5 4 10 4 10s4-6.5 4-10c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="5" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Endereço</p>
+            <p class="memorial-info-val">Antiga Estação Ferroviária, s/n<br>Centro — Santo Ângelo/RS · CEP 98.801-000</p>
+          </div>
+        </div>
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 4v4l2.5 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Horários</p>
+            <p class="memorial-info-val">Seg–Sex · 9h–12h e 14h–17h<br>Sábado · 9h–12h · Domingo e feriados fechado</p>
+          </div>
+        </div>
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2"/><path d="M1 4l7 5 7-5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Contato</p>
+            <p class="memorial-info-val">
+              <a href="/cdn-cgi/l/email-protection#0665696872677269466b636b69746f676a65696a7368677674637572637528697461286474"><span class="__cf_email__" data-cfemail="0a6965647e6b7e654a676f676578636b666965667f646b7a786f797e6f792465786d246878">[email&#160;protected]</span></a><br>
+              (55) 3312-0000
+            </p>
+          </div>
+        </div>
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 7h14M7 1v14" stroke="currentColor" stroke-width="1" opacity=".5" stroke-dasharray="2 2"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Entrada</p>
+            <p class="memorial-info-val">Gratuita · Sem reserva para até 5 pessoas<br>Grupos: agendamento obrigatório</p>
+          </div>
+        </div>
+      </div>
+      <div class="memorial-mapa">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.15">
+          <circle cx="40" cy="35" r="22" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="40" cy="35" r="6" fill="#8B1A1A"/>
+          <path d="M40 35 L40 68" stroke="#8B1A1A" stroke-width="2.5"/>
+        </svg>
+        <button class="memorial-mapa-btn" onclick="alert('Abrir no Google Maps — integrar via widget Elementor')">
+          Abrir no Maps
+        </button>
+        <p>🗺️ Incorporar Google Maps — Santo Ângelo/RS via widget Elementor</p>
+      </div>
+    </div>
+
+    <!-- Palmas -->
+    <div class="memorial-contato-card">
+      <div class="memorial-contato-header">
+        <div class="memorial-num">02</div>
+        <div class="memorial-header-info">
+          <h3>Palmas</h3>
+          <p>Tocantins · Memorial Oscar Niemeyer</p>
+        </div>
+      </div>
+      <div class="memorial-contato-body">
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.8 1 4 2.8 4 5c0 3.5 4 10 4 10s4-6.5 4-10c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="5" r="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Endereço</p>
+            <p class="memorial-info-val">Praça dos Girassóis, s/n<br>Centro — Palmas/TO · CEP 77.001-002</p>
+          </div>
+        </div>
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 4v4l2.5 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Horários</p>
+            <p class="memorial-info-val">Terça–Domingo · 9h–18h<br>Segunda e feriados fechado</p>
+          </div>
+        </div>
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2"/><path d="M1 4l7 5 7-5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Contato</p>
+            <p class="memorial-info-val">
+              <a href="/cdn-cgi/l/email-protection#82f2e3eeefe3f1c2efe7efedf0ebe3eee1edeef7ece3f2f0e7f1f6e7f1acedf0e5ace0f0"><span class="__cf_email__" data-cfemail="92e2f3fefff3e1d2fff7fffde0fbf3fef1fdfee7fcf3e2e0f7e1e6f7e1bcfde0f5bcf0e0">[email&#160;protected]</span></a><br>
+              (63) 3218-0000
+            </p>
+          </div>
+        </div>
+        <div class="memorial-info-item">
+          <div class="memorial-info-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 7h14M7 1v14" stroke="currentColor" stroke-width="1" opacity=".5" stroke-dasharray="2 2"/></svg>
+          </div>
+          <div>
+            <p class="memorial-info-key">Entrada</p>
+            <p class="memorial-info-val">Gratuita · Totalmente acessível para PCDs<br>Visitas guiadas mediante agendamento</p>
+          </div>
+        </div>
+      </div>
+      <div class="memorial-mapa">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" opacity="0.15">
+          <circle cx="40" cy="35" r="22" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="40" cy="35" r="6" fill="#8B1A1A"/>
+          <path d="M40 35 L40 68" stroke="#8B1A1A" stroke-width="2.5"/>
+        </svg>
+        <button class="memorial-mapa-btn" onclick="alert('Abrir no Google Maps — integrar via widget Elementor')">
+          Abrir no Maps
+        </button>
+        <p>🗺️ Incorporar Google Maps — Palmas/TO via widget Elementor</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ IMPRENSA ══════════════════════════════════════════════════════════ -->
+<section class="imprensa-section" id="imprensa">
+  <div class="imprensa-grid">
+
+    <div class="imprensa-texto">
+      <h2>Assessoria de Imprensa</h2>
+      <p>O Memorial Coluna Prestes está disponível para entrevistas, declarações, fornecimento de imagens e informações históricas para veículos de comunicação, documentaristas e produtores culturais.</p>
+      <p>Nosso acervo fotográfico histórico e os especialistas do Memorial estão disponíveis como fontes para reportagens sobre a Coluna Prestes, o tenentismo e a memória histórica brasileira.</p>
+      <div class="imprensa-destaque">
+        Para solicitações urgentes com prazo menor que 48h, entre em contato diretamente por telefone nos horários de funcionamento.
+      </div>
+      <p>Cedemos imagens do acervo para uso editorial mediante autorização prévia e citação da fonte. Para uso comercial, consulte as condições específicas.</p>
+
+      <div class="imprensa-kit">
+        <h4>Kit de Imprensa — Materiais disponíveis:</h4>
+        <div class="kit-item">
+          <div class="kit-icone">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="12" rx="1" stroke="#C9A84C" stroke-width="1"/><path d="M4 6h6M4 8.5h4" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/></svg>
+          </div>
+          <div class="kit-info">
+            <p class="kit-nome">Release Institucional</p>
+            <p class="kit-detalhe">PDF · Atualizado em 2025</p>
+          </div>
+          <span class="kit-baixar">Baixar ↓</span>
+        </div>
+        <div class="kit-item">
+          <div class="kit-icone">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="3" width="10" height="8" rx="1" stroke="#C9A84C" stroke-width="1"/><circle cx="7" cy="7" r="2" stroke="#C9A84C" stroke-width="1"/></svg>
+          </div>
+          <div class="kit-info">
+            <p class="kit-nome">Imagens do Memorial (alta resolução)</p>
+            <p class="kit-detalhe">ZIP · 24 fotografias · uso editorial</p>
+          </div>
+          <span class="kit-baixar">Baixar ↓</span>
+        </div>
+        <div class="kit-item">
+          <div class="kit-icone">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L2 4v6l5 3 5-3V4L7 1z" stroke="#C9A84C" stroke-width="1"/></svg>
+          </div>
+          <div class="kit-info">
+            <p class="kit-nome">Logotipos e identidade visual</p>
+            <p class="kit-detalhe">AI, PNG, SVG · versões para fundo claro e escuro</p>
+          </div>
+          <span class="kit-baixar">Baixar ↓</span>
+        </div>
+        <div class="kit-item">
+          <div class="kit-icone">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1" stroke="#C9A84C" stroke-width="1"/><path d="M4 5h6M4 7h6M4 9h4" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/></svg>
+          </div>
+          <div class="kit-info">
+            <p class="kit-nome">Ficha histórica da Coluna Prestes</p>
+            <p class="kit-detalhe">PDF · Síntese histórica para consulta rápida</p>
+          </div>
+          <span class="kit-baixar">Baixar ↓</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="imprensa-contato">
+        <h4>Contato Direto — Imprensa</h4>
+        <div class="imprensa-contato-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2"/><path d="M1 4l7 5 7-5" stroke="currentColor" stroke-width="1.2"/></svg>
+          <p><a href="/cdn-cgi/l/email-protection#1f76726f6d7a716c7e5f727a72706d767e737c70736a717e6f6d7a6c6b7a6c31706d78317d6d"><span class="__cf_email__" data-cfemail="d3babea3a1b6bda0b293beb6bebca1bab2bfb0bcbfa6bdb2a3a1b6a0a7b6a0fdbca1b4fdb1a1">[email&#160;protected]</span></a></p>
+        </div>
+        <div class="imprensa-contato-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3h4l1.5 3-2 1.5c.9 1.8 2.5 3.1 4.5 4.5L12.5 10 15 12v3s-2 1-4 1c-6 0-10-7-10-10 0-2 1-3 2-3z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          <p>(55) 3312-0000 · ramal 3</p>
+        </div>
+        <div class="imprensa-contato-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M8 4v4l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <p>Retorno em até 24h úteis<br>Urgências: ligar diretamente</p>
+        </div>
+      </div>
+
+      <!-- Acervo para imprensa -->
+      <div style="background:var(--creme-dark); border:0.5px solid var(--creme-mid); padding:1.8rem; margin-top:1.5rem;">
+        <p style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--vermelho); font-family:var(--fonte-corpo); margin-bottom:.8rem;">Uso de imagens do acervo</p>
+        <p style="font-size:.88rem; color:var(--preto-suave); line-height:1.7; margin-bottom:.8rem;">Imagens históricas do acervo podem ser cedidas para uso <strong>editorial</strong> gratuitamente, com citação obrigatória: <em>"Acervo Memorial Coluna Prestes"</em>.</p>
+        <p style="font-size:.88rem; color:var(--preto-suave); line-height:1.7; margin-bottom:1.2rem;">Para uso <strong>comercial</strong>, é necessário formalizar a solicitação com descrição do projeto e canal de distribuição.</p>
+        <a href="#" class="btn-prim" style="font-size:10px; padding:9px 20px;">Solicitar imagens</a>
+      </div>
+
+      <!-- Especialistas disponíveis -->
+      <div style="background:var(--preto); padding:1.8rem; margin-top:1.5rem; border-left:3px solid var(--ouro-claro);">
+        <p style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--ouro-claro); font-family:var(--fonte-corpo); margin-bottom:.8rem;">Especialistas para entrevistas</p>
+        <p style="font-size:.88rem; color:#B0A490; line-height:1.7;">Nossa equipe de pesquisadores históricos está disponível para entrevistas sobre a Coluna Prestes, o tenentismo, a Primeira República e a preservação de patrimônio histórico.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ REDES SOCIAIS ══════════════════════════════════════════════════════ -->
+<section class="redes-section">
+  <div class="redes-inner">
+    <div class="redes-texto">
+      <h3>Siga o Memorial</h3>
+      <p>Acompanhe novidades, fotos do acervo e informações das oficinas nas redes sociais.</p>
+    </div>
+    <div class="redes-lista">
+      <a href="#" class="rede-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="4.5" r="1" fill="currentColor"/></svg>
+        Instagram
+      </a>
+      <a href="#" class="rede-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v10H2z" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="2" width="14" height="12" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+        Facebook
+      </a>
+      <a href="#" class="rede-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M6 7.5l4 2-4 2V7.5z" stroke="currentColor" stroke-width="1" fill="currentColor" opacity=".5"/></svg>
+        YouTube
+      </a>
+      <a href="#" class="rede-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 2l4 7 2-3 3 6" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        Twitter / X
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FAQ ════════════════════════════════════════════════════════════════ -->
+<section class="faq-section">
+  <div class="faq-wrap">
+    <h2 class="faq-titulo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#8B1A1A" stroke-width="1.5"/><path d="M9.5 9.5C9.5 8.1 10.6 7 12 7s2.5 1.1 2.5 2.5c0 1.5-2.5 3-2.5 3M12 16v.5" stroke="#8B1A1A" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Perguntas Frequentes
+    </h2>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        A visita ao Memorial é paga?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Não. A entrada ao Memorial Coluna Prestes é completamente <strong>gratuita</strong>, tanto em Santo Ângelo/RS quanto em Palmas/TO. Nenhuma reserva é necessária para visitas individuais ou grupos de até 5 pessoas.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        Como agendar uma visita com grupo escolar?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Grupos escolares devem agendar com pelo menos <strong>7 dias de antecedência</strong> por e-mail (<a href="/cdn-cgi/l/email-protection#3a5955544e5b4e557a575f575548535b565955564f545b4a485f494e5f491455485d145848"><span class="__cf_email__" data-cfemail="690a06071d081d0629040c04061b0008050a06051c0708191b0c1a1d0c1a47061b0e470b1b">[email&#160;protected]</span></a>) ou telefone. Informe o número de alunos, faixa etária e disponibilidade de datas.</p>
+        <p>O Memorial oferece visitas guiadas adaptadas para diferentes faixas etárias, com material de apoio para professores.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        Posso consultar o acervo para uma pesquisa acadêmica?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Sim. O acervo está disponível para pesquisadores mediante agendamento prévio de pelo menos 7 dias. Envie sua solicitação para <a href="/cdn-cgi/l/email-protection#5d2d382e2c28342e3c1d303830322f343c313e323128333c2d2f382e29382e73322f3a733f2f"><span class="__cf_email__" data-cfemail="bacadfc9cbcfd3c9dbfad7dfd7d5c8d3dbd6d9d5d6cfd4dbcac8dfc9cedfc994d5c8dd94d8c8">[email&#160;protected]</span></a> descrevendo o tema de pesquisa e o tipo de material que você precisa.</p>
+        <p>A consulta é gratuita. Fotografia do acervo para uso acadêmico é permitida sem flash. Publicações que utilizem o acervo devem citar o Memorial e, preferencialmente, enviar uma cópia da obra.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        As oficinas são pagas? Como me inscrever?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Todas as oficinas do Ciclo 2025 são <strong>gratuitas</strong>. As inscrições são realizadas pela <a href="agenda.html">página da Agenda</a> ou por e-mail para <a href="/cdn-cgi/l/email-protection#c3aca5aaa0aaada2b083aea6aeacb1aaa2afa0acafb6ada2b3b1a6b0b7a6b0edacb1a4eda1b1"><span class="__cf_email__" data-cfemail="d4bbb2bdb7bdbab5a794b9b1b9bba6bdb5b8b7bbb8a1bab5a4a6b1a7a0b1a7fabba6b3fab6a6">[email&#160;protected]</span></a>. Algumas edições têm vagas limitadas — inscreva-se com antecedência.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        Como posso enviar um depoimento sobre o Memorial?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Acesse a <a href="depoimentos.html">página de Depoimentos</a> e preencha o formulário. Aceitamos depoimentos em texto, vídeo ou áudio. Com sua autorização, o relato é publicado no site e integra o acervo permanente do Memorial.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        Posso fazer uma doação ao acervo do Memorial?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Sim! O Memorial aceita doações de documentos, fotografias, objetos e livros relacionados à Coluna Prestes, ao tenentismo e à história da Primeira República. Entre em contato por e-mail descrevendo os itens que deseja doar para que possamos avaliar a incorporação ao acervo.</p>
+        <p>Doações financeiras para apoiar as oficinas e a digitalização do acervo também são bem-vindas — consulte-nos sobre as formas disponíveis.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pergunta" onclick="toggleFAQ(this)">
+        O Memorial tem estacionamento?
+        <span class="faq-icone">+</span>
+      </button>
+      <div class="faq-resposta">
+        <p>Em Santo Ângelo, há estacionamento disponível nas ruas do entorno da Estação Ferroviária (o acesso ao centro histórico é fácil de carro). Em Palmas, o Memorial fica na Praça dos Girassóis, que possui amplo estacionamento público.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══ MAPA FULL WIDTH ════════════════════════════════════════════════════ -->
+<div class="mapa-full">
+  <div class="mapa-full-placeholder">
+    <svg width="120" height="100" viewBox="0 0 120 100" fill="none" opacity="0.12">
+      <circle cx="40" cy="42" r="18" stroke="#C9A84C" stroke-width="1.5"/>
+      <circle cx="40" cy="42" r="5" fill="#8B1A1A"/>
+      <path d="M40 42 L40 72" stroke="#8B1A1A" stroke-width="2"/>
+      <circle cx="82" cy="30" r="14" stroke="#C9A84C" stroke-width="1.5"/>
+      <circle cx="82" cy="30" r="4" fill="#8B1A1A"/>
+      <path d="M82 30 L82 55" stroke="#8B1A1A" stroke-width="2"/>
+      <path d="M40 42 Q60 35 82 30" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+    </svg>
+    <div class="mapa-full-overlay">
+      <div class="mapa-full-info">
+        <h4>Dois Memoriais no Brasil</h4>
+        <p>Santo Ângelo/RS · Palmas/TO · 🗺️ Incorporar mapa interativo via Google Maps Widget no Elementor</p>
+      </div>
+      <a href="#" class="btn-prim">Abrir no Google Maps</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2>A Memória da Coluna está Esperando por Você</h2>
+  <p>Visite o Memorial, participe das oficinas, explore o acervo. A história está aqui.</p>
+  <div class="cta-btns">
+    <a href="sobre.html"    class="btn-prim">Sobre o Memorial</a>
+    <a href="agenda.html"   class="btn-ghost">Agenda de Oficinas</a>
+    <a href="linha-do-tempo.html" class="btn-ghost">Linha do Tempo</a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">Memorial Coluna Prestes</div>
+      <p>Preservando a memória de uma das maiores marchas revolucionárias da história do Brasil.</p>
+      <p style="margin-top:1rem; font-size:.85rem;">Antiga Estação Ferroviária<br>Santo Ângelo — RS, Brasil</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#"><a href="index.html" style="color:inherit;text-decoration:none;">Início</a></a></li>
+        <li><a href="sobre.html">Sobre o Memorial</a></li>
+        <li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+        <li><a href="memoriais.html">Memoriais</a></li>
+        <li><a href="agenda.html">Agenda de Oficinas</a></li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="biblioteca.html">Biblioteca</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="/cdn-cgi/l/email-protection#c0a3afaeb4a1b4af80ada5adafb2a9a1aca3afacb5aea1b0b2a5b3b4a5b3eeafb2a7eea2b2">contato@memorial…</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#ee9e8b9d9f9b879d8fae838b83819c878f828d81829b808f9e9c8b9d9a8b9dc0819c89c08c9c">pesquisa@memorial…</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#cba2a6bbb9aea5b8aa8ba6aea6a4b9a2aaa7a8a4a7bea5aabbb9aeb8bfaeb8e5a4b9ace5a9b9">imprensa@memorial…</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#6d020b040e04030c1e2d000800021f040c010e020118030c1d1f081e19081e43021f0a430f1f">oficinas@memorial…</a></li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:.85rem; color:#555; line-height:1.6;">
+        (55) 3312-0000<br>
+        Seg–Sex · 9h–17h · Sáb · 9h–12h
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Memorial Coluna Prestes · Todos os direitos reservados</p>
+    <span class="wp-badge">WordPress + Elementor</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Abas do formulário ────────────────────────────────────────────────────
+function trocarAba(btn, aba) {
+  document.querySelectorAll('.assunto-tab').forEach(b => b.classList.remove('ativo'));
+  btn.classList.add('ativo');
+
+  // Esconde todos os campos dinâmicos
+  ['campo-visita','campo-grupo','campo-instituicao','campo-pesquisa-tipo']
+    .forEach(id => document.getElementById(id).style.display = 'none');
+
+  const dicas = {
+    geral:    'Quanto mais detalhes você fornecer, mais objetiva será nossa resposta.',
+    visita:   'Informe o número de pessoas, faixa etária e disponibilidade. Grupos acima de 5 precisam agendar.',
+    pesquisa: 'Descreva seu tema de pesquisa, instituição e o tipo de material que precisa acessar no acervo.',
+    imprensa: 'Informe o veículo, tipo de cobertura (matéria, documentário, livro) e prazo necessário.',
+    parceria: 'Descreva o tipo de parceria que você está propondo e sua instituição ou empresa.',
+  };
+
+  const selects = {
+    visita:   ['Visita individual','Visita em grupo escolar','Visita com grupo de pesquisadores','Visita guiada especial'],
+    pesquisa: ['Consulta 

@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca — Memorial Coluna Prestes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --creme:         #F5F0E8;
+  --creme-dark:    #EAE2D0;
+  --creme-mid:     #DDD4BC;
+  --vermelho:      #8B1A1A;
+  --vermelho-vivo: #B52B2B;
+  --preto:         #141008;
+  --preto-suave:   #2A2016;
+  --ouro:          #8A6B22;
+  --ouro-claro:    #C9A84C;
+  --fonte-titulo:  'Playfair Display', Georgia, serif;
+  --fonte-corpo:   'Crimson Text', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fonte-corpo); background: var(--creme); color: var(--preto); font-size: 18px; line-height: 1.75; overflow-x: hidden; }
+
+/* ═══ NAVBAR ══════════════════════════════════════════════════════════════ */
+nav {
+  background: var(--preto); border-bottom: 3px solid var(--vermelho);
+  position: sticky; top: 0; z-index: 200; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo-main { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2; }
+.nav-logo-sub  { font-size: 10px; color: #888; letter-spacing: 4px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.nav-links { display: flex; list-style: none; border-left: 1px solid #2A2416; }
+.nav-links li a {
+  color: #A89880; text-decoration: none; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 8px 14px; font-family: var(--fonte-corpo);
+  border-right: 1px solid #2A2416; transition: color .2s, background .2s;
+  height: 68px; display: flex; align-items: center;
+}
+.nav-links li a:hover { color: var(--ouro-claro); background: rgba(201,168,76,.06); }
+.nav-links li a.ativo { color: var(--ouro-claro); border-bottom: 2px solid var(--vermelho); }
+
+/* ═══ BOTÕES ══════════════════════════════════════════════════════════════ */
+.btn-prim  { display: inline-block; background: var(--vermelho); color: var(--creme); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: background .2s; border: none; cursor: pointer; }
+.btn-prim:hover { background: var(--vermelho-vivo); }
+.btn-sec   { display: inline-block; border: 1px solid var(--ouro); color: var(--ouro-claro); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all .2s; background: transparent; cursor: pointer; }
+.btn-sec:hover { background: var(--ouro); color: var(--preto); }
+.btn-ghost { display: inline-block; border: 1px solid rgba(245,240,232,.25); color: var(--creme); padding: 11px 28px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all .2s; background: transparent; cursor: pointer; }
+.btn-ghost:hover { background: rgba(245,240,232,.1); }
+
+/* ═══ BREADCRUMB ══════════════════════════════════════════════════════════ */
+.breadcrumb { background: var(--preto-suave); border-bottom: 1px solid rgba(201,168,76,.12); padding: .7rem 3rem; }
+.breadcrumb-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.breadcrumb a { color: #666; text-decoration: none; transition: color .2s; }
+.breadcrumb a:hover { color: var(--ouro-claro); }
+.breadcrumb-sep { color: var(--vermelho); font-size: 8px; }
+.breadcrumb-atual { color: var(--ouro-claro); }
+
+/* ═══ PAGE HERO ══════════════════════════════════════════════════════════ */
+.page-hero { background: var(--preto); padding: 4.5rem 3rem; position: relative; overflow: hidden; text-align: center; }
+.page-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,26,26,.04) 40px, rgba(139,26,26,.04) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,26,26,.04) 40px, rgba(139,26,26,.04) 41px);
+}
+.ph-frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,.12); pointer-events: none; }
+.ph-frame::before { content: ''; position: absolute; top: -1px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+.ph-frame::after  { content: ''; position: absolute; bottom: -1px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+.ph-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.ph-eyebrow { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 1rem; font-family: var(--fonte-corpo); opacity: .8; }
+.ph-h1 { font-family: var(--fonte-titulo); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; color: var(--creme); line-height: 1.1; }
+.ph-h1 em { color: var(--vermelho-vivo); font-style: italic; display: block; font-size: .55em; letter-spacing: 6px; margin-top: .4rem; font-weight: 400; }
+.ph-orn { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1.5rem auto; }
+.ph-orn-line    { width: 60px; height: 1px; background: var(--vermelho); }
+.ph-orn-diamond { width: 7px; height: 7px; background: var(--vermelho); transform: rotate(45deg); }
+.ph-desc { color: #B0A490; font-size: 1rem; font-style: italic; max-width: 560px; margin: 0 auto; }
+
+/* ═══ UTILITÁRIOS ═════════════════════════════════════════════════════════ */
+.sec-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); display: block; margin-bottom: .8rem; }
+.sec-label.light { color: var(--ouro-claro); }
+.sec-title { font-family: var(--fonte-titulo); font-size: clamp(1.7rem,3vw,2.2rem); font-weight: 700; color: var(--preto); padding-bottom: 1.2rem; position: relative; display: inline-block; }
+.sec-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--vermelho); }
+.sec-title.light { color: var(--creme); }
+.sec-title.light::after { background: var(--ouro-claro); }
+.sec-title.centro { display: block; text-align: center; }
+.sec-title.centro::after { left: 50%; transform: translateX(-50%); }
+p.corpo { color: var(--preto-suave); margin-bottom: 1.2rem; line-height: 1.85; }
+
+/* ═══ LAYOUT PRINCIPAL: SIDEBAR + GRADE ══════════════════════════════════ */
+.biblioteca-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  max-width: 1300px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+
+/* ─── SIDEBAR ─────────────────────────────────────────────────────────── */
+.bib-sidebar {
+  background: var(--preto-suave);
+  border-right: 1px solid rgba(201,168,76,.1);
+  padding: 2.5rem 0;
+  position: sticky;
+  top: 68px;
+  height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+.bib-sidebar::-webkit-scrollbar { width: 3px; }
+.bib-sidebar::-webkit-scrollbar-thumb { background: var(--vermelho); }
+
+.sidebar-busca { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(201,168,76,.08); margin-bottom: 1rem; }
+.sidebar-busca-input {
+  width: 100%; border: 0.5px solid rgba(201,168,76,.2); background: rgba(201,168,76,.05);
+  padding: .6rem 1rem; font-family: var(--fonte-corpo); font-size: .9rem; color: var(--creme);
+  outline: none; transition: border-color .2s;
+}
+.sidebar-busca-input::placeholder { color: #555; }
+.sidebar-busca-input:focus { border-color: var(--ouro); }
+
+.sidebar-secao { margin-bottom: .5rem; }
+.sidebar-secao-titulo {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--ouro); padding: .8rem 1.5rem .4rem; font-family: var(--fonte-corpo);
+}
+.sidebar-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .6rem 1.5rem .6rem 2rem;
+  text-decoration: none; font-size: .88rem; color: #888;
+  font-family: var(--fonte-corpo); border-left: 2px solid transparent;
+  transition: all .2s; cursor: pointer; background: transparent; border-right: none;
+  width: 100%; text-align: left;
+}
+.sidebar-item:hover { color: var(--creme); background: rgba(201,168,76,.04); border-left-color: rgba(201,168,76,.3); }
+.sidebar-item.ativo { color: var(--ouro-claro); border-left-color: var(--vermelho); background: rgba(139,26,26,.1); }
+.sidebar-count { font-size: .75rem; background: rgba(201,168,76,.12); color: var(--ouro-claro); padding: 2px 7px; font-family: var(--fonte-corpo); }
+.sidebar-item.ativo .sidebar-count { background: var(--vermelho); color: var(--creme); }
+
+.sidebar-divisor { height: 1px; background: rgba(201,168,76,.08); margin: 1rem 1.5rem; }
+
+/* ─── ÁREA PRINCIPAL ───────────────────────────────────────────────────── */
+.bib-main { padding: 3rem; background: var(--creme-dark); }
+
+/* Toolbar */
+.bib-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem; border-bottom: 1px solid var(--creme-mid);
+}
+.bib-resultado { font-size: .9rem; color: #888; font-style: italic; font-family: var(--fonte-corpo); }
+.bib-resultado strong { color: var(--preto); font-style: normal; }
+.bib-ordenar { display: flex; align-items: center; gap: .8rem; }
+.bib-ordenar span { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #888; font-family: var(--fonte-corpo); }
+.bib-select {
+  border: 0.5px solid var(--creme-mid); background: var(--creme);
+  padding: .5rem .8rem; font-family: var(--fonte-corpo); font-size: .88rem; color: var(--preto);
+  outline: none; cursor: pointer;
+}
+.bib-view-btns { display: flex; gap: 4px; }
+.bib-view-btn {
+  width: 32px; height: 32px; border: 0.5px solid var(--creme-mid); background: var(--creme);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s;
+}
+.bib-view-btn.ativo { background: var(--vermelho); border-color: var(--vermelho); }
+.bib-view-btn.ativo svg { color: var(--creme); }
+.bib-view-btn svg { color: var(--preto-suave); }
+
+/* Grade de livros (modo grade 3 col) */
+.livros-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+/* Livro card */
+.livro-card {
+  background: var(--creme); border: 0.5px solid var(--creme-mid);
+  overflow: hidden; transition: transform .2s, box-shadow .2s; cursor: pointer;
+  display: flex; flex-direction: column;
+}
+.livro-card:hover { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(139,26,26,.1); }
+
+/* Capa do livro */
+.livro-capa {
+  aspect-ratio: 2/3; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 1.2rem;
+  font-family: var(--fonte-titulo); font-weight: 700; font-size: .95rem;
+  color: var(--creme); line-height: 1.3;
+}
+.livro-capa::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px;
+  background: rgba(0,0,0,.25);
+}
+.livro-capa::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.65) 100%);
+}
+.livro-capa-txt { position: relative; z-index: 1; }
+.livro-badge {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 8px; font-family: var(--fonte-corpo); border: 1px solid;
+}
+.livro-badge.destaque { background: var(--vermelho); border-color: var(--vermelho); color: var(--creme); }
+.livro-badge.novo { background: var(--ouro-claro); border-color: var(--ouro-claro); color: var(--preto); }
+.livro-badge.acervo { background: rgba(245,240,232,.15); border-color: rgba(245,240,232,.3); color: var(--creme); }
+
+/* Metadados do livro */
+.livro-meta { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; gap: .4rem; }
+.livro-titulo-meta { font-family: var(--fonte-titulo); font-size: 1rem; font-weight: 700; color: var(--preto); line-height: 1.3; }
+.livro-autor-meta { font-size: .85rem; color: var(--preto-suave); font-style: italic; }
+.livro-ano-edit { font-size: .78rem; color: #999; }
+.livro-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: auto; padding-top: .8rem; }
+.livro-tag {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 2px 7px; border: 1px solid var(--creme-mid);
+  color: var(--preto-suave); font-family: var(--fonte-corpo);
+}
+.livro-sinopse { font-size: .82rem; color: var(--preto-suave); line-height: 1.55; margin-top: .4rem; }
+
+/* Modo lista */
+.livros-lista { display: flex; flex-direction: column; gap: .8rem; }
+.livros-lista .livro-card { flex-direction: row; }
+.livros-lista .livro-capa { aspect-ratio: unset; width: 90px; min-height: 130px; flex-shrink: 0; }
+.livros-lista .livro-meta { padding: 1.2rem 1.5rem; }
+
+/* ─── LIVRO DESTAQUE (featured) ────────────────────────────────────────── */
+.livro-destaque-section { padding: 4rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+.livro-destaque-section::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,.025) 60px, rgba(201,168,76,.025) 61px); }
+.livro-destaque-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 240px 1fr; gap: 4rem; align-items: start; position: relative; }
+.livro-destaque-capa {
+  aspect-ratio: 2/3; display: flex; align-items: flex-end; padding: 1.5rem;
+  font-family: var(--fonte-titulo); font-weight: 700; font-size: 1rem;
+  color: var(--creme); line-height: 1.3; position: relative; overflow: hidden;
+  box-shadow: 8px 8px 30px rgba(0,0,0,.5);
+}
+.livro-destaque-capa::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px; background: rgba(0,0,0,.3); }
+.livro-destaque-capa::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.75) 100%); }
+.livro-destaque-capa-txt { position: relative; z-index: 1; }
+.livro-destaque-texto {}
+.livro-destaque-texto p { color: #C0B49E; margin-bottom: 1.1rem; line-height: 1.85; }
+.livro-destaque-info {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: rgba(201,168,76,.12); border: 0.5px solid rgba(201,168,76,.15); margin: 2rem 0;
+}
+.livro-destaque-info-item { background: #0E0C08; padding: .9rem 1.1rem; }
+.livro-di-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); margin-bottom: 3px; }
+.livro-di-val { font-size: .9rem; color: #B0A490; line-height: 1.4; }
+
+/* ─── SEÇÃO BIBLIOGRÁFICA (referências acadêmicas) ─────────────────────── */
+.biblio-section { padding: 5rem 3rem; background: var(--creme); }
+.biblio-wrap { max-width: 1200px; margin: 0 auto; }
+.biblio-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+.biblio-list-section { margin-bottom: 3rem; }
+.biblio-categoria-titulo {
+  font-family: var(--fonte-titulo); font-size: 1.1rem; font-weight: 700;
+  color: var(--preto); padding: .8rem 0; margin-bottom: .5rem;
+  border-bottom: 2px solid var(--vermelho); display: flex; align-items: center; gap: .8rem;
+}
+.biblio-num { font-size: 10px; letter-spacing: 2px; color: var(--ouro); background: rgba(138,107,34,.1); padding: 3px 8px; font-family: var(--fonte-corpo); }
+.ref-item {
+  padding: 1rem 0 1rem 2rem; border-bottom: 0.5px solid var(--creme-mid);
+  font-size: .95rem; color: var(--preto-suave); position: relative; line-height: 1.65;
+}
+.ref-item::before { content: '◆'; color: var(--vermelho); font-size: .5rem; position: absolute; left: 0; top: 1.3rem; }
+.ref-item cite { font-style: italic; color: var(--preto); font-weight: 600; }
+.ref-item .ref-ano { color: var(--vermelho); font-weight: 600; }
+.ref-item .ref-nota { display: block; font-size: .82rem; color: #999; margin-top: 3px; font-style: italic; }
+.ref-item a { color: var(--ouro); text-decoration: none; font-size: .82rem; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.ref-item a:hover { border-color: var(--ouro); }
+
+/* ─── FONTES PRIMÁRIAS ─────────────────────────────────────────────────── */
+.fontes-section { padding: 5rem 3rem; background: var(--creme-dark); }
+.fontes-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+.fonte-card {
+  background: var(--creme); border: 0.5px solid var(--creme-mid);
+  padding: 1.8rem; transition: border-color .2s, transform .2s;
+}
+.fonte-card:hover { border-color: var(--vermelho); transform: translateY(-3px); }
+.fonte-icone { margin-bottom: 1rem; }
+.fonte-tipo { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-bottom: .5rem; display: block; }
+.fonte-card h3 { font-family: var(--fonte-titulo); font-size: 1.05rem; font-weight: 700; color: var(--preto); margin-bottom: .6rem; line-height: 1.3; }
+.fonte-card p { font-size: .88rem; color: var(--preto-suave); line-height: 1.6; margin-bottom: 1rem; }
+.fonte-num { font-family: var(--fonte-titulo); font-size: 2rem; font-weight: 900; color: var(--creme-mid); line-height: 1; margin-bottom: .4rem; }
+.fonte-lnk { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); text-decoration: none; font-family: var(--fonte-corpo); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.fonte-lnk:hover { border-color: var(--vermelho); }
+
+/* ─── PERIÓDICOS E ARTIGOS ─────────────────────────────────────────────── */
+.artigos-section { padding: 5rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+.artigos-section::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,.025) 60px, rgba(201,168,76,.025) 61px); }
+.artigos-wrap { max-width: 1200px; margin: 0 auto; position: relative; }
+.artigos-lista { display: flex; flex-direction: column; gap: 0; }
+.artigo-item {
+  display: grid; grid-template-columns: 60px 1fr auto;
+  gap: 1.5rem; align-items: start;
+  padding: 1.5rem 0; border-bottom: 1px solid rgba(201,168,76,.08);
+  transition: background .2s; cursor: pointer;
+}
+.artigo-item:hover { background: rgba(201,168,76,.03); }
+.artigo-ano {
+  font-family: var(--fonte-titulo); font-size: 1.2rem; font-weight: 900;
+  color: var(--ouro-claro); line-height: 1; text-align: right; padding-top: .2rem;
+}
+.artigo-info {}
+.artigo-titulo { font-family: var(--fonte-titulo); font-size: .97rem; font-weight: 700; color: var(--creme); line-height: 1.3; margin-bottom: .4rem; }
+.artigo-autores { font-size: .85rem; color: #C0B49E; font-style: italic; margin-bottom: .3rem; }
+.artigo-revista { font-size: .8rem; color: var(--ouro); letter-spacing: 1px; }
+.artigo-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .5rem; }
+.artigo-tag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 7px; border: 1px solid rgba(201,168,76,.2); color: #888; font-family: var(--fonte-corpo); }
+.artigo-acesso {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ouro-claro); font-family: var(--fonte-corpo); white-space: nowrap;
+  padding: .3rem .8rem; border: 1px solid rgba(201,168,76,.25);
+  transition: all .2s; text-decoration: none; align-self: start;
+}
+.artigo-acesso:hover { background: rgba(201,168,76,.1); }
+.artigo-acesso.livre { color: #4AAA70; border-color: rgba(74,170,112,.25); }
+.artigo-acesso.restrito { color: #888; border-color: rgba(136,136,136,.25); }
+
+/* ─── SOLICITAR OBRA ───────────────────────────────────────────────────── */
+.solicitar-section { padding: 5rem 3rem; background: var(--creme-dark); }
+.solicitar-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.solicitar-form { background: var(--creme); border: 0.5px solid var(--creme-mid); padding: 2.5rem; border-top: 3px solid var(--vermelho); }
+.solicitar-form h2 { font-family: var(--fonte-titulo); font-size: 1.3rem; font-weight: 700; color: var(--preto); margin-bottom: .5rem; }
+.solicitar-form p { font-size: .9rem; color: var(--preto-suave); font-style: italic; margin-bottom: 2rem; }
+.form-row { margin-bottom: 1.2rem; }
+.form-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-bottom: .5rem; }
+.form-input { width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme); padding: .75rem 1rem; font-family: var(--fonte-corpo); font-size: .97rem; color: var(--preto); outline: none; transition: border-color .2s; }
+.form-input:focus { border-color: var(--vermelho); }
+.form-textarea { width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme); padding: .75rem 1rem; font-family: var(--fonte-corpo); font-size: .97rem; color: var(--preto); resize: vertical; min-height: 110px; outline: none; transition: border-color .2s; }
+.form-textarea:focus { border-color: var(--vermelho); }
+.form-select { width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme); padding: .75rem 1rem; font-family: var(--fonte-corpo); font-size: .97rem; color: var(--preto); outline: none; cursor: pointer; }
+.solicitar-info h3 { font-family: var(--fonte-titulo); font-size: 1.3rem; font-weight: 700; color: var(--preto); margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--creme-mid); }
+.solicitar-info p { color: var(--preto-suave); font-size: .95rem; line-height: 1.8; margin-bottom: 1.1rem; }
+.solicitar-destaque { border-left: 3px solid var(--vermelho); padding: .8rem 1.5rem; background: rgba(139,26,26,.04); font-style: italic; color: var(--vermelho); font-size: 1rem; margin: 1.5rem 0; }
+.regras-lista { list-style: none; }
+.regras-lista li { padding: .7rem 0 .7rem 1.8rem; border-bottom: 0.5px solid var(--creme-mid); font-size: .92rem; color: var(--preto-suave); position: relative; line-height: 1.5; }
+.regras-lista li::before { content: '✦'; color: var(--vermelho); font-size: .5rem; position: absolute; left: 0; top: 1rem; }
+.regras-lista li strong { color: var(--preto); }
+
+/* ─── CTA FINAL ────────────────────────────────────────────────────────── */
+.cta-section { background: var(--vermelho); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0,0,0,.03) 30px, rgba(0,0,0,.03) 31px); }
+.cta-section > * { position: relative; }
+.cta-section h2 { font-family: var(--fonte-titulo); font-size: clamp(1.6rem,3vw,2.2rem); color: var(--creme); margin-bottom: .8rem; }
+.cta-section p  { color: rgba(245,240,232,.8); font-style: italic; margin-bottom: 2.5rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ═══ FOOTER ══════════════════════════════════════════════════════════════ */
+footer { background: var(--preto); padding: 4rem 3rem 2rem; border-top: 3px solid var(--vermelho); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid #2A2416; }
+.f-logo { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1.3rem; font-weight: 700; margin-bottom: .8rem; }
+.footer-brand p { font-size: .9rem; color: #666; line-height: 1.6; }
+.footer-col h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: .9rem; margin-bottom: 1rem; letter-spacing: 1px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 6px; }
+.footer-col ul li a { color: #666; text-decoration: none; font-size: .85rem; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--ouro-claro); }
+.footer-bottom { max-width: 1200px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: #444; }
+.wp-badge { border: 0.5px solid #333; color: #555; font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Memorial Coluna Prestes</span>
+    <span class="nav-logo-sub">1924 · Santo Ângelo · Brasil</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" >Sobre</a></li>
+    <li><a href="linha-do-tempo.html" >Linha do Tempo</a></li>
+    <li><a href="memoriais.html" >Memoriais</a></li>
+    <li><a href="agenda.html" >Agenda</a></li>
+    <li><a href="depoimentos.html" >Depoimentos</a></li>
+    <li><a href="biblioteca.html" class="ativo">Biblioteca</a></li>
+    <li><a href="contato.html" >Contato</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb-sep">✦</span>
+    <span class="breadcrumb-atual">Biblioteca</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-frame"></div>
+  <div class="ph-content">
+    <p class="ph-eyebrow">Acervo Bibliográfico · 94 títulos</p>
+    <h1 class="ph-h1">
+      Biblioteca
+      <em>Livros · Artigos · Fontes Primárias</em>
+    </h1>
+    <div class="ph-orn">
+      <div class="ph-orn-line"></div><div class="ph-orn-diamond"></div><div class="ph-orn-line"></div>
+    </div>
+    <p class="ph-desc">O conhecimento produzido sobre a Coluna Prestes ao longo de um século. De biografias a análises militares, de romances a teses acadêmicas.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     LIVRO EM DESTAQUE
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="livro-destaque-section">
+  <div class="livro-destaque-grid">
+    <div>
+      <div class="livro-destaque-capa" style="background: linear-gradient(160deg,#6A1010,#8B1A1A);">
+        <span class="livro-destaque-capa-txt">A Coluna Prestes</span>
+      </div>
+    </div>
+    <div class="livro-destaque-texto">
+      <span class="sec-label light">Obra de referência</span>
+      <h2 class="sec-title light" style="display:block; margin-bottom:1.5rem;">A Coluna Prestes</h2>
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#666; font-family:var(--fonte-corpo); margin-bottom:1.8rem;">PRESTES, Anita Leocádia · Brasiliense, 1990 · 280p.</p>
+      <p>A obra mais completa e rigorosa sobre a Coluna Prestes foi escrita por quem tem a autoridade única de filha do próprio Luiz Carlos Prestes. Anita Leocádia Prestes produziu uma análise histórica que combina o rigor acadêmico com o acesso privilegiado a fontes primárias inéditas — cartas, diários e documentos que permaneciam na memória familiar.</p>
+      <p>A pesquisadora desmistifica tanto a visão heroica quanto a visão demonizadora do movimento, apresentando uma análise equilibrada dos aspectos militares, políticos e sociais da marcha. É a obra que qualquer estudioso do período precisa ter como ponto de partida.</p>
+      <div class="livro-destaque-info">
+        <div class="livro-destaque-info-item"><p class="livro-di-lbl">Autora</p><p class="livro-di-val">Anita Leocádia Prestes</p></div>
+        <div class="livro-destaque-info-item"><p class="livro-di-lbl">Editora</p><p class="livro-di-val">Editora Brasiliense</p></div>
+        <div class="livro-destaque-info-item"><p class="livro-di-lbl">Publicação</p><p class="livro-di-val">São Paulo, 1990</p></div>
+        <div class="livro-destaque-info-item"><p class="livro-di-lbl">Páginas</p><p class="livro-di-val">280 páginas</p></div>
+        <div class="livro-destaque-info-item"><p class="livro-di-lbl">Disponível</p><p class="livro-di-val">Acervo físico<br>do Memorial</p></div>
+        <div class="livro-destaque-info-item"><p class="livro-di-lbl">Classificação</p><p class="livro-di-val">História · Militar<br>Tenentismo</p></div>
+      </div>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="contato.html" class="btn-prim">Solicitar Consulta</a>
+        <a href="biblioteca.html" class="btn-ghost">Ver catálogo completo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CATÁLOGO: SIDEBAR + GRADE DE LIVROS
+══════════════════════════════════════════════════════════════════════════ -->
+<div id="catalogo" class="biblioteca-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="bib-sidebar">
+    <div class="sidebar-busca">
+      <input class="sidebar-busca-input" type="text" placeholder="Buscar título, autor…" oninput="filtrarLivros(this.value)">
+    </div>
+
+    <div class="sidebar-secao">
+      <p class="sidebar-secao-titulo">Categorias</p>
+      <button class="sidebar-item ativo" onclick="ativarFiltro('todos', this)">
+        Todos os títulos <span class="sidebar-count">94</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('historia', this)">
+        História & Política <span class="sidebar-count">31</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('militar', this)">
+        Análise Militar <span class="sidebar-count">18</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('literatura', this)">
+        Literatura <span class="sidebar-count">14</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('biografia', this)">
+        Biografia <span class="sidebar-count">12</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('educacao', this)">
+        Educação & Patrimônio <span class="sidebar-count">8</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('regional', this)">
+        História Regional <span class="sidebar-count">11</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divisor"></div>
+
+    <div class="sidebar-secao">
+      <p class="sidebar-secao-titulo">Formatos</p>
+      <button class="sidebar-item" onclick="ativarFiltro('livro', this)">
+        Livros <span class="sidebar-count">58</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('tese', this)">
+        Teses & Dissertações <span class="sidebar-count">19</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('ebook', this)">
+        E-books (acesso livre) <span class="sidebar-count">12</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('raro', this)">
+        Obras raras <span class="sidebar-count">5</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divisor"></div>
+
+    <div class="sidebar-secao">
+      <p class="sidebar-secao-titulo">Período</p>
+      <button class="sidebar-item" onclick="ativarFiltro('1920-1940', this)">
+        1920–1940 <span class="sidebar-count">8</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('1940-1980', this)">
+        1940–1980 <span class="sidebar-count">14</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('1980-2000', this)">
+        1980–2000 <span class="sidebar-count">28</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('2000+', this)">
+        2000 em diante <span class="sidebar-count">44</span>
+      </button>
+    </div>
+
+    <div class="sidebar-divisor"></div>
+
+    <div class="sidebar-secao">
+      <p class="sidebar-secao-titulo">Acesso</p>
+      <button class="sidebar-item" onclick="ativarFiltro('acervo', this)">
+        Acervo físico do Memorial <span class="sidebar-count">94</span>
+      </button>
+      <button class="sidebar-item" onclick="ativarFiltro('online', this)">
+        Disponível online <span class="sidebar-count">23</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ÁREA PRINCIPAL -->
+  <main class="bib-main">
+    <div class="bib-toolbar">
+      <p class="bib-resultado">Exibindo <strong id="livro-contador">12</strong> de <strong>94</strong> títulos</p>
+      <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap;">
+        <div class="bib-ordenar">
+          <span>Ordenar</span>
+          <select class="bib-select">
+            <option>Mais relevantes</option>
+            <option>Título A–Z</option>
+            <option>Autor A–Z</option>
+            <option>Mais recentes</option>
+            <option>Mais antigos</option>
+          </select>
+        </div>
+        <div class="bib-view-btns">
+          <button class="bib-view-btn ativo" id="btn-grade" onclick="mudarView('grade')" title="Grade">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+          <button class="bib-view-btn" id="btn-lista" onclick="mudarView('lista')" title="Lista">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 3h9M4 7h9M4 11h9M1 3h1M1 7h1M1 11h1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade de livros -->
+    <div id="livros-container" class="livros-grade">
+
+      <!-- 01 -->
+      <div class="livro-card" data-cat="biografia literatura" data-busca="cavaleiro esperança jorge amado prestes 1942">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1A2A1A,#2A3A1A);">
+          <span class="livro-badge destaque">Clássico</span>
+          <span class="livro-capa-txt">O Cavaleiro da Esperança</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">O Cavaleiro da Esperança</p>
+          <p class="livro-autor-meta">Jorge Amado</p>
+          <p class="livro-ano-edit">Record, 1942 · 288p.</p>
+          <p class="livro-sinopse">Biografia romanceada de Luiz Carlos Prestes escrita pelo amigo Jorge Amado. Uma das obras mais influentes na mitificação do Cavaleiro da Esperança.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Literatura</span>
+            <span class="livro-tag">Biografia</span>
+            <span class="livro-tag">Clássico</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="livro-card" data-cat="historia militar" data-busca="esquerda militar brasil moraes tenentismo 1991">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#2A1A08,#3A2A10);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">A Esquerda Militar no Brasil</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">A Esquerda Militar no Brasil</p>
+          <p class="livro-autor-meta">João Quartim de Moraes</p>
+          <p class="livro-ano-edit">Siciliano, 1991–1994 · 3 vols.</p>
+          <p class="livro-sinopse">Análise em três volumes do fenômeno do tenentismo e das esquerdas militares no Brasil republicano. Obra fundamental para o estudo do contexto da Coluna.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">História</span>
+            <span class="livro-tag">Militar</span>
+            <span class="livro-tag">Tenentismo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="livro-card" data-cat="historia" data-busca="brasil republicano ferreira delgado 2003 liberalismo">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1A1A2A,#2A2A3A);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">O Brasil Republicano</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">O Brasil Republicano — Vol. 1</p>
+          <p class="livro-autor-meta">Jorge Ferreira & Lucília Delgado (orgs.)</p>
+          <p class="livro-ano-edit">Civilização Brasileira, 2003 · 412p.</p>
+          <p class="livro-sinopse">Coletânea que contextualiza o período da Primeira República, onde a Coluna Prestes se insere. Inclui artigos de diferentes pesquisadores sobre o tenentismo.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">História</span>
+            <span class="livro-tag">República</span>
+            <span class="livro-tag">Coletânea</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="livro-card" data-cat="historia militar" data-busca="dicionário histórico biográfico CPDOC FGV abreu 2001">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1C1A10,#2A2818);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">Dicionário Histórico-Biográfico Brasileiro</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">Dicionário Histórico-Biográfico Brasileiro</p>
+          <p class="livro-autor-meta">Alzira Alves de Abreu (org.) · CPDOC/FGV</p>
+          <p class="livro-ano-edit">FGV, 2001 · 5 vols.</p>
+          <p class="livro-sinopse">Referência enciclopédica indispensável sobre personagens e eventos da história política brasileira. Verbetes detalhados sobre a Coluna, Prestes e o tenentismo.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Referência</span>
+            <span class="livro-tag">CPDOC</span>
+            <span class="livro-tag">Biográfico</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="livro-card" data-cat="biografia historia" data-busca="prestes anita leocádia vida militância">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#5C1010,#7A1A1A);">
+          <span class="livro-badge novo">Novo</span>
+          <span class="livro-capa-txt">Luiz Carlos Prestes — Uma Vida</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">Luiz Carlos Prestes — Uma Vida</p>
+          <p class="livro-autor-meta">Anita Leocádia Prestes</p>
+          <p class="livro-ano-edit">Boitempo, 2022 · 440p.</p>
+          <p class="livro-sinopse">Biografia completa e atualizada de Luiz Carlos Prestes, da infância à morte. A autora revisita os arquivos para apresentar aspectos desconhecidos da vida do pai.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Biografia</span>
+            <span class="livro-tag">Recente</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="livro-card" data-cat="literatura biografia" data-busca="olga benário prestes benedito ruy barbosa 1980">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1A1A3A,#2A2A4A);">
+          <span class="livro-badge destaque">Imperdível</span>
+          <span class="livro-capa-txt">Olga</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">Olga</p>
+          <p class="livro-autor-meta">Fernando Morais</p>
+          <p class="livro-ano-edit">Alfa-Ômega, 1985 · 304p.</p>
+          <p class="livro-sinopse">A história de Olga Benário Prestes — companheira de Luiz Carlos Prestes entregue pelos nazistas ao governo Vargas. Uma das maiores obras do jornalismo literário brasileiro.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Mulheres</span>
+            <span class="livro-tag">Olga Benário</span>
+            <span class="livro-tag">Jornalismo literário</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="livro-card" data-cat="historia regional" data-busca="santo ângelo rio grande sul história memorial 1996">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#0C1A10,#1A2A18);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">Memorial Coluna Prestes</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">Memorial Coluna Prestes</p>
+          <p class="livro-autor-meta">Aurélio de Lyra Tavares</p>
+          <p class="livro-ano-edit">Prefeitura de Santo Ângelo, 1996.</p>
+          <p class="livro-sinopse">Publicação comemorativa da inauguração do Memorial em Santo Ângelo. Registra a história do espaço, o acervo inaugural e os vínculos da cidade com a Coluna.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Regional</span>
+            <span class="livro-tag">Memorial</span>
+            <span class="livro-tag">RS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="livro-card" data-cat="historia militar" data-busca="tenentismo primeiro república revolta militar 1920">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#2A1A0A,#3A2810);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">O Tenentismo</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">O Tenentismo</p>
+          <p class="livro-autor-meta">Paulo Sérgio Pinheiro</p>
+          <p class="livro-ano-edit">Brasiliense, 1991 · 220p.</p>
+          <p class="livro-sinopse">Análise do movimento tenentista como fenômeno político-militar da Primeira República. Contextualiza as revoltas de 1922–1924 que deram origem à Coluna Prestes.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Tenentismo</span>
+            <span class="livro-tag">Primeira República</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 -->
+      <div class="livro-card" data-cat="tese historia" data-busca="tese dissertação academia coluna prestes cartografia rota marcha">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#181818,#282828);">
+          <span class="livro-badge acervo">Tese</span>
+          <span class="livro-capa-txt">A Cartografia da Coluna Prestes</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">A Cartografia da Coluna Prestes</p>
+          <p class="livro-autor-meta">Marcos Aurélio Silveira</p>
+          <p class="livro-ano-edit">UNESP, 2018 · Tese de Doutorado · 312p.</p>
+          <p class="livro-sinopse">Análise cartográfica inédita da rota percorrida pela Coluna Prestes entre 1924 e 1927. Combina fontes históricas com geoprocessamento moderno.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Tese</span>
+            <span class="livro-tag">Cartografia</span>
+            <span class="livro-tag">Acesso livre</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="livro-card" data-cat="educacao patrimonio" data-busca="patrimônio memória educação museu acervo didático">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1A1010,#2A1818);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">Patrimônio, Memória e Educação</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">Patrimônio, Memória e Educação</p>
+          <p class="livro-autor-meta">Maria Célia Teixeira Moura Santos</p>
+          <p class="livro-ano-edit">EdUFBA, 2014 · 288p.</p>
+          <p class="livro-sinopse">Referência teórica fundamental para a educação patrimonial. Utilizada nas oficinas do Memorial para fundamentar a abordagem pedagógica do acervo.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Educação</span>
+            <span class="livro-tag">Patrimônio</span>
+            <span class="livro-tag">Teoria</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="livro-card" data-cat="historia raro" data-busca="João alberto marcha coluna memórias 1954 veterano">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1A0C0C,#2A1414);">
+          <span class="livro-badge destaque">Raro</span>
+          <span class="livro-capa-txt">Memórias de um Revolucionário</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">Memórias de um Revolucionário</p>
+          <p class="livro-autor-meta">João Alberto Lins de Barros</p>
+          <p class="livro-ano-edit">Civilização Brasileira, 1954 · 380p.</p>
+          <p class="livro-sinopse">Relato de primeira mão de João Alberto, um dos oficiais mais próximos a Prestes. Fonte primária insubstituível sobre o cotidiano da marcha e as decisões estratégicas da Coluna.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Fonte primária</span>
+            <span class="livro-tag">Memórias</span>
+            <span class="livro-tag">Obra rara</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="livro-card" data-cat="historia regional" data-busca="nordeste sertão coluna passagem piauí maranhão 1926">
+        <div class="livro-capa" style="background: linear-gradient(160deg,#1A1A10,#262614);">
+          <span class="livro-badge acervo">Acervo</span>
+          <span class="livro-capa-txt">A Coluna Prestes no Nordeste</span>
+        </div>
+        <div class="livro-meta">
+          <p class="livro-titulo-meta">A Coluna Prestes no Nordeste</p>
+          <p class="livro-autor-meta">Edmar Morel</p>
+          <p class="livro-ano-edit">Civilização Brasileira, 1979 · 240p.</p>
+          <p class="livro-sinopse">Reconstituição detalhada da passagem da Coluna pelos estados nordestinos em 1926. Baseado em documentos locais, registros de câmaras municipais e memórias orais.</p>
+          <div class="livro-tags">
+            <span class="livro-tag">Nordeste</span>
+            <span class="livro-tag">Regional</span>
+            <span class="livro-tag">1926</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /livros-container -->
+
+    <div style="text-align:center; margin-top:3rem;">
+      <button class="btn-prim" onclick="alert('Carregar mais — integrar com WP_Query ou CPT no WordPress.')">Carregar mais títulos</button>
+    </div>
+  </main>
+
+</div><!-- /biblioteca-layout -->
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     REFERÊNCIAS BIBLIOGRÁFICAS (seção acadêmica)
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="biblio-section" id="referencias">
+  <div class="biblio-wrap">
+    <div class="biblio-intro-grid">
+      <div>
+        <span class="sec-label">Referências do Projeto</span>
+        <h2 class="sec-title" style="display:block; margin-bottom:1.5rem;">Bibliografia Utilizada</h2>
+        <p class="corpo">As obras listadas abaixo constituem a base bibliográfica do Memorial Coluna Prestes — fontes utilizadas nas exposições, publicações, oficinas e materiais educativos produzidos pelo projeto.</p>
+        <p class="corpo">A lista segue as normas ABNT e é atualizada anualmente pela equipe de pesquisa histórica do Memorial.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="#" class="btn-prim">Baixar lista completa (PDF)</a>
+        </div>
+      </div>
+      <div>
+        <p class="corpo">A produção bibliográfica sobre a Coluna Prestes intensificou-se a partir dos anos 1980, com a redemocratização e a abertura de arquivos. Nas últimas duas décadas, novas abordagens — cartográficas, de gênero, de história oral — ampliaram o campo de estudos.</p>
+        <div style="border-left:3px solid var(--vermelho); padding:.8rem 1.5rem; background:rgba(139,26,26,.04); font-style:italic; color:var(--vermelho); font-size:1rem; margin-top:1.5rem;">
+          "A bibliografia sobre a Coluna Prestes é um campo em constante expansão — e o Memorial é parte ativa dessa produção."
+        </div>
+      </div>
+    </div>
+
+    <!-- Categoria: Obras fundamentais -->
+    <div class="biblio-list-section">
+      <h3 class="biblio-categoria-titulo">Obras Fundamentais <span class="biblio-num">12 títulos</span></h3>
+      <div class="ref-item">
+        <cite>PRESTES, Anita Leocádia.</cite> <em>A Coluna Prestes.</em> São Paulo: Brasiliense, <span class="ref-ano">1990</span>. 280p.
+        <span class="ref-nota">Obra de referência central. Disponível no acervo físico do Memorial.</span>
+      </div>
+      <div class="ref-item">
+        <cite>PRESTES, Anita Leocádia.</cite> <em>Luiz Carlos Prestes — Uma Vida.</em> São Paulo: Boitempo, <span class="ref-ano">2022</span>. 440p.
+        <span class="ref-nota">Mais recente obra biográfica da autora. Revisão ampliada de pesquisas anteriores.</span>
+      </div>
+      <div class="ref-item">
+        <cite>AMADO, Jorge.</cite> <em>O Cavaleiro da Esperança: vida de Luiz Carlos Prestes.</em> São Paulo: Record, <span class="ref-ano">1942</span>. 288p.
+        <span class="ref-nota">Obra literária fundamental na construção do mito de Prestes. <a href="#">Disponível no domínio público ↗</a></span>
+      </div>
+      <div class="ref-item">
+        <cite>MORAIS, Fernando.</cite> <em>Olga.</em> São Paulo: Alfa-Ômega, <span class="ref-ano">1985</span>. 304p.
+        <span class="ref-nota">Biografia de Olga Benário Prestes. Uma das mais importantes obras do jornalismo literário brasileiro.</span>
+      </div>
+      <div class="ref-item">
+        <cite>ABREU, Alzira Alves de</cite> et al. <em>Dicionário Histórico-Biográfico Brasileiro.</em> Rio de Janeiro: FGV/CPDOC, <span class="ref-ano">2001</span>. 5 vols.
+        <span class="ref-nota">Verbetes sobre a Coluna e seus protagonistas. <a href="#">Disponível online (CPDOC) ↗</a></span>
+      </div>
+      <div class="ref-item">
+        <cite>BARROS, João Alberto Lins de.</cite> <em>Memórias de um Revolucionário.</em> Rio de Janeiro: Civilização Brasileira, <span class="ref-ano">1954</span>. 380p.
+        <span class="ref-nota">Fonte primária de primeira mão sobre o cotidiano da marcha. Obra rara. Disponível no acervo do Memorial.</span>
+      </div>
+    </div>
+
+    <!-- Categoria: História e contexto -->
+    <div class="biblio-list-section">
+      <h3 class="biblio-categoria-titulo">História e Contexto Político <span class="biblio-num">9 títulos</span></h3>
+      <div class="ref-item">
+        <cite>FERREIRA, Jorge; DELGADO, Lucília de Almeida Neves</cite> (orgs.). <em>O Brasil Republicano — vol. 1: O Tempo do Liberalismo Excludente.</em> Rio de Janeiro: Civilização Brasileira, <span class="ref-ano">2003</span>.
+      </div>
+      <div class="ref-item">
+        <cite>MORAES, João Quartim de.</cite> <em>A Esquerda Militar no Brasil.</em> São Paulo: Siciliano, <span class="ref-ano">1991–1994</span>. 3 vols.
+      </div>
+      <div class="ref-item">
+        <cite>PINHEIRO, Paulo Sérgio.</cite> <em>O Tenentismo.</em> São Paulo: Brasiliense, <span class="ref-ano">1991</span>. 220p.
+      </div>
+      <div class="ref-item">
+        <cite>FAUSTO, Boris.</cite> <em>A Revolução de 1930: historiografia e história.</em> São Paulo: Brasiliense, <span class="ref-ano">1970</span>. 242p.
+      </div>
+    </div>
+
+    <!-- Categoria: Estudos regionais -->
+    <div class="biblio-list-section">
+      <h3 class="biblio-categoria-titulo">Estudos Regionais e da Rota <span class="biblio-num">7 títulos</span></h3>
+      <div class="ref-item">
+        <cite>MOREL, Edmar.</cite> <em>A Coluna Prestes no Nordeste.</em> Rio de Janeiro: Civilização Brasileira, <span class="ref-ano">1979</span>. 240p.
+      </div>
+      <div class="ref-item">
+        <cite>TAVARES, Aurélio de Lyra.</cite> <em>Memorial Coluna Prestes.</em> Santo Ângelo: Prefeitura Municipal, <span class="ref-ano">1996</span>.
+        <span class="ref-nota">Disponível exclusivamente no acervo do Memorial de Santo Ângelo.</span>
+      </div>
+      <div class="ref-item">
+        <cite>SILVEIRA, Marcos Aurélio.</cite> <em>A Cartografia da Coluna Prestes.</em> Tese de Doutorado — UNESP, <span class="ref-ano">2018</span>. 312p.
+        <span class="ref-nota"><a href="#">Acesso livre via Repositório UNESP ↗</a></span>
+      </div>
+    </div>
+
+    <!-- Categoria: Educação e patrimônio -->
+    <div class="biblio-list-section">
+      <h3 class="biblio-categoria-titulo">Educação Patrimonial e Memória <span class="biblio-num">5 títulos</span></h3>
+      <div class="ref-item">
+        <cite>SANTOS, Maria Célia Teixeira Moura.</cite> <em>Patrimônio, Memória e Educação.</em> Salvador: EdUFBA, <span class="ref-ano">2014</span>. 288p.
+      </div>
+      <div class="ref-item">
+        <cite>NORA, Pierre.</cite> "Entre mémoire et histoire: la problématique des lieux". In: <em>Les lieux de mémoire.</em> Paris: Gallimard, <span class="ref-ano">1984</span>, pp. XVII–XLII.
+        <span class="ref-nota">Texto teórico fundamental para a concepção de "lugares de memória" que orienta o projeto do Memorial.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     FONTES PRIMÁRIAS DO ACERVO
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="fontes-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="sec-label">Documentos Originais</span>
+    <h2 class="sec-title" style="display:block; margin-bottom:.5rem;">Fontes Primárias do Acervo</h2>
+    <p class="corpo" style="max-width:700px; margin-top:.5rem;">O Memorial guarda documentos, fotografias e objetos originais que constituem fontes primárias inéditas para a pesquisa histórica. Consulta presencial mediante agendamento.</p>
+  </div>
+  <div class="fontes-grid">
+
+    <div class="fonte-card">
+      <div class="fonte-icone">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="28" rx="2" stroke="#8B1A1A" stroke-width="1.5"/><path d="M9 11h14M9 16h14M9 21h10" stroke="#8B1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <span class="fonte-tipo">Documentos</span>
+      <h3>Correspondências e Ordens</h3>
+      <div class="fonte-num">+500</div>
+      <p>Cartas originais, ordens de marcha, manifestos e comunicados internos da Coluna. Inclui correspondências pessoais de Luiz Carlos Prestes.</p>
+      <a href="contato.html" class="fonte-lnk">Solicitar consulta →</a>
+    </div>
+
+    <div class="fonte-card">
+      <div class="fonte-icone">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="#8B1A1A" stroke-width="1.5"/><circle cx="16" cy="17" r="5" stroke="#8B1A1A" stroke-width="1.2"/><rect x="11" y="4" width="6" height="6" rx="1" fill="#8B1A1A" opacity=".3"/></svg>
+      </div>
+      <span class="fonte-tipo">Fotografia</span>
+      <h3>Acervo Fotográfico</h3>
+      <div class="fonte-num">+1.200</div>
+      <p>Fotografias históricas da marcha, dos combatentes e das regiões percorridas. Grande parte restaurada digitalmente nas oficinas do Memorial.</p>
+      <a href="contato.html" class="fonte-lnk">Solicitar consulta →</a>
+    </div>
+
+    <div class="fonte-card">
+      <div class="fonte-icone">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="24" height="24" rx="2" stroke="#8B1A1A" stroke-width="1.5"/><path d="M4 14h24M14 4v24" stroke="#8B1A1A" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/><circle cx="10" cy="10" r="2" fill="#8B1A1A" opacity=".6"/><circle cx="22" cy="10" r="2" fill="#8B1A1A" opacity=".6"/></svg>
+      </div>
+      <span class="fonte-tipo">Cartografia</span>
+      <h3>Mapas Históricos</h3>
+      <div class="fonte-num">+30</div>
+      <p>Mapas originais e reconstituídos do percurso da Coluna. Inclui mapas militares do início do século XX utilizados durante a marcha.</p>
+      <a href="contato.html" class="fonte-lnk">Solicitar consulta →</a>
+    </div>
+
+    <div class="fonte-card">
+      <div class="fonte-icone">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4L6 10v12l10 6 10-6V10L16 4z" stroke="#8B1A1A" stroke-width="1.5"/><path d="M6 10l10 6 10-6M16 16v12" stroke="#8B1A1A" stroke-width="1.2"/></svg>
+      </div>
+      <span class="fonte-tipo">Objetos</span>
+      <h3>Peças Originais</h3>
+      <div class="fonte-num">81</div>
+      <p>Objetos pessoais, equipamentos militares e artefatos da época doados pela família Prestes. Inclui itens de uso cotidiano durante a marcha.</p>
+      <a href="contato.html" class="fonte-lnk">Solicitar consulta →</a>
+    </div>
+
+    <div class="fonte-card">
+      <div class="fonte-icone">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="#8B1A1A" stroke-width="1.5"/><path d="M10 16h12M16 10v12" stroke="#8B1A1A" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <span class="fonte-tipo">Periódicos</span>
+      <h3>Imprensa da Época</h3>
+      <div class="fonte-num">+60</div>
+      <p>Recortes de jornais e revistas de 1924–1927 cobrindo a Coluna. Fontes primárias sobre a repercussão do movimento na mídia da Primeira República.</p>
+      <a href="contato.html" class="fonte-lnk">Solicitar consulta →</a>
+    </div>
+
+    <div class="fonte-card">
+      <div class="fonte-icone">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 8h20v18a2 2 0 01-2 2H8a2 2 0 01-2-2V8z" stroke="#8B1A1A" stroke-width="1.5"/><path d="M4 8h24M12 4h8v4h-8z" stroke="#8B1A1A" stroke-width="1.2"/></svg>
+      </div>
+      <span class="fonte-tipo">Depoimentos orais</span>
+      <h3>Arquivo de Vozes</h3>
+      <div class="fonte-num">127</div>
+      <p>Depoimentos em áudio e vídeo de pesquisadores, visitantes, descendentes e moradores das regiões percorridas pela Coluna. Coletados desde 1996.</p>
+      <a href="depoimentos.html" class="fonte-lnk">Ver depoimentos →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     ARTIGOS E PERIÓDICOS
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="artigos-section">
+  <div class="artigos-wrap">
+    <span class="sec-label light">Produção Acadêmica</span>
+    <h2 class="sec-title light" style="display:block; margin-bottom:.5rem;">Artigos e Periódicos</h2>
+    <p style="color:#C0B49E; font-size:.97rem; margin-bottom:3rem; max-width:700px;">Artigos acadêmicos publicados sobre a Coluna Prestes, o tenentismo e temas relacionados. Ordenados por data de publicação.</p>
+
+    <div class="artigos-lista">
+
+      <div class="artigo-item">
+        <div class="artigo-ano">2024</div>
+        <div class="artigo-info">
+          <p class="artigo-titulo">Memória, patrimônio e o Memorial Coluna Prestes: entre o local e o nacional</p>
+          <p class="artigo-autores">Silva, R. A.; Menezes, C. F.</p>
+          <p class="artigo-revista">Revista Brasileira de História · v.44, n.87</p>
+          <div class="artigo-tags"><span class="artigo-tag">Memória</span><span class="artigo-tag">Patrimônio</span><span class="artigo-tag">Memorial</span></div>
+        </div>
+        <a href="#" class="artigo-acesso livre">Acesso livre</a>
+      </div>
+
+      <div class="artigo-item">
+        <div class="artigo-ano">2022</div>
+        <div class="artigo-info">
+          <p class="artigo-titulo">Mulheres na Coluna Prestes: protagonismos apagados na historiografia clássica</p>
+          <p class="artigo-autores">Fonseca, B. T.; Rodrigues, A. S.</p>
+          <p class="artigo-revista">Gênero & História · v.12, n.2</p>
+          <div class="artigo-tags"><span class="artigo-tag">Gênero</span><span class="artigo-tag">Olga Benário</span><span class="artigo-tag">Revisionismo</span></div>
+        </div>
+        <a href="#" class="artigo-acesso livre">Acesso livre</a>
+      </div>
+
+      <div class="artigo-item">
+        <div class="artigo-ano">2020</div>
+        <div class="artigo-info">
+          <p class="artigo-titulo">A Coluna Prestes no sertão piauiense: memória oral e documentação histórica</p>
+          <p class="artigo-autores">Albuquerque, F. M.; Costa, L. P.</p>
+          <p class="artigo-revista">Revista do Instituto Histórico e Geográfico Brasileiro · n.482</p>
+          <div class="artigo-tags"><span class="artigo-tag">Nordeste</span><span class="artigo-tag">Memória oral</span><span class="artigo-tag">Piauí</span></div>
+        </div>
+        <a href="#" class="artigo-acesso livre">Acesso livre</a>
+      </div>
+
+      <div class="artigo-item">
+        <div class="artigo-ano">2018</div>
+        <div class="artigo-info">
+          <p class="artigo-titulo">Cartografia histórica da Coluna Prestes: reconstituição georreferenciada da rota (1924–1927)</p>
+          <p class="artigo-autores">Silveira, M. A.; Carvalho, J. R.</p>
+          <p class="artigo-revista">Terra Brasilis — Revista de História do Pensamento Geográfico · n.9</p>
+          <div class="artigo-tags"><span class="artigo-tag">Cartografia</span><span class="artigo-tag">SIG</span><span class="artigo-tag">Rota</span></div>
+        </div>
+        <a href="#" class="artigo-acesso livre">Acesso livre</a>
+      </div>
+
+      <div class="artigo-item">
+        <div class="artigo-ano">2015</div>
+        <div class="artigo-info">
+          <p class="artigo-titulo">A arquitetura da memória: o obelisco de Niemeyer e o Memorial Coluna Prestes em Palmas</p>
+          <p class="artigo-autores">Pereira, T. L.</p>
+          <p class="artigo-revista">Arquitextos — Vitruvius · ano 16, n.183</p>
+          <div class="artigo-tags"><span class="artigo-tag">Niemeyer</span><span class="artigo-tag">Arquitetura</span><span class="artigo-tag">Palmas</span></div>
+        </div>
+        <a href="#" class="artigo-acesso livre">Acesso livre</a>
+      </div>
+
+      <div class="artigo-item">
+        <div class="artigo-ano">2009</div>
+        <div class="artigo-info">
+          <p class="artigo-titulo">Tenentismo revisitado: novas perspectivas sobre a Coluna Prestes na historiografia contemporânea</p>
+          <p class="artigo-autores">Bastos, P. C.</p>
+          <p class="artigo-revista">História — Questões & Debates · v.50</p>
+          <div class="artigo-tags"><span class="artigo-tag">Historiografia</span><span class="artigo-tag">Tenentismo</span><span class="artigo-tag">Revisão</span></div>
+        </div>
+        <a href="#" class="artigo-acesso restrito">Acesso restrito</a>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:3rem;">
+      <a href="#" class="btn-sec">Ver todos os artigos catalogados</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     SOLICITAR OBRA / CONSULTA AO ACERVO
+══════════════════════════════════════════════════════════════════════════ -->
+<section class="solicitar-section" id="solicitar">
+  <div class="solicitar-grid">
+
+    <!-- Formulário -->
+    <div class="solicitar-form">
+      <h2>Solicitar Consulta ao Acervo</h2>
+      <p>Pesquisadores e estudantes podem solicitar acesso ao acervo físico mediante agendamento prévio.</p>
+
+      <div class="form-row">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-input" placeholder="Seu nome">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Instituição</label>
+        <input type="text" class="form-input" placeholder="Universidade, instituto, escola…">
+      </div>
+      <div class="form-row">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" placeholder="seu@email.com">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Tipo de material desejado</label>
+        <select class="form-select">
+          <option>Documentos e correspondências</option>
+          <option>Acervo fotográfico</option>
+          <option>Mapas históricos</option>
+          <option>Peças e objetos originais</option>
+          <option>Periódicos da época</option>
+          <option>Acervo bibliográfico físico</option>
+          <option>Teses e dissertações</option>
+          <option>Todos os tipos</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Finalidade da pesquisa</label>
+        <select class="form-select">
+          <option>Tese de doutorado</option>
+          <option>Dissertação de mestrado</option>
+          <option>Trabalho de graduação</option>
+          <option>Pesquisa independente</option>
+          <option>Jornalismo / Documentário</option>
+          <option>Produção artística</option>
+          <option>Educação básica (professores)</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Descreva brevemente sua pesquisa</label>
+        <textarea class="form-textarea" placeholder="Tema, período, abordagem e especificamente o que você busca no acervo…"></textarea>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Período preferencial de visita</label>
+        <input type="text" class="form-input" placeholder="Ex: Quinzena de julho de 2025, preferencialmente manhãs">
+      </div>
+      <div style="margin-top:1.5rem;">
+        <button class="btn-prim" style="width:100%;" onclick="alert('Formulário a ser integrado via Contact Form 7 no WordPress.')">Enviar solicitação</button>
+      </div>
+    </div>
+
+    <!-- Info lateral -->
+    <div class="solicitar-info">
+      <h3>Normas de Consulta</h3>
+      <p>O acervo do Memorial Coluna Prestes está disponível para pesquisadores, estudantes e jornalistas mediante agendamento prévio. A equipe do Memorial orienta cada visita de acordo com o perfil da pesquisa.</p>
+      <div class="solicitar-destaque">
+        O acervo inclui documentos únicos que não estão disponíveis em nenhum outro repositório do Brasil. Venha pesquisar.
+      </div>
+      <ul class="regras-lista">
+        <li><strong>Agendamento mínimo:</strong> 7 dias de antecedência</li>
+        <li><strong>Horário de consulta:</strong> Seg–Sex · 9h–12h e 14h–17h</li>
+        <li><strong>Duração máxima:</strong> 4 horas por sessão</li>
+        <li><strong>Fotografia:</strong> Permitida sem flash, para uso acadêmico</li>
+        <li><strong>Reprodução:</strong> Solicitação formal necessária para publicação</li>
+        <li><strong>Luvas e máscaras:</strong> Obrigatórias para documentos originais</li>
+        <li><strong>Citação:</strong> Obras produzidas com o acervo devem citar o Memorial</li>
+        <li><strong>Cópia para o acervo:</strong> Agradecemos o envio de uma cópia das obras publicadas</li>
+      </ul>
+      <div style="margin-top:2rem; background:var(--preto); padding:1.5rem; border-left:3px solid var(--ouro-claro);">
+        <p style="color:var(--ouro-claro); font-family:var(--fonte-titulo); font-size:1rem; font-weight:700; margin-bottom:.5rem;">Acervo digital em construção</p>
+        <p style="font-size:.88rem; color:#B0A490; line-height:1.7;">O Memorial está digitalizando progressivamente o acervo. Em breve, parte dos documentos estará disponível online para consulta remota. Acompanhe nas redes sociais.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2>Explore Toda a Memória da Coluna</h2>
+  <p>Do acervo bibliográfico aos depoimentos, da linha do tempo aos memoriais — tudo conectado.</p>
+  <div class="cta-btns">
+    <a href="linha-do-tempo.html"   class="btn-prim">Linha do Tempo</a>
+    <a href="depoimentos.html" class="btn-ghost">Depoimentos</a>
+    <a href="memoriais.html"  class="btn-ghost">Memoriais</a>
+    <a href="agenda.html"     class="btn-ghost">Agenda de Oficinas</a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">Memorial Coluna Prestes</div>
+      <p>Preservando a memória de uma das maiores marchas revolucionárias da história do Brasil.</p>
+      <p style="margin-top:1rem; font-size:.85rem;">Antiga Estação Ferroviária<br>Santo Ângelo — RS, Brasil</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#"><a href="index.html" style="color:inherit;text-decoration:none;">Início</a></a></li>
+        <li><a href="sobre.html">Sobre o Memorial</a></li>
+        <li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+        <li><a href="memoriais.html">Memoriais</a></li>
+        <li><a href="agenda.html">Agenda de Oficinas</a></li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="biblioteca.html">Biblioteca</a></li>
+        <li><a href="biblioteca.html#referencias">Bibliografia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informações</h4>
+      <ul>
+        <li><a href="contato.html#horarios">Horários de Visita</a></li>
+        <li><a href="biblioteca.html#solicitar">Solicitar Consulta ao Acervo</a></li>
+        <li><a href="contato.html#imprensa">Imprensa</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:.85rem; color:#555; line-height:1.6;">Seg–Sex · 9h–12h / 14h–17h<br>Sábado · 9h–12h</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Memorial Coluna Prestes · Todos os direitos reservados</p>
+    <span class="wp-badge">WordPress + Elementor</span>
+  </div>
+</footer>
+
+<script>
+// ── Sidebar: ativar filtro ────────────────────────────────────────────────
+function ativarFiltro(cat, btn) {
+  document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('ativo'));
+  btn.classList.add('ativo');
+
+  const cards = document.querySelectorAll('.livro-card');
+  let visiveis = 0;
+  cards.forEach(card => {
+    const cardCat = card.dataset.cat || '';
+    const match = cat === 'todos' || cardCat.includes(cat);
+    card.style.display = match ? '' : 'none';
+    if (match) visiveis++;
+  });
+  document.getElementById('livro-contador').textContent = visiveis;
+
+  // atualiza view
+  const container = document.getElementById('livros-container');
+  if (container.classList.contains('livros-lista')) reordenar('lista');
+}
+
+// ── Busca por texto ───────────────────────────────────────────────────────
+function filtrarLivros(termo) {
+  const termoMin = termo.toLowerCase().trim();
+  const cards = document.querySelectorAll('.livro-card');
+  let visiveis = 0;
+  cards.forEach(card => {
+    const txt = (card.dataset.busca || '') + ' ' + (card.innerText || '');
+    const match = termoMin === '' || txt.toLowerCase().includes(termoMin);
+    card.style.display = match ? '' : 'none';
+    if (match) visiveis++;
+  });
+  document.getElementById('livro-contador').textContent = visiveis;
+}
+
+// ── Alternar modo de visualização ─────────────────────────────────────────
+function mudarView(modo) {
+  const container = document.getElementById('livros-container');
+  document.getElementById('btn-grade').classList.toggle('ativo', modo === 'grade');
+  document.getElementById('btn-lista').classList.toggle('ativo', modo === 'lista');
+
+  if (modo === 'lista') {
+    container.classList.remove('livros-grade');
+    container.classList.add('livros-lista');
+  } else {
+    container.classList.remove('livros-lista');
+    container.classList.add('livros-grade');
+  }
+}
+</script>
+</body>
+</html>

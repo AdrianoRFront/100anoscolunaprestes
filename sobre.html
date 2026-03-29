@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre — Memorial Coluna Prestes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --creme: #F5F0E8;
+    --creme-dark: #EAE2D0;
+    --creme-mid: #DDD4BC;
+    --vermelho: #8B1A1A;
+    --vermelho-vivo: #B52B2B;
+    --preto: #141008;
+    --preto-suave: #2A2016;
+    --ouro: #8A6B22;
+    --ouro-claro: #C9A84C;
+    --fonte-titulo: 'Playfair Display', Georgia, serif;
+    --fonte-corpo: 'Crimson Text', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--fonte-corpo); background: var(--creme); color: var(--preto); font-size: 18px; line-height: 1.75; overflow-x: hidden; }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    background: var(--preto); border-bottom: 3px solid var(--vermelho);
+    position: sticky; top: 0; z-index: 200; padding: 0 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+  .nav-logo { display: flex; flex-direction: column; gap: 1px; }
+  .nav-logo-main { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2; }
+  .nav-logo-sub { font-size: 10px; color: #888; letter-spacing: 4px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+  .nav-links { display: flex; list-style: none; border-left: 1px solid #2A2416; }
+  .nav-links li a {
+    color: #A89880; text-decoration: none; font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 8px 14px; font-family: var(--fonte-corpo);
+    border-right: 1px solid #2A2416; transition: color 0.2s, background 0.2s;
+    height: 68px; display: flex; align-items: center;
+  }
+  .nav-links li a:hover, .nav-links li a.ativo { color: var(--ouro-claro); background: rgba(201,168,76,0.06); }
+  .nav-links li a.ativo { border-bottom: 2px solid var(--vermelho); }
+
+  /* ===== BOTÕES ===== */
+  .btn-prim { display: inline-block; background: var(--vermelho); color: var(--creme); padding: 12px 36px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: background 0.2s; cursor: pointer; border: none; }
+  .btn-prim:hover { background: var(--vermelho-vivo); }
+  .btn-sec { display: inline-block; border: 1px solid var(--ouro); color: var(--ouro-claro); padding: 12px 36px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all 0.2s; cursor: pointer; background: transparent; }
+  .btn-sec:hover { background: var(--ouro); color: var(--preto); }
+
+  /* ===== BREADCRUMB ===== */
+  .breadcrumb {
+    background: var(--preto-suave);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 0.7rem 3rem;
+  }
+  .breadcrumb-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--fonte-corpo);
+  }
+  .breadcrumb a { color: #666; text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--ouro-claro); }
+  .breadcrumb-sep { color: var(--vermelho); font-size: 8px; }
+  .breadcrumb-atual { color: var(--ouro-claro); }
+
+  /* ===== PAGE HERO (menor que o principal) ===== */
+  .page-hero {
+    background: var(--preto); padding: 4rem 3rem;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,26,26,0.04) 40px, rgba(139,26,26,0.04) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,26,26,0.04) 40px, rgba(139,26,26,0.04) 41px);
+  }
+  .page-hero-frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,0.12); pointer-events: none; }
+  .page-hero-frame::before { content:''; position: absolute; top: -1px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+  .page-hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .page-eyebrow { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 1rem; font-family: var(--fonte-corpo); opacity: 0.8; }
+  .page-hero h1 { font-family: var(--fonte-titulo); font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 900; color: var(--creme); line-height: 1.1; }
+  .page-hero h1 em { color: var(--vermelho-vivo); font-style: italic; display: block; font-size: 0.6em; letter-spacing: 4px; margin-top: 0.4rem; font-weight: 400; }
+  .page-hero-orn { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1.5rem auto; }
+  .ph-line { width: 60px; height: 1px; background: var(--vermelho); }
+  .ph-diamond { width: 7px; height: 7px; background: var(--vermelho); transform: rotate(45deg); }
+  .page-hero p { color: #B0A490; font-size: 1.05rem; font-style: italic; max-width: 580px; margin: 0 auto; }
+
+  /* ===== ÂNCORAS INTERNAS ===== */
+  .ancora-nav {
+    background: var(--creme-dark);
+    border-bottom: 1px solid var(--creme-mid);
+    position: sticky; top: 68px; z-index: 100;
+  }
+  .ancora-inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 3rem;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .ancora-inner a {
+    color: var(--preto-suave); text-decoration: none; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 14px 20px;
+    font-family: var(--fonte-corpo); white-space: nowrap;
+    border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .ancora-inner a:hover { color: var(--vermelho); border-bottom-color: var(--vermelho); }
+
+  /* ===== UTILITÁRIOS ===== */
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .sec-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--vermelho); margin-bottom: 0.8rem; font-family: var(--fonte-corpo); display: block; }
+  .sec-label.light { color: var(--ouro-claro); }
+  .sec-title { font-family: var(--fonte-titulo); font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 700; color: var(--preto); padding-bottom: 1.2rem; position: relative; margin-bottom: 2.5rem; }
+  .sec-title::after { content:''; position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: var(--vermelho); }
+  .sec-title.light { color: var(--creme); }
+  .sec-title.light::after { background: var(--ouro-claro); }
+  .sec-title.centro { text-align: center; }
+  .sec-title.centro::after { left: 50%; transform: translateX(-50%); }
+  p.corpo { color: var(--preto-suave); margin-bottom: 1.2rem; line-height: 1.8; }
+  .destaque { border-left: 4px solid var(--vermelho); padding: 0.8rem 1.5rem; font-style: italic; color: var(--vermelho); font-size: 1.1rem; margin: 2rem 0; background: rgba(139,26,26,0.04); }
+  .orn-hr { display: flex; align-items: center; gap: 12px; margin: 3rem 0; }
+  .orn-hr-line { flex: 1; height: 1px; background: var(--creme-mid); }
+  .orn-hr-diamond { width: 7px; height: 7px; background: var(--creme-mid); transform: rotate(45deg); flex-shrink: 0; }
+
+  /* ===== 1. INTRO SPLIT ===== */
+  .intro-section { padding: 6rem 3rem; }
+  .intro-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .intro-imagem {
+    position: sticky; top: 120px;
+    background: var(--preto-suave); aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    border: 0.5px solid rgba(201,168,76,0.2);
+    overflow: hidden; position: relative;
+  }
+  .intro-imagem-placeholder { opacity: 0.2; }
+  .intro-imagem-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(20,16,8,0.85); padding: 1rem 1.2rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .intro-imagem-caption p { font-size: 0.8rem; color: #C9A84C; font-style: italic; margin: 0; line-height: 1.4; }
+
+  /* ===== 2. HISTÓRIA ===== */
+  .historia-section { padding: 6rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+  .historia-section::before { content:''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,0.025) 60px, rgba(201,168,76,0.025) 61px); }
+  .historia-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; }
+  .historia-texto .sec-label { color: var(--ouro-claro); }
+  .historia-texto p { color: #C0B49E; margin-bottom: 1.2rem; line-height: 1.8; }
+  .historia-texto .destaque { color: var(--ouro-claro); border-left-color: var(--ouro-claro); background: rgba(201,168,76,0.06); }
+  .historia-numeros { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(201,168,76,0.15); border: 0.5px solid rgba(201,168,76,0.2); }
+  .historia-num-item { background: var(--preto); padding: 2rem 1.5rem; text-align: center; }
+  .h-num-valor { font-family: var(--fonte-titulo); font-size: 3rem; color: var(--ouro-claro); font-weight: 900; line-height: 1; }
+  .h-num-label { font-size: 0.8rem; color: #888; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 6px; line-height: 1.4; font-family: var(--fonte-corpo); }
+
+  /* ===== 3. O ESPAÇO ===== */
+  .espaco-section { padding: 6rem 3rem; }
+  .espaco-grid { max-width: 1100px; margin: 0 auto; }
+  .espaco-intro { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+  .espaco-foto-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .foto-placeholder {
+    background: var(--preto-suave); border: 0.5px solid rgba(201,168,76,0.15);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.6;
+  }
+  .foto-placeholder.tall { aspect-ratio: 2/3; }
+  .foto-placeholder.wide { aspect-ratio: 3/2; grid-column: 1/-1; }
+  .foto-placeholder.square { aspect-ratio: 1; }
+  .foto-label { font-size: 0.75rem; color: #666; font-style: italic; text-align: center; margin-top: 0.4rem; }
+
+  /* ===== 4. ACERVO ===== */
+  .acervo-section { padding: 6rem 3rem; background: var(--creme-dark); }
+  .acervo-grid { max-width: 1100px; margin: 0 auto; }
+  .acervo-items { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .acervo-item {
+    background: var(--creme); border: 0.5px solid var(--creme-mid);
+    padding: 2rem 1.5rem; text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .acervo-item:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(20,16,8,0.1); }
+  .acervo-icone { width: 48px; height: 48px; margin: 0 auto 1rem; opacity: 0.6; }
+  .acervo-num { font-family: var(--fonte-titulo); font-size: 2.5rem; color: var(--vermelho); font-weight: 900; line-height: 1; }
+  .acervo-tipo { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--preto-suave); margin-top: 6px; font-family: var(--fonte-corpo); }
+  .acervo-desc { font-size: 0.85rem; color: var(--preto-suave); margin-top: 0.8rem; line-height: 1.5; }
+
+  /* ===== 5. OSCAR NIEMEYER ===== */
+  .niemeyer-section { padding: 6rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+  .niemeyer-section::before { content:''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,168,76,0.025) 40px, rgba(201,168,76,0.025) 41px); }
+  .niemeyer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; }
+  .niemeyer-img-wrap { position: relative; }
+  .niemeyer-img {
+    background: #1A1208; border: 0.5px solid rgba(201,168,76,0.2);
+    aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .niemeyer-img-badge {
+    position: absolute; bottom: 1.5rem; left: 1.5rem;
+    background: var(--vermelho); color: var(--creme);
+    padding: 6px 14px; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; font-family: var(--fonte-corpo);
+  }
+  .niemeyer-texto p { color: #C0B49E; margin-bottom: 1.2rem; line-height: 1.8; }
+  .niemeyer-texto .sec-label { color: var(--ouro-claro); }
+  .niemeyer-frase {
+    margin: 2rem 0; padding: 1.5rem 2rem;
+    border: 0.5px solid rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.04);
+  }
+  .niemeyer-frase p { font-family: var(--fonte-titulo); font-size: 1.2rem; font-style: italic; color: var(--ouro-claro); line-height: 1.5; margin: 0; }
+  .niemeyer-frase cite { display: block; font-size: 0.8rem; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; font-style: normal; }
+
+  /* ===== 6. EQUIPE / PARCEIROS ===== */
+  .equipe-section { padding: 6rem 3rem; }
+  .equipe-grid { max-width: 1100px; margin: 0 auto; }
+  .equipe-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .equipe-card {
+    border: 0.5px solid var(--creme-mid); padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .equipe-card:hover { border-color: var(--vermelho); }
+  .equipe-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--preto-suave); display: flex; align-items: center; justify-content: center;
+    font-family: var(--fonte-titulo); font-size: 1.2rem; color: var(--ouro-claro); font-weight: 700;
+    margin-bottom: 1.2rem; border: 2px solid var(--creme-mid);
+  }
+  .equipe-card h4 { font-family: var(--fonte-titulo); font-size: 1.05rem; color: var(--preto); margin-bottom: 4px; }
+  .equipe-cargo { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); margin-bottom: 0.8rem; display: block; font-family: var(--fonte-corpo); }
+  .equipe-card p { font-size: 0.9rem; color: var(--preto-suave); line-height: 1.6; }
+
+  .parceiros-wrap { max-width: 1100px; margin: 4rem auto 0; padding-top: 3rem; border-top: 1px solid var(--creme-mid); }
+  .parceiros-logos { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+  .parceiro-item {
+    border: 0.5px solid var(--creme-mid); padding: 1rem 2rem;
+    background: var(--creme); font-size: 0.85rem; color: var(--preto-suave);
+    font-family: var(--fonte-corpo); font-style: italic;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .parceiro-dot { width: 8px; height: 8px; background: var(--vermelho); transform: rotate(45deg); flex-shrink: 0; }
+
+  /* ===== 7. MISSÃO / VALORES ===== */
+  .missao-section { padding: 6rem 3rem; background: var(--vermelho); position: relative; overflow: hidden; }
+  .missao-section::before { content:''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0,0,0,0.03) 30px, rgba(0,0,0,0.03) 31px); }
+  .missao-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; position: relative; }
+  .missao-card {
+    background: rgba(0,0,0,0.18); border: 0.5px solid rgba(245,240,232,0.15);
+    padding: 2.5rem 2rem;
+  }
+  .missao-icone-wrap { margin-bottom: 1.5rem; }
+  .missao-num { font-family: var(--fonte-titulo); font-size: 3rem; color: rgba(201,168,76,0.3); font-weight: 900; line-height: 1; }
+  .missao-card h3 { font-family: var(--fonte-titulo); font-size: 1.2rem; color: var(--creme); margin-bottom: 0.8rem; }
+  .missao-card p { font-size: 0.95rem; color: rgba(245,240,232,0.8); line-height: 1.7; }
+  .missao-header { text-align: center; margin-bottom: 3.5rem; position: relative; }
+  .missao-header .sec-label { color: var(--ouro-claro); }
+  .missao-header .sec-title.light { text-align: center; }
+  .missao-header .sec-title.light::after { left: 50%; transform: translateX(-50%); }
+
+  /* ===== 8. VISITA PRÁTICA ===== */
+  .visita-section { padding: 6rem 3rem; background: var(--creme-dark); }
+  .visita-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .visita-info h3 { font-family: var(--fonte-titulo); font-size: 1.5rem; color: var(--preto); margin-bottom: 1.5rem; }
+  .visita-lista { list-style: none; }
+  .visita-lista li {
+    padding: 1rem 0 1rem 1.5rem; border-bottom: 0.5px solid var(--creme-mid);
+    font-size: 0.95rem; color: var(--preto-suave); position: relative; line-height: 1.5;
+  }
+  .visita-lista li::before { content:'✦'; color: var(--vermelho); font-size: 0.55rem; position: absolute; left: 0; top: 1.1rem; }
+  .visita-lista li strong { color: var(--preto); }
+  .visita-mapa {
+    background: var(--preto-suave); border: 0.5px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 380px; position: relative; overflow: hidden;
+  }
+  .visita-mapa-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(20,16,8,0.9); padding: 1.2rem 1.5rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .visita-mapa-overlay p { font-size: 0.85rem; color: var(--ouro-claro); font-style: italic; margin: 0; }
+  .visita-mapa-overlay strong { display: block; color: var(--creme); font-size: 0.9rem; margin-bottom: 2px; font-style: normal; font-family: var(--fonte-titulo); }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--preto); padding: 4rem 3rem 2rem; border-top: 3px solid var(--vermelho); }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid #2A2416; }
+  .f-logo { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+  .footer-brand p { font-size: 0.9rem; color: #666; line-height: 1.6; }
+  .footer-col h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 1px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 6px; }
+  .footer-col ul li a { color: #666; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--ouro-claro); }
+  .footer-bottom { max-width: 1100px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #444; }
+  .wp-badge { border: 0.5px solid #333; color: #555; font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Memorial Coluna Prestes</span>
+    <span class="nav-logo-sub">1924 · Santo Ângelo · Brasil</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" class="ativo">Sobre</a></li>
+    <li><a href="linha-do-tempo.html" >Linha do Tempo</a></li>
+    <li><a href="memoriais.html" >Memoriais</a></li>
+    <li><a href="agenda.html" >Agenda</a></li>
+    <li><a href="depoimentos.html" >Depoimentos</a></li>
+    <li><a href="biblioteca.html" >Biblioteca</a></li>
+    <li><a href="contato.html" >Contato</a></li>
+  </ul>
+</nav>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb-sep">✦</span>
+    <span class="breadcrumb-atual">Sobre</span>
+  </div>
+</div>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="page-hero-frame"></div>
+  <div class="page-hero-content">
+    <p class="page-eyebrow">Memorial Coluna Prestes</p>
+    <h1>
+      Sobre o Memorial
+      <em>História · Acervo · Missão</em>
+    </h1>
+    <div class="page-hero-orn">
+      <div class="ph-line"></div>
+      <div class="ph-diamond"></div>
+      <div class="ph-line"></div>
+    </div>
+    <p>Conheça a história do espaço que preserva a memória da maior marcha revolucionária do Brasil republicano.</p>
+  </div>
+</section>
+
+<!-- ===== ÂNCORAS INTERNAS ===== -->
+<nav class="ancora-nav" aria-label="Seções da página">
+  <div class="ancora-inner">
+    <a href="#historia">A Coluna Prestes</a>
+    <a href="#espaco">O Espaço</a>
+    <a href="#acervo">Acervo</a>
+    <a href="#niemeyer">Oscar Niemeyer</a>
+    <a href="#equipe">Equipe & Parceiros</a>
+    <a href="#missao">Missão & Valores</a>
+    <a href="#visita">Informações de Visita</a>
+  </div>
+</nav>
+
+<!-- ===== 1. INTRO ===== -->
+<section class="intro-section" id="historia">
+  <div class="intro-grid">
+
+    <!-- Imagem fixa -->
+    <div>
+      <div class="intro-imagem">
+        <svg class="intro-imagem-placeholder" width="160" height="200" viewBox="0 0 160 200" fill="none">
+          <rect x="60" y="10" width="40" height="140" rx="4" fill="#C9A84C"/>
+          <rect x="10" y="90" width="140" height="80" rx="6" fill="#8B1A1A"/>
+          <path d="M30 90 L80 10 L130 90" fill="none" stroke="#C9A84C" stroke-width="3"/>
+          <circle cx="80" cy="60" r="15" fill="none" stroke="#C9A84C" stroke-width="2"/>
+        </svg>
+        <div class="intro-imagem-caption">
+          <p>Estação Ferroviária de Santo Ângelo/RS — local de origem da Coluna Prestes em 1924 e sede do Memorial.</p>
+        </div>
+      </div>
+      <p class="foto-label">📷 Substituir pela fotografia real do Memorial</p>
+    </div>
+
+    <!-- Texto -->
+    <div>
+      <span class="sec-label">A Coluna Prestes</span>
+      <h2 class="sec-title">O Movimento que Atravessou o Brasil</h2>
+
+      <p class="corpo">Entre 1924 e 1927, um grupo de militares dissidentes e civis empreendeu uma das mais extraordinárias marchas da história brasileira. Liderada pelo Capitão Luiz Carlos Prestes, a Coluna percorreu aproximadamente <strong>25.000 quilômetros</strong> pelo interior do país, atravessando 11 estados e tocando a vida de milhares de brasileiros.</p>
+
+      <p class="corpo">O movimento nasceu do tenentismo, corrente política que questionava a ordem oligárquica da Primeira República. Ao contrário de outras revoltas da época, a Coluna Prestes optou pela marcha contínua em vez de confrontos frontais, tornando-se virtualmente imbatível pelas forças do governo federal.</p>
+
+      <blockquote class="destaque">
+        "Nunca fomos derrotados em combate. Deixamos o Brasil por razões políticas, não militares." — Luiz Carlos Prestes
+      </blockquote>
+
+      <p class="corpo">Após dois anos e três meses de caminhada, a Coluna cruzou a fronteira para a Bolívia em fevereiro de 1927, onde seus integrantes depuseram as armas. O episódio consolidou Prestes como figura mítica da resistência popular brasileira — o <em>Cavaleiro da Esperança</em>, como o imortalizou Jorge Amado.</p>
+
+      <p class="corpo">Décadas depois, a memória dessa marcha seria honrada com a criação do Memorial em Santo Ângelo/RS, exatamente no local onde tudo começou — a antiga Estação Ferroviária da cidade.</p>
+
+      <div class="orn-hr">
+        <div class="orn-hr-line"></div>
+        <div class="orn-hr-diamond"></div>
+        <div class="orn-hr-line"></div>
+      </div>
+
+      <a href="#" class="btn-prim">Explorar a Linha do Tempo</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 2. CONTEXTO HISTÓRICO COM NÚMEROS ===== -->
+<section class="historia-section">
+  <div class="historia-grid">
+
+    <div class="historia-texto">
+      <span class="sec-label">Contexto e Legado</span>
+      <h2 class="sec-title light">A Marcha em Números</h2>
+      <p>A magnitude da Coluna Prestes só se revela quando olhamos para os dados: uma tropa de cerca de 1.500 homens que enfrentou o maior exército regular do Brasil por quase três anos, jamais sendo derrotada em campo aberto.</p>
+      <p>A marcha percorreu distâncias comparáveis à travessia da Europa de ponta a ponta — em sua maior parte por sertões remotos, sem mapas precisos, abastecimento garantido ou apoio logístico.</p>
+      <blockquote class="destaque">
+        "A Coluna não foi apenas um evento militar. Foi uma pedagogia de resistência que moldou a política brasileira do século XX."
+      </blockquote>
+      <p>Seu impacto se estende até hoje: inspirou movimentos sociais, obras literárias, produções artísticas e políticas públicas de memória e patrimônio.</p>
+    </div>
+
+    <div class="historia-numeros">
+      <div class="historia-num-item">
+        <div class="h-num-valor">25mil</div>
+        <div class="h-num-label">Quilômetros<br>percorridos</div>
+      </div>
+      <div class="historia-num-item">
+        <div class="h-num-valor">11</div>
+        <div class="h-num-label">Estados<br>brasileiros</div>
+      </div>
+      <div class="historia-num-item">
+        <div class="h-num-valor">2a 3m</div>
+        <div class="h-num-label">Duração<br>da marcha</div>
+      </div>
+      <div class="historia-num-item">
+        <div class="h-num-valor">~1.500</div>
+        <div class="h-num-label">Combatentes<br>na Coluna</div>
+      </div>
+      <div class="historia-num-item">
+        <div class="h-num-valor">1924</div>
+        <div class="h-num-label">Início em<br>Santo Ângelo</div>
+      </div>
+      <div class="historia-num-item">
+        <div class="h-num-valor">1927</div>
+        <div class="h-num-label">Exílio na<br>Bolívia</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 3. O ESPAÇO ===== -->
+<section class="espaco-section" id="espaco">
+  <div class="espaco-grid">
+    <span class="sec-label">O Memorial</span>
+    <h2 class="sec-title">O Espaço Físico</h2>
+
+    <div class="espaco-intro">
+      <div>
+        <p class="corpo">O Memorial Coluna Prestes de Santo Ângelo está instalado no prédio da antiga Estação Ferroviária, construção histórica que data do início do século XX. Não é coincidência: foi exatamente neste local que, em outubro de 1924, as tropas lideradas por Luiz Carlos Prestes partiram em marcha.</p>
+        <p class="corpo">A escolha do espaço é em si um ato de memória. Ao ocupar o edifício ferroviário, o Memorial materializa a ligação entre o local histórico e o movimento que dele partiu. O conjunto arquitetônico reúne o prédio original restaurado e uma área expositiva externa.</p>
+        <p class="corpo">Em Palmas/TO, um segundo memorial foi inaugurado em 2001 com projeto do arquiteto Oscar Niemeyer, na Praça dos Girassóis — um dos maiores centros cívicos do Brasil. Com 570m² de área, o espaço abriga 81 peças originais doadas pela família Prestes.</p>
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#" class="btn-prim">Santo Ângelo/RS</a>
+          <a href="#" class="btn-sec">Palmas/TO</a>
+        </div>
+      </div>
+      <div>
+        <div class="foto-placeholder square" style="height: 280px;">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.3">
+            <rect x="5" y="20" width="50" height="35" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M5 20 L30 5 L55 20" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+            <rect x="22" y="30" width="16" height="25" rx="2" fill="#8B1A1A"/>
+          </svg>
+        </div>
+        <p class="foto-label">📷 Fachada do Memorial — Santo Ângelo/RS</p>
+      </div>
+    </div>
+
+    <!-- Galeria de espaços -->
+    <div>
+      <h3 style="font-family: var(--fonte-titulo); font-size: 1.3rem; color: var(--preto); margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--creme-mid);">Ambientes do Memorial</h3>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+
+        <div>
+          <div class="foto-placeholder" style="height: 160px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity="0.3"><rect x="3" y="3" width="34" height="34" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M3 15 L37 15" stroke="#C9A84C" stroke-width="1"/><circle cx="20" cy="26" r="5" stroke="#8B1A1A" stroke-width="1.5"/></svg>
+          </div>
+          <p style="font-size: 0.85rem; font-family: var(--fonte-titulo); color: var(--preto); margin-top: 0.6rem;">Sala de Exposição Permanente</p>
+          <p class="foto-label">Acervo histórico original com documentos e fotografias de época.</p>
+        </div>
+
+        <div>
+          <div class="foto-placeholder" style="height: 160px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity="0.3"><rect x="5" y="8" width="30" height="25" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M5 16 L35 16" stroke="#C9A84C" stroke-width="1"/><rect x="10" y="20" width="8" height="12" fill="#8B1A1A"/><rect x="22" y="20" width="8" height="12" fill="#8B1A1A"/></svg>
+          </div>
+          <p style="font-size: 0.85rem; font-family: var(--fonte-titulo); color: var(--preto); margin-top: 0.6rem;">Área de Pesquisa e Biblioteca</p>
+          <p class="foto-label">Espaço dedicado à consulta do acervo bibliográfico e documental.</p>
+        </div>
+
+        <div>
+          <div class="foto-placeholder" style="height: 160px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity="0.3"><ellipse cx="20" cy="20" rx="15" ry="15" stroke="#C9A84C" stroke-width="1.5"/><path d="M20 8 L20 32 M8 20 L32 20" stroke="#C9A84C" stroke-width="1"/><circle cx="20" cy="20" r="4" fill="#8B1A1A"/></svg>
+          </div>
+          <p style="font-size: 0.85rem; font-family: var(--fonte-titulo); color: var(--preto); margin-top: 0.6rem;">Mapa Interativo da Rota</p>
+          <p class="foto-label">Instalação cartográfica mostrando o percurso completo da marcha.</p>
+        </div>
+
+        <div>
+          <div class="foto-placeholder" style="height: 160px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity="0.3"><rect x="8" y="5" width="24" height="30" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M8 15 L32 15 M8 22 L32 22" stroke="#C9A84C" stroke-width="1"/></svg>
+          </div>
+          <p style="font-size: 0.85rem; font-family: var(--fonte-titulo); color: var(--preto); margin-top: 0.6rem;">Sala de Vídeo e Audiovisual</p>
+          <p class="foto-label">Projeções documentais sobre a história da Coluna e seus personagens.</p>
+        </div>
+
+        <div>
+          <div class="foto-placeholder" style="height: 160px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity="0.3"><path d="M8 35 L20 5 L32 35 Z" stroke="#C9A84C" stroke-width="1.5" fill="none"/><circle cx="20" cy="20" r="5" stroke="#8B1A1A" stroke-width="1.5"/></svg>
+          </div>
+          <p style="font-size: 0.85rem; font-family: var(--fonte-titulo); color: var(--preto); margin-top: 0.6rem;">Área Externa e Obelisco</p>
+          <p class="foto-label">Espaço aberto com o obelisco comemorativo e área de convivência.</p>
+        </div>
+
+        <div>
+          <div class="foto-placeholder" style="height: 160px;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" opacity="0.3"><rect x="4" y="10" width="32" height="25" rx="3" stroke="#C9A84C" stroke-width="1.5"/><rect x="12" y="4" width="16" height="8" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M4 18 L36 18" stroke="#C9A84C" stroke-width="1"/></svg>
+          </div>
+          <p style="font-size: 0.85rem; font-family: var(--fonte-titulo); color: var(--preto); margin-top: 0.6rem;">Auditório para Eventos</p>
+          <p class="foto-label">Espaço para oficinas, palestras e atividades educativas do projeto.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4. ACERVO ===== -->
+<section class="acervo-section" id="acervo">
+  <div class="acervo-grid">
+    <span class="sec-label">Patrimônio Preservado</span>
+    <h2 class="sec-title">O Acervo do Memorial</h2>
+    <p class="corpo" style="max-width: 700px;">Reunido ao longo de décadas de pesquisa, o acervo do Memorial Coluna Prestes é um dos mais completos sobre o movimento. Grande parte das peças foi doada pela própria família de Luiz Carlos Prestes.</p>
+
+    <div class="acervo-items">
+
+      <div class="acervo-item">
+        <div class="acervo-icone">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="8" y="6" width="32" height="38" rx="3" stroke="#8B1A1A" stroke-width="1.5"/>
+            <path d="M14 16 L34 16 M14 22 L34 22 M14 28 L26 28" stroke="#8B1A1A" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="acervo-num">+500</div>
+        <div class="acervo-tipo">Documentos</div>
+        <div class="acervo-desc">Cartas, ordens de marcha, manifestos e registros administrativos originais.</div>
+      </div>
+
+      <div class="acervo-item">
+        <div class="acervo-icone">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="6" y="10" width="36" height="28" rx="3" stroke="#8B1A1A" stroke-width="1.5"/>
+            <circle cx="24" cy="24" r="8" stroke="#8B1A1A" stroke-width="1.2"/>
+            <circle cx="24" cy="24" r="3" fill="#8B1A1A"/>
+          </svg>
+        </div>
+        <div class="acervo-num">+1.200</div>
+        <div class="acervo-tipo">Fotografias</div>
+        <div class="acervo-desc">Imagens históricas da marcha, dos combatentes e dos locais percorridos.</div>
+      </div>
+
+      <div class="acervo-item">
+        <div class="acervo-icone">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M10 38 L24 10 L38 38 Z" stroke="#8B1A1A" stroke-width="1.5" fill="none"/>
+            <path d="M16 28 L32 28" stroke="#8B1A1A" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="acervo-num">81</div>
+        <div class="acervo-tipo">Peças Originais</div>
+        <div class="acervo-desc">Objetos pessoais, equipamentos militares e artefatos da época doados pela família Prestes.</div>
+      </div>
+
+      <div class="acervo-item">
+        <div class="acervo-icone">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="8" y="8" width="32" height="32" rx="3" stroke="#8B1A1A" stroke-width="1.5"/>
+            <path d="M8 20 L40 20 M20 8 L20 40" stroke="#8B1A1A" stroke-width="1"/>
+            <circle cx="14" cy="14" r="2" fill="#8B1A1A"/>
+            <circle cx="34" cy="14" r="2" fill="#8B1A1A"/>
+          </svg>
+        </div>
+        <div class="acervo-num">+30</div>
+        <div class="acervo-tipo">Mapas Históricos</div>
+        <div class="acervo-desc">Cartografias originais e reconstituídas do percurso da Coluna pelo Brasil.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. OSCAR NIEMEYER ===== -->
+<section class="niemeyer-section" id="niemeyer">
+  <div class="niemeyer-grid">
+
+    <div class="niemeyer-img-wrap">
+      <div class="niemeyer-img">
+        <svg width="140" height="180" viewBox="0 0 140 180" fill="none" opacity="0.2">
+          <ellipse cx="70" cy="90" rx="55" ry="70" stroke="#C9A84C" stroke-width="1.5"/>
+          <ellipse cx="70" cy="90" rx="30" ry="45" stroke="#C9A84C" stroke-width="1"/>
+          <path d="M70 20 L70 160 M15 90 L125 90" stroke="#C9A84C" stroke-width="0.5"/>
+          <circle cx="70" cy="90" r="8" stroke="#8B1A1A" stroke-width="2"/>
+        </svg>
+        <div class="niemeyer-img-badge">Palmas — TO · 2001</div>
+      </div>
+      <p class="foto-label">📷 Memorial Oscar Niemeyer — Praça dos Girassóis, Palmas/TO</p>
+    </div>
+
+    <div class="niemeyer-texto">
+      <span class="sec-label">Arquitetura e Memória</span>
+      <h2 class="sec-title light">Oscar Niemeyer e o Memorial de Palmas</h2>
+
+      <p>A amizade entre Oscar Niemeyer e Luiz Carlos Prestes é um capítulo à parte na história da cultura brasileira. Os dois compartilhavam ideais políticos e uma profunda crença na capacidade transformadora da arte e da arquitetura.</p>
+
+      <p>Quando o projeto do Memorial em Palmas tomou forma, não houve dúvida sobre quem seria o arquiteto. Niemeyer aceitou o desafio e projetou um espaço que dialoga com a vastidão do cerrado tocantinense e com a grandiosidade da Praça dos Girassóis — uma das maiores praças cívicas do mundo.</p>
+
+      <div class="niemeyer-frase">
+        <p>"Prestes foi um homem que lutou pela justiça social com uma coragem que poucos têm. É uma honra poder guardar sua memória neste espaço."</p>
+        <cite>— Oscar Niemeyer, sobre o projeto do Memorial</cite>
+      </div>
+
+      <p>O resultado é um edifício de linhas orgânicas e formas curvas características do estilo de Niemeyer — um contraste deliberado com a rigidez militar do movimento que homenageia. Com 570m² de área expositiva, o memorial integra arquitetura e memória de forma indissociável.</p>
+
+      <a href="#" class="btn-sec" style="margin-top: 1rem;">Conhecer o Memorial de Palmas</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 6. EQUIPE E PARCEIROS ===== -->
+<section class="equipe-section" id="equipe">
+  <div class="equipe-grid">
+    <span class="sec-label">Quem Faz o Memorial</span>
+    <h2 class="sec-title">Equipe e Coordenação</h2>
+    <p class="corpo" style="max-width: 700px;">O Memorial Coluna Prestes é mantido por uma equipe multidisciplinar de pesquisadores, educadores e profissionais de patrimônio histórico, com apoio de parceiros institucionais.</p>
+
+    <div class="equipe-cards">
+
+      <div class="equipe-card">
+        <div class="equipe-avatar">CP</div>
+        <h4>Coordenação Geral</h4>
+        <span class="equipe-cargo">Direção do Memorial</span>
+        <p>Responsável pela gestão institucional, articulação com parceiros e supervisão das atividades culturais e educativas do Memorial.</p>
+      </div>
+
+      <div class="equipe-card">
+        <div class="equipe-avatar">PH</div>
+        <h4>Pesquisa Histórica</h4>
+        <span class="equipe-cargo">Curadoria do Acervo</span>
+        <p>Equipe dedicada à catalogação, preservação e pesquisa do acervo documental e fotográfico. Responsável pelo conteúdo das exposições.</p>
+      </div>
+
+      <div class="equipe-card">
+        <div class="equipe-avatar">ED</div>
+        <h4>Educação e Oficinas</h4>
+        <span class="equipe-cargo">Programa Educativo</span>
+        <p>Coordenação do ciclo de 10 oficinas anuais, atendimento a grupos escolares e desenvolvimento de materiais pedagógicos.</p>
+      </div>
+
+    </div>
+
+    <!-- Parceiros -->
+    <div class="parceiros-wrap">
+      <span class="sec-label">Apoio Institucional</span>
+      <h3 style="font-family: var(--fonte-titulo); font-size: 1.2rem; color: var(--preto); margin-bottom: 0.5rem;">Parceiros e Apoiadores</h3>
+      <div class="parceiros-logos">
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Prefeitura de Santo Ângelo/RS</div>
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Governo do Estado do RS</div>
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Governo do Estado do TO</div>
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Ministério da Cultura</div>
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Fundação Oscar Niemeyer</div>
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Família Prestes</div>
+        <div class="parceiro-item"><div class="parceiro-dot"></div>Universidades Parceiras</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 7. MISSÃO E VALORES ===== -->
+<section class="missao-section" id="missao">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <div class="missao-header">
+      <span class="sec-label">Nossa Razão de Existir</span>
+      <h2 class="sec-title light centro">Missão & Valores</h2>
+    </div>
+    <div class="missao-grid">
+
+      <div class="missao-card">
+        <div class="missao-icone-wrap"><div class="missao-num">01</div></div>
+        <h3>Preservar a Memória</h3>
+        <p>Guardar e transmitir às gerações futuras os registros materiais e imateriais da Coluna Prestes, assegurando que esse capítulo fundamental da história brasileira não seja esquecido.</p>
+      </div>
+
+      <div class="missao-card">
+        <div class="missao-icone-wrap"><div class="missao-num">02</div></div>
+        <h3>Educar e Difundir</h3>
+        <p>Desenvolver programas educativos que aproximem o público — especialmente jovens e estudantes — da história da Coluna, promovendo o pensamento crítico e a consciência histórica.</p>
+      </div>
+
+      <div class="missao-card">
+        <div class="missao-icone-wrap"><div class="missao-num">03</div></div>
+        <h3>Pesquisar e Documentar</h3>
+        <p>Fomentar a pesquisa histórica rigorosa sobre o movimento, ampliando continuamente o acervo e produzindo conhecimento acessível ao público em geral e à comunidade acadêmica.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8. INFORMAÇÕES DE VISITA ===== -->
+<section class="visita-section" id="visita">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <span class="sec-label">Planeje sua Visita</span>
+    <h2 class="sec-title">Informações Práticas</h2>
+
+    <div class="visita-grid">
+
+      <div>
+        <div class="visita-info" style="margin-bottom: 2.5rem;">
+          <h3>Memorial de Santo Ângelo/RS</h3>
+          <ul class="visita-lista">
+            <li><strong>Endereço:</strong> Antiga Estação Ferroviária, Santo Ângelo — RS</li>
+            <li><strong>Horários:</strong> Segunda a Sexta · 9h–12h e 14h–17h · Sábado · 9h–12h</li>
+            <li><strong>Entrada:</strong> Gratuita</li>
+            <li><strong>Grupos escolares:</strong> Agendamento prévio pelo telefone ou e-mail</li>
+            <li><strong>Acessibilidade:</strong> Rampa de acesso e banheiro adaptado</li>
+            <li><strong>Estacionamento:</strong> Disponível nas proximidades da Estação</li>
+          </ul>
+        </div>
+
+        <div class="visita-info">
+          <h3>Memorial Oscar Niemeyer — Palmas/TO</h3>
+          <ul class="visita-lista">
+            <li><strong>Endereço:</strong> Praça dos Girassóis, Palmas — TO</li>
+            <li><strong>Horários:</strong> Terça a Domingo · 9h–18h</li>
+            <li><strong>Entrada:</strong> Gratuita</li>
+            <li><strong>Visitas guiadas:</strong> Disponíveis com agendamento</li>
+            <li><strong>Acessibilidade:</strong> Totalmente adaptado para PCDs</li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#" class="btn-prim">Como Chegar</a>
+          <a href="#" class="btn-sec">Agendar Visita em Grupo</a>
+        </div>
+      </div>
+
+      <!-- Mapa placeholder -->
+      <div>
+        <div class="visita-mapa">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" opacity="0.2">
+            <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="1.5"/>
+            <circle cx="60" cy="55" r="8" fill="#8B1A1A"/>
+            <path d="M60 55 L60 95" stroke="#8B1A1A" stroke-width="2"/>
+            <path d="M30 55 L90 55 M60 15 L60 95" stroke="#C9A84C" stroke-width="0.5"/>
+          </svg>
+          <div class="visita-mapa-overlay">
+            <strong>Santo Ângelo — Rio Grande do Sul</strong>
+            <p>Antiga Estação Ferroviária · Centro histórico da cidade</p>
+          </div>
+        </div>
+        <p class="foto-label" style="text-align: center;">🗺️ Incorporar mapa do Google Maps via Elementor</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="contato">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">Memorial Coluna Prestes</div>
+      <p>Preservando a memória de uma das maiores marchas revolucionárias da história do Brasil.</p>
+      <p style="margin-top:1rem; font-size:0.85rem;">Antiga Estação Ferroviária<br>Santo Ângelo — RS, Brasil</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#"><a href="index.html" style="color:inherit;text-decoration:none;">Início</a></a></li>
+        <li><a href="sobre.html">Sobre o Memorial</a></li>
+        <li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+        <li><a href="memoriais.html">Memoriais</a></li>
+        <li><a href="agenda.html">Agenda de Oficinas</a></li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="biblioteca.html">Biblioteca</a></li>
+        <li><a href="biblioteca.html#referencias">Bibliografia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informações</h4>
+      <ul>
+        <li><a href="contato.html#horarios">Horários de Visita</a></li>
+        <li><a href="contato.html">Agendamento de Grupos</a></li>
+        <li><a href="contato.html#imprensa">Imprensa</a></li>
+        <li><a href="contato.html">Parceiros</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:0.85rem; color:#555; line-height:1.6;">Seg a Sex · 9h–12h e 14h–17h<br>Sábado · 9h–12h</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Memorial Coluna Prestes · Todos os direitos reservados</p>
+    <span class="wp-badge">WordPress + Elementor</span>
+  </div>
+</footer>
+
+</body>
+</html>

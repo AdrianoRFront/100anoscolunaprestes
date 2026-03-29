@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linha do Tempo — Memorial Coluna Prestes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --creme: #F5F0E8;
+  --creme-dark: #EAE2D0;
+  --creme-mid: #DDD4BC;
+  --vermelho: #8B1A1A;
+  --vermelho-vivo: #B52B2B;
+  --preto: #141008;
+  --preto-suave: #2A2016;
+  --ouro: #8A6B22;
+  --ouro-claro: #C9A84C;
+  --fonte-titulo: 'Playfair Display', Georgia, serif;
+  --fonte-corpo: 'Crimson Text', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fonte-corpo); background: var(--preto); color: var(--creme); font-size: 17px; line-height: 1.75; overflow-x: hidden; }
+
+/* ===== NAVBAR ===== */
+nav {
+  background: var(--preto); border-bottom: 3px solid var(--vermelho);
+  position: sticky; top: 0; z-index: 200; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo-main { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2; }
+.nav-logo-sub { font-size: 10px; color: #666; letter-spacing: 4px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.nav-links { display: flex; list-style: none; border-left: 1px solid #2A2416; }
+.nav-links li a {
+  color: #A89880; text-decoration: none; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 8px 14px; font-family: var(--fonte-corpo);
+  border-right: 1px solid #2A2416; transition: color 0.2s, background 0.2s;
+  height: 68px; display: flex; align-items: center;
+}
+.nav-links li a:hover { color: var(--ouro-claro); background: rgba(201,168,76,0.06); }
+.nav-links li a.ativo { color: var(--ouro-claro); border-bottom: 2px solid var(--vermelho); }
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb { background: #1C1710; border-bottom: 1px solid rgba(201,168,76,0.12); padding: 0.7rem 3rem; }
+.breadcrumb-inner { max-width: 1300px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.breadcrumb a { color: #555; text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--ouro-claro); }
+.breadcrumb-sep { color: var(--vermelho); font-size: 8px; }
+.breadcrumb-atual { color: var(--ouro-claro); }
+
+/* ===== BOTÕES ===== */
+.btn-prim { display: inline-block; background: var(--vermelho); color: var(--creme); padding: 11px 30px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: background 0.2s; border: none; cursor: pointer; }
+.btn-prim:hover { background: var(--vermelho-vivo); }
+.btn-sec { display: inline-block; border: 1px solid var(--ouro); color: var(--ouro-claro); padding: 11px 30px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all 0.2s; background: transparent; cursor: pointer; }
+.btn-sec:hover { background: var(--ouro); color: var(--preto); }
+
+/* ===== PAGE HERO ===== */
+.page-hero {
+  background: var(--preto); padding: 4rem 3rem 3rem;
+  position: relative; overflow: hidden; text-align: center;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.page-hero::before {
+  content:''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,26,26,0.04) 40px, rgba(139,26,26,0.04) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,26,26,0.04) 40px, rgba(139,26,26,0.04) 41px);
+}
+.page-hero-frame { position: absolute; inset: 18px; border: 1px solid rgba(201,168,76,0.1); pointer-events: none; }
+.page-hero-frame::before { content:''; position: absolute; top:-1px; left:10%; right:10%; height:1px; background: linear-gradient(90deg, transparent, var(--ouro), transparent); }
+.page-hero-content { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+.page-eyebrow { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 1rem; font-family: var(--fonte-corpo); opacity: 0.8; }
+.page-hero h1 { font-family: var(--fonte-titulo); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; color: var(--creme); line-height: 1.1; }
+.page-hero h1 em { color: var(--vermelho-vivo); font-style: italic; display: block; font-size: 0.55em; letter-spacing: 6px; margin-top: 0.4rem; font-weight: 400; }
+.page-hero-orn { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1.5rem auto; }
+.ph-line { width: 60px; height: 1px; background: var(--vermelho); }
+.ph-diamond { width: 7px; height: 7px; background: var(--vermelho); transform: rotate(45deg); }
+.page-hero p { color: #B0A490; font-size: 1rem; font-style: italic; max-width: 560px; margin: 0 auto; }
+
+/* ===== FILTROS DE ANO ===== */
+.filtros-section {
+  background: #1C1710;
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  position: sticky; top: 68px; z-index: 100;
+  padding: 0 3rem;
+}
+.filtros-inner {
+  max-width: 1300px; margin: 0 auto;
+  display: flex; align-items: center; gap: 0;
+  overflow-x: auto;
+}
+.filtros-label {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: #555; font-family: var(--fonte-corpo); white-space: nowrap;
+  padding: 14px 20px 14px 0; border-right: 1px solid #2A2416; margin-right: 4px;
+}
+.filtro-btn {
+  background: transparent; border: none; color: #888;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 14px 16px; font-family: var(--fonte-corpo); cursor: pointer;
+  border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap;
+}
+.filtro-btn:hover { color: var(--ouro-claro); }
+.filtro-btn.ativo { color: var(--ouro-claro); border-bottom-color: var(--vermelho); }
+.filtros-sep { width: 1px; height: 20px; background: #2A2416; flex-shrink: 0; margin: 0 4px; }
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.tl-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ===== SIDEBAR ===== */
+.tl-sidebar {
+  border-right: 1px solid rgba(201,168,76,0.12);
+  background: #0E0C08;
+  position: sticky; top: 120px; height: calc(100vh - 120px);
+  overflow-y: auto; padding: 2.5rem 0;
+}
+.tl-sidebar::-webkit-scrollbar { width: 3px; }
+.tl-sidebar::-webkit-scrollbar-track { background: transparent; }
+.tl-sidebar::-webkit-scrollbar-thumb { background: var(--vermelho); border-radius: 2px; }
+
+.sidebar-title {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+  color: #555; padding: 0 1.5rem 1rem; font-family: var(--fonte-corpo);
+  border-bottom: 1px solid rgba(201,168,76,0.08); margin-bottom: 0.5rem;
+}
+
+.sidebar-fase {
+  margin-bottom: 0.5rem;
+}
+.sidebar-fase-titulo {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ouro); padding: 0.8rem 1.5rem 0.4rem; font-family: var(--fonte-corpo);
+}
+.sidebar-item {
+  display: block; padding: 0.7rem 1.5rem 0.7rem 2rem;
+  text-decoration: none; font-size: 0.85rem; color: #666;
+  font-family: var(--fonte-corpo); border-left: 2px solid transparent;
+  transition: all 0.2s; line-height: 1.4; position: relative;
+}
+.sidebar-item::before {
+  content: ''; position: absolute; left: -1px; top: 50%; transform: translateY(-50%);
+  width: 4px; height: 4px; background: transparent; border-radius: 50%;
+  transition: background 0.2s;
+}
+.sidebar-item:hover { color: var(--creme); background: rgba(201,168,76,0.04); border-left-color: rgba(201,168,76,0.3); }
+.sidebar-item:hover::before { background: var(--ouro-claro); }
+.sidebar-item.ativo { color: var(--ouro-claro); border-left-color: var(--vermelho); background: rgba(139,26,26,0.08); }
+.sidebar-item.ativo::before { background: var(--vermelho); }
+.sidebar-item-ano { font-family: var(--fonte-titulo); font-size: 0.75rem; color: var(--vermelho-vivo); display: block; margin-bottom: 2px; }
+
+/* ===== CONTEÚDO DA TIMELINE ===== */
+.tl-content { padding: 0; }
+
+/* ===== FASE HEADER ===== */
+.fase-header {
+  background: var(--vermelho);
+  padding: 2.5rem 3.5rem;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.fase-header::before {
+  content:''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.03) 20px, rgba(0,0,0,0.03) 21px);
+}
+.fase-header-inner { position: relative; display: flex; align-items: center; gap: 2rem; }
+.fase-num { font-family: var(--fonte-titulo); font-size: 5rem; color: rgba(0,0,0,0.15); font-weight: 900; line-height: 1; flex-shrink: 0; }
+.fase-info {}
+.fase-tag { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(245,240,232,0.6); margin-bottom: 4px; font-family: var(--fonte-corpo); }
+.fase-titulo { font-family: var(--fonte-titulo); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; color: var(--creme); line-height: 1.2; }
+.fase-periodo { font-size: 11px; letter-spacing: 3px; color: var(--ouro-claro); margin-top: 6px; font-family: var(--fonte-corpo); }
+
+/* ===== EVENTO ===== */
+.evento {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  transition: background 0.2s;
+}
+.evento:hover { background: rgba(201,168,76,0.02); }
+.evento:last-child { border-bottom: none; }
+
+/* Coluna de data */
+.evento-data {
+  padding: 2.5rem 1.5rem;
+  border-right: 1px solid rgba(201,168,76,0.1);
+  display: flex; flex-direction: column; align-items: flex-end;
+  justify-content: flex-start; gap: 4px;
+  background: rgba(0,0,0,0.15);
+}
+.evento-mes {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: #666; font-family: var(--fonte-corpo); text-align: right;
+}
+.evento-ano-num {
+  font-family: var(--fonte-titulo); font-size: 1.6rem; color: var(--ouro-claro);
+  font-weight: 900; line-height: 1; text-align: right;
+}
+.evento-ponto {
+  width: 10px; height: 10px; background: var(--vermelho);
+  border: 1.5px solid var(--ouro-claro); border-radius: 50%;
+  margin-top: 8px; flex-shrink: 0;
+}
+
+/* Coluna de conteúdo */
+.evento-corpo { padding: 2.5rem 3rem 2.5rem 2.5rem; }
+.evento-tag {
+  display: inline-block; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 3px 8px; margin-bottom: 0.8rem; font-family: var(--fonte-corpo);
+  border: 1px solid;
+}
+.evento-tag.militar { color: var(--vermelho-vivo); border-color: rgba(181,43,43,0.3); background: rgba(139,26,26,0.1); }
+.evento-tag.politico { color: var(--ouro-claro); border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.06); }
+.evento-tag.social { color: #8BC4A8; border-color: rgba(139,196,168,0.3); background: rgba(139,196,168,0.06); }
+.evento-tag.geografico { color: #A8B8C4; border-color: rgba(168,184,196,0.3); background: rgba(168,184,196,0.06); }
+.evento-tag.desfecho { color: #C4A8A8; border-color: rgba(196,168,168,0.3); background: rgba(196,168,168,0.06); }
+
+.evento-titulo {
+  font-family: var(--fonte-titulo); font-size: 1.2rem; color: var(--creme);
+  font-weight: 700; line-height: 1.3; margin-bottom: 0.8rem;
+}
+.evento-local {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--vermelho-vivo); margin-bottom: 1rem; font-family: var(--fonte-corpo);
+}
+.evento-local::before { content: '✦ '; }
+.evento-texto { font-size: 0.95rem; color: #B0A490; line-height: 1.8; margin-bottom: 1.2rem; }
+.evento-texto:last-child { margin-bottom: 0; }
+
+.evento-img {
+  margin-top: 1.5rem;
+  background: #1C1710; border: 0.5px solid rgba(201,168,76,0.12);
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.evento-img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(14,12,8,0.9); padding: 0.6rem 1rem;
+  font-size: 0.75rem; color: var(--ouro-claro); font-style: italic;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+
+.evento-destaque {
+  margin-top: 1.2rem;
+  border-left: 3px solid var(--vermelho);
+  padding: 0.7rem 1.2rem;
+  background: rgba(139,26,26,0.08);
+  font-style: italic; color: rgba(245,240,232,0.7); font-size: 0.95rem;
+}
+
+/* Grid de dois eventos menores lado a lado */
+.evento-duplo {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.evento-duplo .evento-mini {
+  padding: 2rem 2.5rem;
+  border-right: 1px solid rgba(201,168,76,0.08);
+  border-bottom: none;
+}
+.evento-duplo .evento-mini:last-child { border-right: none; }
+.evento-mini-data {
+  font-family: var(--fonte-titulo); font-size: 1.3rem; color: var(--ouro-claro);
+  font-weight: 900; margin-bottom: 0.4rem;
+}
+.evento-mini-local { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho-vivo); margin-bottom: 0.6rem; font-family: var(--fonte-corpo); }
+.evento-mini h4 { font-family: var(--fonte-titulo); font-size: 1rem; color: var(--creme); margin-bottom: 0.6rem; line-height: 1.3; }
+.evento-mini p { font-size: 0.88rem; color: #907A68; line-height: 1.7; }
+
+/* ===== MAPA ROTA ===== */
+.mapa-rota {
+  background: #0A0806;
+  border-top: 1px solid rgba(201,168,76,0.12);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  padding: 3rem 3.5rem;
+}
+.mapa-placeholder {
+  background: #111009; border: 0.5px solid rgba(201,168,76,0.15);
+  height: 360px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.mapa-rota-label {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: #555; font-family: var(--fonte-corpo); margin-bottom: 1rem;
+}
+.mapa-rota-titulo {
+  font-family: var(--fonte-titulo); font-size: 1.1rem; color: var(--creme);
+  margin-bottom: 1.5rem;
+}
+
+/* ===== PERSONAGENS ===== */
+.personagens-section {
+  background: #0E0C08;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  padding: 3.5rem;
+}
+.personagens-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  margin-top: 2rem;
+}
+.personagem-card {
+  border: 0.5px solid rgba(201,168,76,0.15); padding: 1.5rem;
+  transition: border-color 0.2s, background 0.2s; cursor: pointer;
+}
+.personagem-card:hover { border-color: var(--vermelho); background: rgba(139,26,26,0.05); }
+.personagem-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fonte-titulo); font-size: 1rem; color: var(--ouro-claro);
+  font-weight: 700; margin-bottom: 1rem;
+}
+.personagem-card h4 { font-family: var(--fonte-titulo); font-size: 0.95rem; color: var(--creme); margin-bottom: 3px; }
+.personagem-posto { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); margin-bottom: 0.6rem; display: block; }
+.personagem-card p { font-size: 0.82rem; color: #7A6A58; line-height: 1.6; }
+
+/* ===== CTA FINAL ===== */
+.cta-final {
+  background: var(--vermelho); padding: 4rem 3.5rem;
+  text-align: center; position: relative; overflow: hidden;
+  border-top: 1px solid rgba(0,0,0,0.2);
+}
+.cta-final::before { content:''; position: absolute; inset:0; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0,0,0,0.03) 30px, rgba(0,0,0,0.03) 31px); }
+.cta-final > * { position: relative; }
+.cta-final h2 { font-family: var(--fonte-titulo); font-size: 1.8rem; color: var(--creme); margin-bottom: 0.8rem; }
+.cta-final p { color: rgba(245,240,232,0.8); font-size: 1rem; margin-bottom: 2rem; font-style: italic; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ===== FOOTER ===== */
+footer { background: var(--preto); padding: 4rem 3rem 2rem; border-top: 3px solid var(--vermelho); }
+.footer-inner { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid #2A2416; }
+.f-logo { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+.footer-brand p { font-size: 0.9rem; color: #666; line-height: 1.6; }
+.footer-col h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 1px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 6px; }
+.footer-col ul li a { color: #666; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--ouro-claro); }
+.footer-bottom { max-width: 1300px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #444; }
+.wp-badge { border: 0.5px solid #333; color: #555; font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+
+/* ===== SCROLL ATIVO ===== */
+.evento.destaque-ativo { background: rgba(139,26,26,0.06); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Memorial Coluna Prestes</span>
+    <span class="nav-logo-sub">1924 · Santo Ângelo · Brasil</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" >Sobre</a></li>
+    <li><a href="linha-do-tempo.html" class="ativo">Linha do Tempo</a></li>
+    <li><a href="memoriais.html" >Memoriais</a></li>
+    <li><a href="agenda.html" >Agenda</a></li>
+    <li><a href="depoimentos.html" >Depoimentos</a></li>
+    <li><a href="biblioteca.html" >Biblioteca</a></li>
+    <li><a href="contato.html" >Contato</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb-sep">✦</span>
+    <span class="breadcrumb-atual">Linha do Tempo</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-frame"></div>
+  <div class="page-hero-content">
+    <p class="page-eyebrow">1924 — 1927 · 25.000 Quilômetros</p>
+    <h1>
+      Linha do Tempo
+      <em>O Percurso da Coluna Prestes</em>
+    </h1>
+    <div class="page-hero-orn">
+      <div class="ph-line"></div>
+      <div class="ph-diamond"></div>
+      <div class="ph-line"></div>
+    </div>
+    <p>Da partida em Santo Ângelo ao exílio na Bolívia — acompanhe cada etapa da mais longa marcha revolucionária da história brasileira.</p>
+  </div>
+</section>
+
+<!-- FILTROS DE FASE -->
+<div class="filtros-section">
+  <div class="filtros-inner">
+    <span class="filtros-label">Navegar por fase</span>
+    <button class="filtro-btn ativo" onclick="irPara('fase1')">Fase I · Origem</button>
+    <div class="filtros-sep"></div>
+    <button class="filtro-btn" onclick="irPara('fase2')">Fase II · Sul-Sudeste</button>
+    <div class="filtros-sep"></div>
+    <button class="filtro-btn" onclick="irPara('fase3')">Fase III · Centro-Oeste</button>
+    <div class="filtros-sep"></div>
+    <button class="filtro-btn" onclick="irPara('fase4')">Fase IV · Norte & Nordeste</button>
+    <div class="filtros-sep"></div>
+    <button class="filtro-btn" onclick="irPara('fase5')">Fase V · Desfecho</button>
+    <div class="filtros-sep"></div>
+    <button class="filtro-btn" onclick="irPara('personagens')">Personagens</button>
+  </div>
+</div>
+
+<!-- LAYOUT PRINCIPAL: SIDEBAR + CONTEÚDO -->
+<div class="tl-layout">
+
+  <!-- SIDEBAR DE NAVEGAÇÃO -->
+  <aside class="tl-sidebar">
+    <p class="sidebar-title">Eventos da Marcha</p>
+
+    <div class="sidebar-fase">
+      <p class="sidebar-fase-titulo">Fase I · Origem (1924)</p>
+      <a class="sidebar-item ativo" href="#ev-tenentismo">
+        <span class="sidebar-item-ano">1922–1924</span>O Tenentismo e o Contexto
+      </a>
+      <a class="sidebar-item" href="#ev-partida">
+        <span class="sidebar-item-ano">Out 1924</span>Partida de Santo Ângelo
+      </a>
+      <a class="sidebar-item" href="#ev-uniao">
+        <span class="sidebar-item-ano">Dez 1924</span>União com os Paulistas
+      </a>
+    </div>
+
+    <div class="sidebar-fase">
+      <p class="sidebar-fase-titulo">Fase II · Sul & Sudeste (1924–25)</p>
+      <a class="sidebar-item" href="#ev-iguacu">
+        <span class="sidebar-item-ano">Jan 1925</span>Foz do Iguaçu — PR
+      </a>
+      <a class="sidebar-item" href="#ev-parana-sp">
+        <span class="sidebar-item-ano">Fev–Mar 1925</span>Interior do Paraná
+      </a>
+    </div>
+
+    <div class="sidebar-fase">
+      <p class="sidebar-fase-titulo">Fase III · Centro-Oeste (1925)</p>
+      <a class="sidebar-item" href="#ev-matogrosso">
+        <span class="sidebar-item-ano">Abr 1925</span>Entrada no Mato Grosso
+      </a>
+      <a class="sidebar-item" href="#ev-goias">
+        <span class="sidebar-item-ano">Jun–Out 1925</span>Travessia de Goiás
+      </a>
+      <a class="sidebar-item" href="#ev-prestes-coluna">
+        <span class="sidebar-item-ano">Set 1925</span>Prestes assume o comando
+      </a>
+    </div>
+
+    <div class="sidebar-fase">
+      <p class="sidebar-fase-titulo">Fase IV · Norte & Nordeste (1926)</p>
+      <a class="sidebar-item" href="#ev-tocantins">
+        <span class="sidebar-item-ano">Jan 1926</span>Norte de Goiás (Tocantins)
+      </a>
+      <a class="sidebar-item" href="#ev-piaui">
+        <span class="sidebar-item-ano">Mar 1926</span>Piauí e Maranhão
+      </a>
+      <a class="sidebar-item" href="#ev-nordeste">
+        <span class="sidebar-item-ano">Mai–Jul 1926</span>Nordeste Brasileiro
+      </a>
+      <a class="sidebar-item" href="#ev-retorno">
+        <span class="sidebar-item-ano">Ago–Nov 1926</span>Retorno pelo Centro-Oeste
+      </a>
+    </div>
+
+    <div class="sidebar-fase">
+      <p class="sidebar-fase-titulo">Fase V · Desfecho (1927)</p>
+      <a class="sidebar-item" href="#ev-ultimo-trecho">
+        <span class="sidebar-item-ano">Jan 1927</span>Último trecho — MT
+      </a>
+      <a class="sidebar-item" href="#ev-bolivia">
+        <span class="sidebar-item-ano">Fev 1927</span>Exílio na Bolívia
+      </a>
+      <a class="sidebar-item" href="#ev-legado">
+        <span class="sidebar-item-ano">1927–hoje</span>O Legado
+      </a>
+    </div>
+  </aside>
+
+  <!-- CONTEÚDO DA TIMELINE -->
+  <main class="tl-content">
+
+    <!-- ══════════════════════════════ -->
+    <!-- FASE I — ORIGEM               -->
+    <!-- ══════════════════════════════ -->
+    <div id="fase1" class="fase-header">
+      <div class="fase-header-inner">
+        <div class="fase-num">I</div>
+        <div class="fase-info">
+          <p class="fase-tag">Fase I · Origem e Formação</p>
+          <h2 class="fase-titulo">O Nascimento da Coluna</h2>
+          <p class="fase-periodo">✦ 1922–1924 · Rio Grande do Sul e Paraná</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evento: O Tenentismo -->
+    <div class="evento" id="ev-tenentismo">
+      <div class="evento-data">
+        <span class="evento-mes">1922–</span>
+        <span class="evento-ano-num">1924</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag politico">Contexto Político</span>
+        <h3 class="evento-titulo">O Tenentismo e a Crise da Primeira República</h3>
+        <p class="evento-local">Rio de Janeiro, São Paulo, Rio Grande do Sul</p>
+        <p class="evento-texto">A Primeira República brasileira (1889–1930) era dominada por oligarquias estaduais — especialmente São Paulo e Minas Gerais — num sistema conhecido como "política do café com leite". A exclusão das classes médias urbanas e dos militares das decisões de poder gerou um movimento de resistência conhecido como tenentismo.</p>
+        <p class="evento-texto">Jovens oficiais do Exército, insatisfeitos com a corrupção e o atraso político do país, protagonizaram uma série de revoltas a partir de 1922. A Revolta do Forte de Copacabana (julho de 1922) foi o estopim. Os "18 do Forte" que marcharam pela praia sob metralha tornaram-se símbolo da resistência.</p>
+        <div class="evento-destaque">
+          "O tenentismo não era um movimento com programa político claro — era a expressão da indignação de uma geração de militares diante da estagnação da República Velha."
+        </div>
+        <p class="evento-texto">A Revolução Paulista de julho de 1924, liderada pelo General Isidoro Dias Lopes, seria o elo que conectaria os rebeldes gaúchos aos paulistas, dando origem à Coluna Prestes.</p>
+      </div>
+    </div>
+
+    <!-- Evento: Partida de Santo Ângelo -->
+    <div class="evento" id="ev-partida">
+      <div class="evento-data">
+        <span class="evento-mes">Out</span>
+        <span class="evento-ano-num">1924</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag militar">Militar</span>
+        <h3 class="evento-titulo">A Partida de Santo Ângelo</h3>
+        <p class="evento-local">Santo Ângelo — Rio Grande do Sul</p>
+        <p class="evento-texto">Em outubro de 1924, o 1º Regimento de Cavalaria Independente de Santo Ângelo se rebela sob o comando do Capitão Luiz Carlos Prestes. Da Estação Ferroviária da cidade — hoje sede do Memorial — partiram as tropas gaúchas que integrariam a Coluna.</p>
+        <p class="evento-texto">Prestes tinha apenas 26 anos. Formado em engenharia militar e com distinção nos estudos, era conhecido pela rigorosa disciplina, austeridade pessoal e cuidado com os soldados. Essas qualidades o tornariam, rapidamente, o líder indiscutível do movimento.</p>
+        <div class="evento-img">
+          <svg width="80" height="60" viewBox="0 0 80 60" fill="none" opacity="0.2">
+            <rect x="5" y="20" width="70" height="35" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M5 20 L40 5 L75 20" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+            <rect x="30" y="30" width="20" height="25" rx="2" fill="#8B1A1A"/>
+            <path d="M5 40 L75 40" stroke="#C9A84C" stroke-width="0.8"/>
+          </svg>
+          <p class="evento-img-caption">📷 Estação Ferroviária de Santo Ângelo — local de partida da Coluna em 1924 e sede do Memorial</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evento: União com os paulistas -->
+    <div class="evento" id="ev-uniao">
+      <div class="evento-data">
+        <span class="evento-mes">Dez</span>
+        <span class="evento-ano-num">1924</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag militar">Militar</span>
+        <h3 class="evento-titulo">A União que Criou a Coluna</h3>
+        <p class="evento-local">Catanduvas — Paraná</p>
+        <p class="evento-texto">Em dezembro de 1924, as tropas gaúchas de Prestes encontram-se com os rebeldes paulistas liderados pelo General Miguel Costa, que haviam abandonado São Paulo após meses de resistência. A junção das duas forças — cerca de 1.500 homens — deu origem à Coluna Paulista-Gaúcha, mais tarde conhecida como Coluna Prestes.</p>
+        <p class="evento-texto">A estrutura de comando ficou dividida: Miguel Costa assumiu o posto de comandante geral, e Luiz Carlos Prestes, o de chefe do estado-maior. Na prática, as decisões táticas eram de Prestes, cuja liderança carismática e competência militar se tornaram rapidamente incontestáveis.</p>
+        <div class="evento-destaque">
+          "A união com os gaúchos foi o que transformou nossa fuga em marcha. Prestes tinha o que nos faltava: um plano e uma visão." — Relato de combatente paulista
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════ -->
+    <!-- FASE II — SUL & SUDESTE       -->
+    <!-- ══════════════════════════════ -->
+    <div id="fase2" class="fase-header">
+      <div class="fase-header-inner">
+        <div class="fase-num">II</div>
+        <div class="fase-info">
+          <p class="fase-tag">Fase II · Sul e Sudeste</p>
+          <h2 class="fase-titulo">Os Primeiros Passos da Marcha</h2>
+          <p class="fase-periodo">✦ Janeiro–Março de 1925 · Paraná</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Evento Duplo -->
+    <div class="evento-duplo" id="ev-iguacu">
+      <div class="evento-mini">
+        <div class="evento-mini-data">Jan 1925</div>
+        <p class="evento-mini-local">Foz do Iguaçu — PR</p>
+        <span class="evento-tag geografico" style="margin-bottom:0.8rem; display:inline-block;">Geográfico</span>
+        <h4>Travessia para o Paraguai</h4>
+        <p>Para escapar do cerco das forças legalistas, a Coluna cruza o Rio Paraná e adentra brevemente o Paraguai antes de retornar ao Brasil pelo Mato Grosso do Sul.</p>
+      </div>
+      <div class="evento-mini">
+        <div class="evento-mini-data">Fev 1925</div>
+        <p class="evento-mini-local">Interior do Paraná</p>
+        <span class="evento-tag militar" style="margin-bottom:0.8rem; display:inline-block;">Militar</span>
+        <h4>A Estratégia da Marcha Contínua</h4>
+        <p>Prestes define a tática fundamental: nunca fixar posição, manter o movimento constante e evitar confrontos diretos com forças superiores. A mobilidade seria a maior arma da Coluna.</p>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-parana-sp">
+      <div class="evento-data">
+        <span class="evento-mes">Mar</span>
+        <span class="evento-ano-num">1925</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag social">Social</span>
+        <h3 class="evento-titulo">Contato com as Populações Locais</h3>
+        <p class="evento-local">Sertão do Paraná e Mato Grosso do Sul</p>
+        <p class="evento-texto">À medida que a Coluna avança pelo interior, estabelece uma relação peculiar com as populações sertanejas. Prestes proíbe saques e determina o pagamento por víveres e serviços — conduta rara para um exército da época. A disciplina distingue os revoltosos de bandos comuns e conquista a simpatia de parte dos habitantes locais.</p>
+        <p class="evento-texto">Camponeses, vaqueiros e trabalhadores rurais passam a informar a Coluna sobre movimentos inimigos e auxiliam na orientação em regiões desconhecidas. Essa rede de apoio informal seria fundamental para a sobrevivência da marcha.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════ -->
+    <!-- FASE III — CENTRO-OESTE       -->
+    <!-- ══════════════════════════════ -->
+    <div id="fase3" class="fase-header">
+      <div class="fase-header-inner">
+        <div class="fase-num">III</div>
+        <div class="fase-info">
+          <p class="fase-tag">Fase III · Centro-Oeste</p>
+          <h2 class="fase-titulo">O Coração do Brasil</h2>
+          <p class="fase-periodo">✦ Abril–Dezembro de 1925 · Mato Grosso e Goiás</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-matogrosso">
+      <div class="evento-data">
+        <span class="evento-mes">Abr</span>
+        <span class="evento-ano-num">1925</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag geografico">Geográfico</span>
+        <h3 class="evento-titulo">Entrada no Mato Grosso</h3>
+        <p class="evento-local">Mato Grosso do Sul e Mato Grosso</p>
+        <p class="evento-texto">A Coluna entra no vasto território do então Mato Grosso — estado que englobava o atual Mato Grosso do Sul. O terreno muda radicalmente: pantanais, cerrados, matas e rios de difícil travessia. A logística torna-se um desafio constante, com abastecimento de alimentos e munição sempre precário.</p>
+        <p class="evento-texto">Cavalos, mulas e homens adoecem. Mas a Coluna não para. Prestes institui rodízios de carga, cuidados médicos improvisados e mantém a moral elevada por meio de sua presença constante entre os soldados.</p>
+        <div class="evento-img">
+          <svg width="100" height="70" viewBox="0 0 100 70" fill="none" opacity="0.18">
+            <ellipse cx="50" cy="50" rx="45" ry="15" fill="#1A2A1A"/>
+            <path d="M5 50 Q25 20 50 10 Q75 20 95 50" fill="none" stroke="#C9A84C" stroke-width="1"/>
+            <path d="M20 55 Q35 35 50 28 Q65 35 80 55" fill="none" stroke="#8B1A1A" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <circle cx="50" cy="28" r="5" fill="#C9A84C" opacity="0.6"/>
+            <circle cx="20" cy="55" r="3" fill="#8B1A1A" opacity="0.6"/>
+          </svg>
+          <p class="evento-img-caption">📷 Espaço para mapa ou fotografia da travessia do Mato Grosso</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-goias">
+      <div class="evento-data">
+        <span class="evento-mes">Jun–Out</span>
+        <span class="evento-ano-num">1925</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag militar">Militar</span>
+        <h3 class="evento-titulo">A Grande Travessia de Goiás</h3>
+        <p class="evento-local">Estado de Goiás (atual GO e TO)</p>
+        <p class="evento-texto">O estado de Goiás é o mais longo trecho percorrido pela Coluna. Meses de marchas pelo cerrado, travessias de rios caudalosos como o Araguaia e o Tocantins, e constantes escaramuças com as forças do governo federal. A Coluna adota a tática de se dividir em colunas menores para confundir o inimigo e reunir-se em pontos acordados.</p>
+        <p class="evento-texto">Os combates de Goiás revelam a superioridade tática da Coluna mesmo em desvantagem numérica. Em nenhum enfrentamento as forças legalistas conseguem esmagar os rebeldes — fato que humilha o governo federal e aumenta o prestígio do movimento.</p>
+        <div class="evento-destaque">
+          "Cruzamos o Araguaia com as armas na cabeça, a água até o pescoço e o inimigo no encalço. E chegamos do outro lado." — Depoimento de veterano
+        </div>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-prestes-coluna">
+      <div class="evento-data">
+        <span class="evento-mes">Set</span>
+        <span class="evento-ano-num">1925</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag politico">Político</span>
+        <h3 class="evento-titulo">Prestes Torna-se o "Cavaleiro da Esperança"</h3>
+        <p class="evento-local">Interior de Goiás</p>
+        <p class="evento-texto">A reputação de Luiz Carlos Prestes cresce além das fronteiras da marcha. Jornais nacionais e estrangeiros noticiam a saga da Coluna. O apelido "Cavaleiro da Esperança" — cunhado pela imprensa — reflete o impacto emocional do movimento sobre a opinião pública brasileira.</p>
+        <p class="evento-texto">Para os pobres e excluídos, Prestes representa a possibilidade de mudança. Para as oligarquias, é uma ameaça que precisa ser eliminada. O governo federal aumenta o valor da recompensa por sua captura e mobiliza dezenas de batalhões para caçar a Coluna.</p>
+      </div>
+    </div>
+
+    <!-- MAPA DA ROTA -->
+    <div class="mapa-rota">
+      <p class="mapa-rota-label">Mapa Interativo</p>
+      <h3 class="mapa-rota-titulo">Rota da Coluna Prestes pelo Brasil (1924–1927)</h3>
+      <div class="mapa-placeholder">
+        <svg width="320" height="280" viewBox="0 0 320 280" fill="none" opacity="0.3">
+          <!-- Silhueta simplificada do Brasil -->
+          <path d="M80 20 Q120 15 160 25 Q200 20 230 40 Q255 55 260 80 Q270 110 255 140 Q245 165 255 190 Q260 220 240 250 Q210 275 180 270 Q150 265 120 250 Q90 230 70 200 Q50 170 45 140 Q35 110 45 80 Q55 50 80 20Z" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+          <!-- Rota da Coluna -->
+          <path d="M95 220 Q100 190 115 165 Q130 140 125 115 Q120 85 140 70 Q155 55 170 65 Q185 75 195 95 Q200 115 185 130 Q170 148 175 165 Q180 180 175 200 Q168 220 155 235" fill="none" stroke="#8B1A1A" stroke-width="2" stroke-dasharray="6 3"/>
+          <!-- Pontos-chave -->
+          <circle cx="95" cy="222" r="5" fill="#C9A84C"/>
+          <text x="100" y="236" font-size="9" fill="#C9A84C" font-family="serif">Santo Ângelo</text>
+          <circle cx="115" cy="168" r="4" fill="#8B1A1A"/>
+          <text x="120" y="165" font-size="8" fill="#C9A84C" font-family="serif">Mato Grosso</text>
+          <circle cx="140" cy="70" r="4" fill="#8B1A1A"/>
+          <text x="145" y="68" font-size="8" fill="#C9A84C" font-family="serif">Piauí</text>
+          <circle cx="155" cy="238" r="5" fill="#C9A84C"/>
+          <text x="108" y="252" font-size="9" fill="#888" font-family="serif">→ Bolívia (1927)</text>
+        </svg>
+      </div>
+      <p style="font-size: 0.8rem; color: #555; font-style: italic; margin-top: 0.8rem; text-align: center;">🗺️ Incorporar mapa interativo via plugin Elementor (Google Maps ou Leaflet.js)</p>
+    </div>
+
+    <!-- ══════════════════════════════ -->
+    <!-- FASE IV — NORTE & NORDESTE    -->
+    <!-- ══════════════════════════════ -->
+    <div id="fase4" class="fase-header">
+      <div class="fase-header-inner">
+        <div class="fase-num">IV</div>
+        <div class="fase-info">
+          <p class="fase-tag">Fase IV · Norte e Nordeste</p>
+          <h2 class="fase-titulo">O Sertão e o Povo</h2>
+          <p class="fase-periodo">✦ Janeiro–Novembro de 1926 · Tocantins, Piauí, Maranhão e Nordeste</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-tocantins">
+      <div class="evento-data">
+        <span class="evento-mes">Jan</span>
+        <span class="evento-ano-num">1926</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag geografico">Geográfico</span>
+        <h3 class="evento-titulo">O Norte de Goiás — Atual Tocantins</h3>
+        <p class="evento-local">Norte de Goiás (hoje Estado do Tocantins)</p>
+        <p class="evento-texto">A Coluna adentro o que então era o norte do estado de Goiás — território que só em 1988 se tornaria o Estado do Tocantins. A região era isolada, com populações que viviam sem assistência do governo federal, e o impacto da passagem da Coluna seria tão marcante que décadas depois a capital do novo estado homenagearia Prestes com o Memorial projetado por Oscar Niemeyer.</p>
+        <p class="evento-texto">A travessia dos grandes rios — Tocantins, Sono, Manoel Alves — impõe as maiores dificuldades físicas até então. Embarcações rudimentares, animais que se afogam, doenças tropicais. E ainda assim a Coluna avança.</p>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-piaui">
+      <div class="evento-data">
+        <span class="evento-mes">Mar</span>
+        <span class="evento-ano-num">1926</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag social">Social</span>
+        <h3 class="evento-titulo">Piauí e Maranhão — O Contato com o Sertão Profundo</h3>
+        <p class="evento-local">Piauí e Maranhão</p>
+        <p class="evento-texto">No Piauí e no Maranhão, a Coluna encontra uma das regiões mais pobres e esquecidas do Brasil. A seca, a miséria e as relações de trabalho quase feudais chocam os combatentes. Prestes intensifica a política de não extorsão da população local — os víveres são comprados, os animais são pagos.</p>
+        <p class="evento-texto">A passagem pelo sertão nordestino consolida nas lideranças da Coluna a consciência da questão social brasileira. Para muitos, a marcha deixa de ser apenas uma aventura militar e passa a ter um significado mais profundo: a denúncia das condições de vida do povo brasileiro.</p>
+        <div class="evento-destaque">
+          "Nós víamos o Brasil real — não o das capitais, não o dos livros. Víamos crianças descalças, adultos que nunca tinham visto uma escola, famílias que não sabiam que existia governo." — Miguel Costa
+        </div>
+      </div>
+    </div>
+
+    <div class="evento-duplo" id="ev-nordeste">
+      <div class="evento-mini">
+        <div class="evento-mini-data">Mai 1926</div>
+        <p class="evento-mini-local">Ceará e Rio Grande do Norte</p>
+        <span class="evento-tag social" style="margin-bottom:0.8rem; display:inline-block;">Social</span>
+        <h4>O Encontro com o Cangaço</h4>
+        <p>No sertão nordestino, a Coluna trava contato com bandos de cangaceiros. Alguns se aproximam da Coluna, atraídos pela fama de Prestes; outros são contratados pelas forças do governo para perseguir os rebeldes. O universo do cangaço cruza-se pela primeira vez com o tenentismo.</p>
+      </div>
+      <div class="evento-mini">
+        <div class="evento-mini-data">Jun–Jul 1926</div>
+        <p class="evento-mini-local">Interior do Nordeste</p>
+        <span class="evento-tag militar" style="margin-bottom:0.8rem; display:inline-block;">Militar</span>
+        <h4>Resistência no Ponto Máximo</h4>
+        <p>O governo federal envia seus melhores generais e mais de 14.000 soldados para eliminar a Coluna no Nordeste. Apesar de cercos progressivos, a tática de dispersão e reunião permite à Coluna escapar sistematicamente do aniquilamento.</p>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-retorno">
+      <div class="evento-data">
+        <span class="evento-mes">Ago–Nov</span>
+        <span class="evento-ano-num">1926</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag geografico">Geográfico</span>
+        <h3 class="evento-titulo">O Retorno pelo Centro-Oeste</h3>
+        <p class="evento-local">Bahia, Goiás e Mato Grosso</p>
+        <p class="evento-texto">Após a incursão pelo Nordeste, a Coluna inicia o retorno em direção ao Centro-Oeste. A decisão de marchar rumo à Bolívia começa a tomar forma. As tropas estão desgastadas após dois anos de marcha, as baixas acumulam-se e a perspectiva de uma vitória militar sobre o governo federal torna-se cada vez mais remota.</p>
+        <p class="evento-texto">Mas a derrota militar não é a única medida do sucesso. A Coluna cumpriu um papel político fundamental: demonstrou a fragilidade do governo federal, expôs as mazelas sociais do Brasil profundo e consolidou Prestes como figura nacional de primeira grandeza.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════ -->
+    <!-- FASE V — DESFECHO             -->
+    <!-- ══════════════════════════════ -->
+    <div id="fase5" class="fase-header">
+      <div class="fase-header-inner">
+        <div class="fase-num">V</div>
+        <div class="fase-info">
+          <p class="fase-tag">Fase V · Desfecho e Legado</p>
+          <h2 class="fase-titulo">O Fim da Marcha</h2>
+          <p class="fase-periodo">✦ Janeiro–Fevereiro de 1927 · Mato Grosso e Bolívia</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-ultimo-trecho">
+      <div class="evento-data">
+        <span class="evento-mes">Jan</span>
+        <span class="evento-ano-num">1927</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag desfecho">Desfecho</span>
+        <h3 class="evento-titulo">O Último Trecho — Mato Grosso</h3>
+        <p class="evento-local">Sudoeste do Mato Grosso</p>
+        <p class="evento-texto">Em janeiro de 1927, a Coluna avança pelo sudoeste do Mato Grosso em direção à fronteira com a Bolívia. As tropas estão reduzidas — de 1.500 homens iniciais, restam cerca de 600. Doenças, deserções e combates cobraram seu preço. Mas os que permanecem são os mais aguerridos e leais.</p>
+        <p class="evento-texto">A decisão de encerrar a marcha é deliberada, não forçada. Prestes e Miguel Costa avaliam que as condições políticas no Brasil não permitem uma retomada do movimento naquele momento. O exílio será temporário — ou assim acreditam.</p>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-bolivia">
+      <div class="evento-data">
+        <span class="evento-mes">Fev</span>
+        <span class="evento-ano-num">1927</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag desfecho">Desfecho</span>
+        <h3 class="evento-titulo">O Exílio na Bolívia — Fim da Marcha</h3>
+        <p class="evento-local">Fronteira Brasil–Bolívia</p>
+        <p class="evento-texto">Em 3 de fevereiro de 1927, a Coluna Prestes cruza a fronteira e adentra o território boliviano. Os combatentes depõem as armas diante das autoridades locais. A marcha que partiu de Santo Ângelo em outubro de 1924 chega ao fim após <strong>2 anos e 3 meses</strong>, <strong>25.000 quilômetros</strong> percorridos e a travessia de <strong>11 estados brasileiros</strong>.</p>
+        <p class="evento-texto">Luiz Carlos Prestes permanece no exílio, primeiro na Bolívia, depois na Argentina e no Uruguai. Em 1931, viaja à União Soviética, onde se filia ao Partido Comunista e conhece Olga Benário, que se tornaria sua companheira.</p>
+        <div class="evento-destaque">
+          "Não somos derrotados. Saímos do Brasil com a cabeça erguida. Voltaremos quando o povo chamar." — Luiz Carlos Prestes, fevereiro de 1927
+        </div>
+        <div class="evento-img">
+          <svg width="90" height="65" viewBox="0 0 90 65" fill="none" opacity="0.2">
+            <path d="M5 32 L45 5 L85 32 L45 62 Z" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+            <line x1="45" y1="5" x2="45" y2="62" stroke="#8B1A1A" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="5" y1="32" x2="85" y2="32" stroke="#8B1A1A" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="45" cy="32" r="8" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+            <circle cx="45" cy="32" r="3" fill="#C9A84C"/>
+          </svg>
+          <p class="evento-img-caption">📷 Espaço reservado para fotografia histórica do cruzamento da fronteira ou da chegada ao exílio</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="evento" id="ev-legado">
+      <div class="evento-data">
+        <span class="evento-mes">1927—</span>
+        <span class="evento-ano-num">hoje</span>
+        <div class="evento-ponto"></div>
+      </div>
+      <div class="evento-corpo">
+        <span class="evento-tag politico">Legado</span>
+        <h3 class="evento-titulo">O Legado Histórico da Coluna Prestes</h3>
+        <p class="evento-local">Brasil</p>
+        <p class="evento-texto">A Coluna Prestes não venceu militarmente, mas sua influência na história brasileira é incalculável. O movimento contribuiu para o desgaste da Primeira República, que seria derrubada pela Revolução de 1930. Luiz Carlos Prestes tornou-se um dos mais importantes líderes políticos do século XX brasileiro.</p>
+        <p class="evento-texto">O legado cultural também é profundo: Jorge Amado imortalizou Prestes em <em>O Cavaleiro da Esperança</em> (1942); a marcha inspirou obras de teatro, música e cinema. Acadêmicos de diversas áreas estudam até hoje as dimensões militares, sociais, políticas e culturais do movimento.</p>
+        <p class="evento-texto">Em 1996, Santo Ângelo inaugurou o primeiro Memorial Coluna Prestes no Brasil, instalado na antiga Estação Ferroviária. Em 2001, Palmas/TO ganhou o Memorial projetado por Oscar Niemeyer. Esses espaços mantêm viva a memória de uma das maiores aventuras da história do Brasil republicano.</p>
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="sobre.html" class="btn-prim">Conhecer o Memorial</a>
+          <a href="#" class="btn-sec">Ver os Memoriais</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════ -->
+    <!-- PERSONAGENS                   -->
+    <!-- ══════════════════════════════ -->
+    <div id="personagens" class="personagens-section">
+      <p style="font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro); font-family: var(--fonte-corpo);">Protagonistas da Marcha</p>
+      <h2 style="font-family: var(--fonte-titulo); font-size: 1.5rem; color: var(--creme); margin: 0.5rem 0 0.5rem; font-weight: 700;">Personagens da Coluna Prestes</h2>
+      <p style="font-size: 0.9rem; color: #666; font-style: italic; margin-bottom: 0;">Conheça quem fez a história dessa marcha extraordinária.</p>
+      <div class="personagens-grid">
+
+        <div class="personagem-card">
+          <div class="personagem-avatar">LP</div>
+          <h4>Luiz Carlos Prestes</h4>
+          <span class="personagem-posto">Capitão — Chefe do Estado-Maior</span>
+          <p>O "Cavaleiro da Esperança". Engenheiro militar de 26 anos ao início da marcha, tornou-se um dos maiores líderes políticos do Brasil do século XX. Fundou e liderou o PCB por décadas.</p>
+        </div>
+
+        <div class="personagem-card">
+          <div class="personagem-avatar">MC</div>
+          <h4>Miguel Costa</h4>
+          <span class="personagem-posto">General — Comandante Geral</span>
+          <p>Líder dos rebeldes paulistas, foi o comandante formal da Coluna após a união das forças em 1924. Sua aliança com Prestes seria a base da marcha por dois anos e três meses.</p>
+        </div>
+
+        <div class="personagem-card">
+          <div class="personagem-avatar">JA</div>
+          <h4>João Alberto Lins de Barros</h4>
+          <span class="personagem-posto">Tenente — Oficial de Estado-Maior</span>
+          <p>Um dos tenentes mais próximos de Prestes. Deixou memórias detalhadas sobre a marcha, tornando-se fonte histórica fundamental. Depois da Coluna, teve papel relevante na Revolução de 1930.</p>
+        </div>
+
+        <div class="personagem-card">
+          <div class="personagem-avatar">JT</div>
+          <h4>Juarez Távora</h4>
+          <span class="personagem-posto">Tenente — Comandante de Coluna</span>
+          <p>Um dos líderes do movimento tenentista, participou da marcha em seus estágios iniciais. Mais tarde, divergiu de Prestes em questões políticas e tornou-se um dos líderes da Revolução de 1930.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA FINAL -->
+    <div class="cta-final">
+      <h2>Continue Explorando a História</h2>
+      <p>Visite os memoriais, participe das oficinas e deixe seu depoimento sobre a Coluna Prestes.</p>
+      <div class="cta-btns">
+        <a href="sobre.html" class="btn-prim">Visitar o Memorial</a>
+        <a href="#" class="btn-sec" style="color:var(--ouro-claro); border-color:var(--ouro);">Ver Agenda de Oficinas</a>
+        <a href="#" class="btn-sec" style="color:var(--ouro-claro); border-color:var(--ouro);">Deixar Depoimento</a>
+      </div>
+    </div>
+
+  </main>
+</div><!-- fim .tl-layout -->
+
+<!-- FOOTER -->
+<footer id="contato">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">Memorial Coluna Prestes</div>
+      <p>Preservando a memória de uma das maiores marchas revolucionárias da história do Brasil.</p>
+      <p style="margin-top:1rem; font-size:0.85rem;">Antiga Estação Ferroviária<br>Santo Ângelo — RS, Brasil</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#"><a href="index.html" style="color:inherit;text-decoration:none;">Início</a></a></li>
+        <li><a href="sobre.html">Sobre o Memorial</a></li>
+        <li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+        <li><a href="memoriais.html">Memoriais</a></li>
+        <li><a href="agenda.html">Agenda de Oficinas</a></li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="biblioteca.html">Biblioteca</a></li>
+        <li><a href="biblioteca.html#referencias">Bibliografia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informações</h4>
+      <ul>
+        <li><a href="contato.html#horarios">Horários de Visita</a></li>
+        <li><a href="contato.html">Agendamento de Grupos</a></li>
+        <li><a href="contato.html#imprensa">Imprensa</a></li>
+        <li><a href="contato.html">Parceiros</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:0.85rem; color:#555; line-height:1.6;">Seg a Sex · 9h–12h e 14h–17h<br>Sábado · 9h–12h</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Memorial Coluna Prestes · Todos os direitos reservados</p>
+    <span class="wp-badge">WordPress + Elementor</span>
+  </div>
+</footer>
+
+<script>
+// Navegação suave pelos filtros
+function irPara(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 140; // altura navbar + filtros
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+  // Atualiza botão ativo
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('ativo'));
+  event.target.classList.add('ativo');
+}
+
+// Destaca item da sidebar conforme scroll
+const sidebarItems = document.querySelectorAll('.sidebar-item');
+const eventos = document.querySelectorAll('[id^="ev-"], [id^="fase"]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      sidebarItems.forEach(item => {
+        item.classList.remove('ativo');
+        if (item.getAttribute('href') === '#' + id) {
+          item.classList.add('ativo');
+          item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+eventos.forEach(ev => observer.observe(ev));
+</script>
+
+</body>
+</html>

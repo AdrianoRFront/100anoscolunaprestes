@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda de Oficinas — Memorial Coluna Prestes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --creme:        #F5F0E8;
+  --creme-dark:   #EAE2D0;
+  --creme-mid:    #DDD4BC;
+  --vermelho:     #8B1A1A;
+  --vermelho-vivo:#B52B2B;
+  --preto:        #141008;
+  --preto-suave:  #2A2016;
+  --ouro:         #8A6B22;
+  --ouro-claro:   #C9A84C;
+  --fonte-titulo: 'Playfair Display', Georgia, serif;
+  --fonte-corpo:  'Crimson Text', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fonte-corpo); background: var(--creme); color: var(--preto); font-size: 18px; line-height: 1.75; overflow-x: hidden; }
+
+/* ═══ NAVBAR ═══════════════════════════════════════════════════════════════ */
+nav {
+  background: var(--preto); border-bottom: 3px solid var(--vermelho);
+  position: sticky; top: 0; z-index: 200; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo-main { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2; }
+.nav-logo-sub  { font-size: 10px; color: #888; letter-spacing: 4px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.nav-links { display: flex; list-style: none; border-left: 1px solid #2A2416; }
+.nav-links li a {
+  color: #A89880; text-decoration: none; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 8px 14px; font-family: var(--fonte-corpo);
+  border-right: 1px solid #2A2416; transition: color .2s, background .2s;
+  height: 68px; display: flex; align-items: center;
+}
+.nav-links li a:hover  { color: var(--ouro-claro); background: rgba(201,168,76,.06); }
+.nav-links li a.ativo  { color: var(--ouro-claro); border-bottom: 2px solid var(--vermelho); }
+
+/* ═══ BOTÕES ════════════════════════════════════════════════════════════════ */
+.btn-prim  { display: inline-block; background: var(--vermelho); color: var(--creme); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: background .2s; border: none; cursor: pointer; }
+.btn-prim:hover { background: var(--vermelho-vivo); }
+.btn-sec   { display: inline-block; border: 1px solid var(--ouro); color: var(--ouro-claro); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all .2s; background: transparent; cursor: pointer; }
+.btn-sec:hover { background: var(--ouro); color: var(--preto); }
+.btn-ghost { display: inline-block; border: 1px solid rgba(245,240,232,.25); color: var(--creme); padding: 11px 28px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all .2s; background: transparent; }
+.btn-ghost:hover { background: rgba(245,240,232,.1); }
+
+/* ═══ BREADCRUMB ════════════════════════════════════════════════════════════ */
+.breadcrumb { background: var(--preto-suave); border-bottom: 1px solid rgba(201,168,76,.12); padding: .7rem 3rem; }
+.breadcrumb-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.breadcrumb a { color: #666; text-decoration: none; transition: color .2s; }
+.breadcrumb a:hover { color: var(--ouro-claro); }
+.breadcrumb-sep { color: var(--vermelho); font-size: 8px; }
+.breadcrumb-atual { color: var(--ouro-claro); }
+
+/* ═══ PAGE HERO ═════════════════════════════════════════════════════════════ */
+.page-hero { background: var(--preto); padding: 4.5rem 3rem; position: relative; overflow: hidden; text-align: center; }
+.page-hero::before {
+  content:''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,26,26,.04) 40px, rgba(139,26,26,.04) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,26,26,.04) 40px, rgba(139,26,26,.04) 41px);
+}
+.ph-frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,.12); pointer-events: none; }
+.ph-frame::before { content:''; position: absolute; top:-1px; left:10%; right:10%; height:1px; background: linear-gradient(90deg,transparent,var(--ouro),transparent); }
+.ph-frame::after  { content:''; position: absolute; bottom:-1px; left:10%; right:10%; height:1px; background: linear-gradient(90deg,transparent,var(--ouro),transparent); }
+.ph-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.ph-eyebrow { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 1rem; font-family: var(--fonte-corpo); opacity: .8; }
+.ph-h1 { font-family: var(--fonte-titulo); font-size: clamp(2.2rem,4vw,3.4rem); font-weight: 900; color: var(--creme); line-height: 1.1; }
+.ph-h1 em { color: var(--vermelho-vivo); font-style: italic; display: block; font-size: .55em; letter-spacing: 6px; margin-top: .4rem; font-weight: 400; }
+.ph-orn { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1.5rem auto; }
+.ph-orn-line    { width: 60px; height: 1px; background: var(--vermelho); }
+.ph-orn-diamond { width: 7px; height: 7px; background: var(--vermelho); transform: rotate(45deg); }
+.ph-desc { color: #B0A490; font-size: 1rem; font-style: italic; max-width: 560px; margin: 0 auto; }
+
+/* ═══ UTILITÁRIOS ═══════════════════════════════════════════════════════════ */
+.sec-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); display: block; margin-bottom: .8rem; }
+.sec-label.light { color: var(--ouro-claro); }
+.sec-title { font-family: var(--fonte-titulo); font-size: clamp(1.7rem,3vw,2.2rem); font-weight: 700; color: var(--preto); padding-bottom: 1.2rem; position: relative; display: inline-block; }
+.sec-title::after { content:''; position: absolute; bottom:0; left:0; width:40px; height:3px; background: var(--vermelho); }
+.sec-title.light { color: var(--creme); }
+.sec-title.light::after { background: var(--ouro-claro); }
+.sec-title.centro { display:block; text-align:center; }
+.sec-title.centro::after { left:50%; transform:translateX(-50%); }
+p.corpo { color: var(--preto-suave); margin-bottom: 1.2rem; line-height: 1.85; }
+
+/* ═══ BARRA DE STATUS ═══════════════════════════════════════════════════════ */
+.status-bar { background: var(--creme-dark); border-bottom: 1px solid var(--creme-mid); padding: 1.2rem 3rem; }
+.status-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.status-nums { display: flex; gap: 2.5rem; }
+.status-num-item { text-align: center; }
+.status-num-val { font-family: var(--fonte-titulo); font-size: 1.8rem; font-weight: 900; color: var(--vermelho); line-height: 1; }
+.status-num-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--preto-suave); font-family: var(--fonte-corpo); margin-top: 3px; }
+.status-filtros { display: flex; gap: .5rem; flex-wrap: wrap; }
+.filtro-pill {
+  background: transparent; border: 1px solid var(--creme-mid);
+  color: var(--preto-suave); font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 7px 16px; font-family: var(--fonte-corpo);
+  cursor: pointer; transition: all .2s;
+}
+.filtro-pill:hover  { border-color: var(--vermelho); color: var(--vermelho); }
+.filtro-pill.ativo  { background: var(--vermelho); border-color: var(--vermelho); color: var(--creme); }
+
+/* ═══ GRADE DE OFICINAS ═════════════════════════════════════════════════════ */
+.oficinas-section { padding: 5rem 3rem; }
+.oficinas-wrap { max-width: 1200px; margin: 0 auto; }
+
+/* Cabeçalho de ano/mês */
+.mes-header {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin: 3.5rem 0 1.5rem; padding-bottom: 1rem;
+  border-bottom: 1px solid var(--creme-mid);
+}
+.mes-header:first-of-type { margin-top: 0; }
+.mes-tag {
+  font-family: var(--fonte-titulo); font-size: 1rem; font-weight: 700;
+  color: var(--creme); background: var(--vermelho);
+  padding: 4px 14px; white-space: nowrap; letter-spacing: 1px;
+}
+.mes-linha { flex: 1; height: 1px; background: var(--creme-mid); }
+.mes-ano { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--creme-mid); font-family: var(--fonte-corpo); white-space: nowrap; }
+
+/* Card de oficina */
+.oficina-card {
+  display: grid; grid-template-columns: 80px 1fr;
+  border: 0.5px solid var(--creme-mid); background: var(--creme);
+  margin-bottom: 1rem; transition: border-color .2s, box-shadow .2s;
+  overflow: hidden; cursor: pointer;
+}
+.oficina-card:hover { border-color: var(--vermelho); box-shadow: 0 4px 20px rgba(139,26,26,.08); }
+.oficina-card.destaque { border-left: 4px solid var(--vermelho); }
+.oficina-card.concluida { opacity: .65; }
+.oficina-card.concluida .ofic-num { background: #E0D8C8; }
+
+/* Número lateral */
+.ofic-num {
+  background: var(--preto-suave); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+  padding: 1.5rem .5rem;
+}
+.ofic-num-val { font-family: var(--fonte-titulo); font-size: 2rem; font-weight: 900; color: var(--ouro-claro); line-height: 1; }
+.ofic-num-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #666; font-family: var(--fonte-corpo); }
+
+/* Corpo do card */
+.ofic-corpo { padding: 1.4rem 1.8rem; display: flex; flex-direction: column; gap: .5rem; }
+.ofic-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.ofic-titulo { font-family: var(--fonte-titulo); font-size: 1.1rem; font-weight: 700; color: var(--preto); line-height: 1.3; }
+.ofic-status { flex-shrink: 0; }
+.status-badge {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 10px; font-family: var(--fonte-corpo); white-space: nowrap;
+  border: 1px solid;
+}
+.status-badge.agendada  { color: var(--ouro); border-color: rgba(138,107,34,.3); background: rgba(201,168,76,.08); }
+.status-badge.aberta    { color: #3A8A4A; border-color: rgba(58,138,74,.3); background: rgba(58,138,74,.08); }
+.status-badge.concluida { color: #777; border-color: rgba(119,119,119,.3); background: rgba(119,119,119,.08); }
+.status-badge.em-breve  { color: var(--vermelho-vivo); border-color: rgba(181,43,43,.3); background: rgba(181,43,43,.08); }
+
+.ofic-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+.ofic-meta-item { display: flex; align-items: center; gap: 6px; font-size: .85rem; color: var(--preto-suave); }
+.ofic-meta-item svg { flex-shrink: 0; opacity: .5; }
+.ofic-meta-item strong { color: var(--preto); }
+.ofic-desc { font-size: .93rem; color: var(--preto-suave); line-height: 1.6; }
+
+.ofic-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .2rem; }
+.ofic-tag {
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 8px; border: 1px solid var(--creme-mid);
+  color: var(--preto-suave); font-family: var(--fonte-corpo);
+}
+.ofic-actions { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin-top: .4rem; }
+.lnk-ver { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); text-decoration: none; font-family: var(--fonte-corpo); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.lnk-ver:hover { border-color: var(--vermelho); }
+
+/* ═══ OFICINA EXPANDIDA (detalhe) ══════════════════════════════════════════ */
+.oficina-detalhe {
+  background: var(--preto); color: var(--creme);
+  padding: 4rem 3rem; margin-bottom: 2rem;
+  border-top: 3px solid var(--vermelho);
+  position: relative; overflow: hidden;
+  display: none;
+}
+.oficina-detalhe.aberto { display: block; }
+.oficina-detalhe::before {
+  content:''; position: absolute; inset:0;
+  background-image: repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,168,76,.025) 60px,rgba(201,168,76,.025) 61px);
+}
+.det-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+.det-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+.det-titulo { font-family: var(--fonte-titulo); font-size: clamp(1.5rem,2.5vw,2rem); font-weight: 700; color: var(--creme); line-height: 1.2; margin-bottom: 1.5rem; }
+.det-texto p { color: #C0B49E; font-size: .97rem; line-height: 1.85; margin-bottom: 1.1rem; }
+.det-destaque { border-left: 3px solid var(--ouro-claro); padding: .8rem 1.4rem; background: rgba(201,168,76,.06); font-style: italic; color: var(--ouro-claro); font-size: .97rem; margin: 1.5rem 0; line-height: 1.6; }
+
+.det-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(201,168,76,.12); border: 0.5px solid rgba(201,168,76,.15); margin-bottom: 2rem; }
+.det-info-item { background: #0E0C08; padding: 1rem 1.2rem; }
+.det-info-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); margin-bottom: 3px; }
+.det-info-val { font-size: .92rem; color: #B0A490; line-height: 1.5; }
+
+.det-fotos { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.det-foto { background: #1C1710; border: 0.5px solid rgba(201,168,76,.12); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; cursor: pointer; transition: border-color .2s; }
+.det-foto:hover { border-color: var(--ouro); }
+.det-foto-caption { position: absolute; bottom:0; left:0; right:0; background: rgba(14,12,8,.9); padding: .5rem 1rem; font-size: .75rem; color: var(--ouro-claro); font-style: italic; border-top: 1px solid rgba(201,168,76,.1); }
+.det-foto.destaque-foto { grid-column: 1/-1; aspect-ratio: 16/7; }
+
+/* ═══ SEÇÃO INSCRIÇÃO ═══════════════════════════════════════════════════════ */
+.inscricao-section { padding: 5rem 3rem; background: var(--creme-dark); }
+.inscricao-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+.insc-form-wrap { background: var(--creme); border: 0.5px solid var(--creme-mid); padding: 2.5rem; }
+.insc-form-titulo { font-family: var(--fonte-titulo); font-size: 1.3rem; font-weight: 700; color: var(--preto); margin-bottom: .5rem; }
+.insc-form-sub { font-size: .9rem; color: var(--preto-suave); font-style: italic; margin-bottom: 2rem; }
+
+.form-row { margin-bottom: 1.2rem; }
+.form-label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-bottom: .5rem; }
+.form-input {
+  width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme);
+  padding: .7rem 1rem; font-family: var(--fonte-corpo); font-size: .95rem; color: var(--preto);
+  transition: border-color .2s; outline: none;
+}
+.form-input:focus { border-color: var(--vermelho); }
+.form-select { width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme); padding: .7rem 1rem; font-family: var(--fonte-corpo); font-size: .95rem; color: var(--preto); outline: none; cursor: pointer; }
+.form-textarea { width: 100%; border: 0.5px solid var(--creme-mid); background: var(--creme); padding: .7rem 1rem; font-family: var(--fonte-corpo); font-size: .95rem; color: var(--preto); resize: vertical; min-height: 100px; outline: none; transition: border-color .2s; }
+.form-textarea:focus { border-color: var(--vermelho); }
+.form-nota { font-size: .82rem; color: #999; font-style: italic; margin-top: .4rem; }
+
+.insc-info-wrap {}
+.insc-info-wrap h3 { font-family: var(--fonte-titulo); font-size: 1.3rem; font-weight: 700; color: var(--preto); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--creme-mid); }
+
+.prox-oficinas { list-style: none; margin-bottom: 2.5rem; }
+.prox-item {
+  display: flex; gap: 1.2rem; align-items: flex-start;
+  padding: 1.1rem 0; border-bottom: 0.5px solid var(--creme-mid);
+}
+.prox-data-box { background: var(--preto); padding: .5rem .8rem; text-align: center; flex-shrink: 0; min-width: 52px; }
+.prox-dia  { font-family: var(--fonte-titulo); font-size: 1.4rem; font-weight: 900; color: var(--ouro-claro); line-height: 1; }
+.prox-mes  { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); }
+.prox-info {}
+.prox-nome { font-family: var(--fonte-titulo); font-size: .95rem; font-weight: 700; color: var(--preto); margin-bottom: 3px; }
+.prox-local { font-size: .82rem; color: var(--preto-suave); }
+
+.insc-duvidas { background: var(--preto); padding: 1.5rem 2rem; border-top: 2px solid var(--vermelho); }
+.insc-duvidas p { font-size: .9rem; color: #B0A490; line-height: 1.7; margin-bottom: .8rem; }
+.insc-duvidas a { color: var(--ouro-claro); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.insc-duvidas a:hover { border-color: var(--ouro-claro); }
+
+/* ═══ SEÇÃO SOBRE O CICLO ═══════════════════════════════════════════════════ */
+.ciclo-section { padding: 5rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+.ciclo-section::before { content:''; position: absolute; inset:0; background-image: repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,168,76,.025) 60px,rgba(201,168,76,.025) 61px); }
+.ciclo-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; }
+.ciclo-texto p { color: #C0B49E; margin-bottom: 1.1rem; line-height: 1.85; }
+.ciclo-destaque { border-left: 3px solid var(--ouro-claro); padding: .8rem 1.4rem; background: rgba(201,168,76,.06); font-style: italic; color: var(--ouro-claro); font-size: 1.05rem; margin: 1.8rem 0; line-height: 1.6; }
+.ciclo-pilares { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(201,168,76,.12); border: 0.5px solid rgba(201,168,76,.15); }
+.ciclo-pilar { background: #0E0C08; padding: 1.8rem 1.5rem; }
+.ciclo-pilar-num { font-family: var(--fonte-titulo); font-size: 2.5rem; font-weight: 900; color: rgba(201,168,76,.2); line-height: 1; margin-bottom: .8rem; }
+.ciclo-pilar h4 { font-family: var(--fonte-titulo); font-size: 1rem; font-weight: 700; color: var(--creme); margin-bottom: .5rem; }
+.ciclo-pilar p { font-size: .88rem; color: #7A6A58; line-height: 1.6; }
+
+/* ═══ CTA FINAL ═════════════════════════════════════════════════════════════ */
+.cta-section { background: var(--vermelho); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content:''; position: absolute; inset:0; background-image: repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(0,0,0,.03) 30px,rgba(0,0,0,.03) 31px); }
+.cta-section > * { position: relative; }
+.cta-section h2 { font-family: var(--fonte-titulo); font-size: clamp(1.6rem,3vw,2.2rem); color: var(--creme); margin-bottom: .8rem; }
+.cta-section p  { color: rgba(245,240,232,.8); font-style: italic; margin-bottom: 2.5rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ═══ FOOTER ════════════════════════════════════════════════════════════════ */
+footer { background: var(--preto); padding: 4rem 3rem 2rem; border-top: 3px solid var(--vermelho); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid #2A2416; }
+.f-logo { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1.3rem; font-weight: 700; margin-bottom: .8rem; }
+.footer-brand p { font-size: .9rem; color: #666; line-height: 1.6; }
+.footer-col h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: .9rem; margin-bottom: 1rem; letter-spacing: 1px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 6px; }
+.footer-col ul li a { color: #666; text-decoration: none; font-size: .85rem; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--ouro-claro); }
+.footer-bottom { max-width: 1200px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: #444; }
+.wp-badge { border: 0.5px solid #333; color: #555; font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ NAVBAR ═════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Memorial Coluna Prestes</span>
+    <span class="nav-logo-sub">1924 · Santo Ângelo · Brasil</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" >Sobre</a></li>
+    <li><a href="linha-do-tempo.html" >Linha do Tempo</a></li>
+    <li><a href="memoriais.html" >Memoriais</a></li>
+    <li><a href="agenda.html" class="ativo">Agenda</a></li>
+    <li><a href="depoimentos.html" >Depoimentos</a></li>
+    <li><a href="biblioteca.html" >Biblioteca</a></li>
+    <li><a href="contato.html" >Contato</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb-sep">✦</span>
+    <span class="breadcrumb-atual">Agenda de Oficinas</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ PAGE HERO ═════════════════════════════════════ -->
+<section class="page-hero">
+  <div class="ph-frame"></div>
+  <div class="ph-content">
+    <p class="ph-eyebrow">Ciclo 2025 · 10 Oficinas</p>
+    <h1 class="ph-h1">
+      Agenda de Oficinas
+      <em>Memória, Pesquisa & Educação</em>
+    </h1>
+    <div class="ph-orn">
+      <div class="ph-orn-line"></div>
+      <div class="ph-orn-diamond"></div>
+      <div class="ph-orn-line"></div>
+    </div>
+    <p class="ph-desc">Um ciclo anual de encontros que aprofundam o conhecimento sobre a Coluna Prestes — abertos ao público, pesquisadores, professores e comunidade.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ STATUS BAR ════════════════════════════════════ -->
+<div class="status-bar">
+  <div class="status-bar-inner">
+    <div class="status-nums">
+      <div class="status-num-item">
+        <div class="status-num-val">10</div>
+        <div class="status-num-lbl">Oficinas no ciclo</div>
+      </div>
+      <div class="status-num-item">
+        <div class="status-num-val">3</div>
+        <div class="status-num-lbl">Concluídas</div>
+      </div>
+      <div class="status-num-item">
+        <div class="status-num-val">7</div>
+        <div class="status-num-lbl">Próximas</div>
+      </div>
+      <div class="status-num-item">
+        <div class="status-num-val">2</div>
+        <div class="status-num-lbl">Locais</div>
+      </div>
+    </div>
+    <div class="status-filtros">
+      <button class="filtro-pill ativo" onclick="filtrar('todos',this)">Todas</button>
+      <button class="filtro-pill" onclick="filtrar('aberta',this)">Inscrições abertas</button>
+      <button class="filtro-pill" onclick="filtrar('proxima',this)">Próximas</button>
+      <button class="filtro-pill" onclick="filtrar('online',this)">Online</button>
+      <button class="filtro-pill" onclick="filtrar('presencial',this)">Presencial</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════ GRADE DE OFICINAS ════════════════════════════ -->
+<section class="oficinas-section">
+  <div class="oficinas-wrap">
+
+    <!-- ── 1º TRIMESTRE ──────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Março</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <!-- OFICINA 01 — Concluída -->
+    <article class="oficina-card concluida" data-tipo="presencial" data-status="concluida" id="ofic-01">
+      <div class="ofic-num" style="background:#2C2416;">
+        <span class="ofic-num-val">01</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Memória e Identidade Nacional</h2>
+          <span class="ofic-status"><span class="status-badge concluida">Concluída</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <strong>15 de Março de 2025</strong>
+          </span>
+          <span class="ofic-meta-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="6" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M7 9c-3 0-5 1.5-5 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <strong>87 participantes</strong>
+          </span>
+          <span class="ofic-meta-item">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>
+            Santo Ângelo — RS <em>(presencial)</em>
+          </span>
+        </div>
+        <p class="ofic-desc">Introdução ao ciclo e ao significado da Coluna Prestes para a identidade nacional. Debate sobre memória coletiva, patrimônio histórico e a importância do Memorial.</p>
+        <div class="ofic-tags">
+          <span class="ofic-tag">Memória</span>
+          <span class="ofic-tag">Identidade</span>
+          <span class="ofic-tag">Introdutória</span>
+        </div>
+        <div class="ofic-actions">
+          <a href="#ofic-01-det" class="lnk-ver" onclick="abrirDetalhe('ofic-01-det', this)">Ver relatório e fotos ↓</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Detalhe Oficina 01 -->
+    <div class="oficina-detalhe" id="ofic-01-det">
+      <div class="det-inner">
+        <div class="det-grid">
+          <div class="det-texto">
+            <h2 class="det-titulo">Oficina 01 — Memória e Identidade Nacional</h2>
+            <p>A abertura do Ciclo 2025 reuniu pesquisadores, estudantes e moradores de Santo Ângelo no espaço do Memorial. Com mediação da equipe de pesquisa, o encontro debateu o papel da memória coletiva na construção da identidade nacional brasileira — e como a Coluna Prestes se insere nesse processo.</p>
+            <p>O debate central girou em torno de uma pergunta: o que significa preservar a memória de um movimento derrotado militarmente? As respostas trouxeram perspectivas da história, da antropologia e das vivências locais dos participantes.</p>
+            <div class="det-destaque">"Ver a comunidade se apropriar dessa história foi o grande saldo desta primeira oficina. A memória não vive no museu — ela vive nas pessoas." — Coordenadora do Memorial</div>
+          </div>
+          <div>
+            <div class="det-info-grid">
+              <div class="det-info-item">
+                <p class="det-info-lbl">Data</p>
+                <p class="det-info-val">15 de março de 2025</p>
+              </div>
+              <div class="det-info-item">
+                <p class="det-info-lbl">Local</p>
+                <p class="det-info-val">Memorial Coluna Prestes<br>Santo Ângelo — RS</p>
+              </div>
+              <div class="det-info-item">
+                <p class="det-info-lbl">Participantes</p>
+                <p class="det-info-val">87 pessoas (presencial)</p>
+              </div>
+              <div class="det-info-item">
+                <p class="det-info-lbl">Carga horária</p>
+                <p class="det-info-val">4 horas</p>
+              </div>
+            </div>
+            <div class="det-fotos">
+              <div class="det-foto destaque-foto">
+                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" opacity="0.2"><rect x="3" y="5" width="54" height="30" rx="2" stroke="#C9A84C" stroke-width="1.2"/><circle cx="30" cy="20" r="9" stroke="#C9A84C" stroke-width="1.2"/><circle cx="30" cy="20" r="3" fill="#8B1A1A"/></svg>
+                <p class="det-foto-caption">📷 Foto principal da abertura — substituir pela imagem real</p>
+              </div>
+              <div class="det-foto">
+                <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.2"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="6" stroke="#C9A84C" stroke-width="1"/></svg>
+                <p class="det-foto-caption">📷 Mesa de debate</p>
+              </div>
+              <div class="det-foto">
+                <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.2"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="6" stroke="#C9A84C" stroke-width="1"/></svg>
+                <p class="det-foto-caption">📷 Participantes na exposição</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ABRIL ──────────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Abril</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <!-- OFICINA 02 — Concluída -->
+    <article class="oficina-card concluida" data-tipo="presencial" data-status="concluida" id="ofic-02">
+      <div class="ofic-num" style="background:#2C2416;">
+        <span class="ofic-num-val">02</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Fotografia Histórica e Acervo</h2>
+          <span class="ofic-status"><span class="status-badge concluida">Concluída</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>22 de Abril de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="6" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M7 9c-3 0-5 1.5-5 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>64 participantes</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>Santo Ângelo — RS <em>(presencial)</em></span>
+        </div>
+        <p class="ofic-desc">Análise, catalogação e restauração digital de fotografias do acervo do Memorial. Técnicas de conservação preventiva aplicadas ao material histórico da Coluna.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Fotografia</span><span class="ofic-tag">Acervo</span><span class="ofic-tag">Restauração</span></div>
+        <div class="ofic-actions">
+          <a href="#ofic-02-det" class="lnk-ver" onclick="abrirDetalhe('ofic-02-det', this)">Ver relatório e fotos ↓</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="oficina-detalhe" id="ofic-02-det">
+      <div class="det-inner">
+        <div class="det-grid">
+          <div class="det-texto">
+            <h2 class="det-titulo">Oficina 02 — Fotografia Histórica e Acervo</h2>
+            <p>Durante quatro horas, participantes aprenderam na prática as etapas de digitalização e restauração de fotografias históricas. Usando imagens originais do acervo do Memorial, o grupo trabalhou em estações com diferentes técnicas de tratamento digital.</p>
+            <p>Ao final, foram catalogadas e restauradas 47 fotografias que integrarão o arquivo digital do Memorial — um resultado concreto que amplia o acervo disponível ao público.</p>
+            <div class="det-destaque">"Segurar uma fotografia de 1924 e devolver nitidez a ela é uma experiência que não tem preço. É como resgatar algo que estava se perdendo." — participante</div>
+          </div>
+          <div>
+            <div class="det-info-grid">
+              <div class="det-info-item"><p class="det-info-lbl">Data</p><p class="det-info-val">22 de abril de 2025</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Local</p><p class="det-info-val">Memorial Coluna Prestes<br>Santo Ângelo — RS</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Participantes</p><p class="det-info-val">64 pessoas</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Resultado</p><p class="det-info-val">47 fotos restauradas</p></div>
+            </div>
+            <div class="det-fotos">
+              <div class="det-foto destaque-foto">
+                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" opacity="0.2"><rect x="3" y="5" width="54" height="30" rx="2" stroke="#C9A84C" stroke-width="1.2"/><circle cx="30" cy="20" r="9" stroke="#C9A84C" stroke-width="1.2"/><circle cx="30" cy="20" r="3" fill="#8B1A1A"/></svg>
+                <p class="det-foto-caption">📷 Foto da sessão de restauração — substituir pela imagem real</p>
+              </div>
+              <div class="det-foto"><svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.2"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="6" stroke="#C9A84C" stroke-width="1"/></svg><p class="det-foto-caption">📷 Acervo fotográfico</p></div>
+              <div class="det-foto"><svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.2"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="6" stroke="#C9A84C" stroke-width="1"/></svg><p class="det-foto-caption">📷 Trabalho em grupo</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MAIO ───────────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Maio</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <!-- OFICINA 03 — Concluída -->
+    <article class="oficina-card concluida" data-tipo="presencial" data-status="concluida" id="ofic-03">
+      <div class="ofic-num" style="background:#2C2416;">
+        <span class="ofic-num-val">03</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Cartografia da Marcha</h2>
+          <span class="ofic-status"><span class="status-badge concluida">Concluída</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>18 de Maio de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="6" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M7 9c-3 0-5 1.5-5 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>52 participantes</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>Palmas — TO <em>(presencial)</em></span>
+        </div>
+        <p class="ofic-desc">Reconstrução cartográfica do percurso da Coluna através de mapas históricos, depoimentos orais e documentos de época. Resultado: mapa interativo com 47 pontos georeferenciados.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Cartografia</span><span class="ofic-tag">Mapeamento</span><span class="ofic-tag">Rota histórica</span></div>
+        <div class="ofic-actions">
+          <a href="#ofic-03-det" class="lnk-ver" onclick="abrirDetalhe('ofic-03-det', this)">Ver relatório e fotos ↓</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="oficina-detalhe" id="ofic-03-det">
+      <div class="det-inner">
+        <div class="det-grid">
+          <div class="det-texto">
+            <h2 class="det-titulo">Oficina 03 — Cartografia da Marcha</h2>
+            <p>Realizada no Memorial de Palmas/TO, essa oficina produziu o mapa interativo mais completo já elaborado sobre a rota da Coluna Prestes. Com 47 pontos georeferenciados, o mapa reúne informações históricas, fotográficas e depoimentos de cada localidade.</p>
+            <p>O trabalho combinou pesquisa em mapas históricos do início do século XX, cruzamento com registros da Coluna e verificação em campo para os pontos de maior acesso.</p>
+          </div>
+          <div>
+            <div class="det-info-grid">
+              <div class="det-info-item"><p class="det-info-lbl">Data</p><p class="det-info-val">18 de maio de 2025</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Local</p><p class="det-info-val">Memorial Oscar Niemeyer<br>Palmas — TO</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Participantes</p><p class="det-info-val">52 pessoas</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Resultado</p><p class="det-info-val">47 pontos mapeados</p></div>
+            </div>
+            <div class="det-fotos">
+              <div class="det-foto destaque-foto">
+                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" opacity="0.2"><rect x="3" y="5" width="54" height="30" rx="2" stroke="#C9A84C" stroke-width="1.2"/><circle cx="30" cy="20" r="9" stroke="#C9A84C" stroke-width="1.2"/><circle cx="30" cy="20" r="3" fill="#8B1A1A"/></svg>
+                <p class="det-foto-caption">📷 Resultado final do mapa — substituir pela imagem real</p>
+              </div>
+              <div class="det-foto"><svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.2"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="6" stroke="#C9A84C" stroke-width="1"/></svg><p class="det-foto-caption">📷 Trabalho cartográfico</p></div>
+              <div class="det-foto"><svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.2"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="6" stroke="#C9A84C" stroke-width="1"/></svg><p class="det-foto-caption">📷 Pesquisa documental</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── JUNHO ──────────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Junho</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <!-- OFICINA 04 — Inscrições abertas / destaque -->
+    <article class="oficina-card destaque" data-tipo="online" data-status="aberta proxima" id="ofic-04">
+      <div class="ofic-num">
+        <span class="ofic-num-val">04</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Literatura e Resistência</h2>
+          <span class="ofic-status"><span class="status-badge aberta">Inscrições abertas</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>14 de Junho de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="6" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M7 9c-3 0-5 1.5-5 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Vagas: <strong>38/50 preenchidas</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M4 7h6M7 4v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><em>Online (transmissão ao vivo)</em></span>
+        </div>
+        <p class="ofic-desc">O tenentismo e a literatura brasileira dos anos 1920–30. A representação da Coluna em Jorge Amado, Graciliano Ramos e outros escritores que transformaram a resistência em arte.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Literatura</span><span class="ofic-tag">Tenentismo</span><span class="ofic-tag">Online</span></div>
+        <div class="ofic-actions">
+          <a href="contato.html" class="btn-prim" style="padding:8px 22px; font-size:10px;">Inscrever-me</a>
+          <a href="#ofic-04-det" class="lnk-ver" onclick="abrirDetalhe('ofic-04-det', this)">Saiba mais ↓</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="oficina-detalhe" id="ofic-04-det">
+      <div class="det-inner">
+        <div class="det-grid">
+          <div class="det-texto">
+            <h2 class="det-titulo">Oficina 04 — Literatura e Resistência</h2>
+            <p>A quarta oficina do ciclo explora as relações entre o movimento tenentista e a produção literária brasileira do período. Como escritores como Jorge Amado transformaram a figura de Luiz Carlos Prestes em mito literário? O que essa mitificação revela sobre o Brasil daquelas décadas?</p>
+            <p>A oficina inclui leitura e análise de trechos de <em>O Cavaleiro da Esperança</em> (Jorge Amado), debate sobre ficção e história, e análise comparada com outras obras da época.</p>
+            <div class="det-destaque">Esta oficina será transmitida ao vivo e gravada para acesso posterior no canal do Memorial. Inscrição gratuita e aberta a todo o Brasil.</div>
+          </div>
+          <div>
+            <div class="det-info-grid">
+              <div class="det-info-item"><p class="det-info-lbl">Data</p><p class="det-info-val">14 de junho de 2025<br>14h às 17h</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Formato</p><p class="det-info-val">Online — transmissão<br>ao vivo + gravação</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Vagas</p><p class="det-info-val">50 vagas (38 preenchidas)</p></div>
+              <div class="det-info-item"><p class="det-info-lbl">Ministrante</p><p class="det-info-val">A confirmar —<br>pesquisador literário</p></div>
+            </div>
+            <div style="text-align:center; padding: 1.5rem 0;">
+              <a href="contato.html" class="btn-prim">Garantir minha vaga</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2º SEMESTRE ────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Julho</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <!-- OFICINA 05 -->
+    <article class="oficina-card" data-tipo="presencial" data-status="proxima" id="ofic-05">
+      <div class="ofic-num">
+        <span class="ofic-num-val">05</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Educação Patrimonial</h2>
+          <span class="ofic-status"><span class="status-badge agendada">Agendada</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>19 de Julho de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>Itinerante — RS</span>
+        </div>
+        <p class="ofic-desc">Metodologias para professores trabalharem o acervo histórico em sala de aula. Material didático, recursos pedagógicos e estratégias de aproximação entre o Memorial e as escolas.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Educação</span><span class="ofic-tag">Professores</span><span class="ofic-tag">Didática</span></div>
+        <div class="ofic-actions"><a href="contato.html" class="lnk-ver">Pré-inscrição ↓</a></div>
+      </div>
+    </article>
+
+    <!-- ── AGOSTO ──────────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Agosto</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <article class="oficina-card" data-tipo="presencial" data-status="proxima" id="ofic-06">
+      <div class="ofic-num">
+        <span class="ofic-num-val">06</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">História Oral e Memória Viva</h2>
+          <span class="ofic-status"><span class="status-badge agendada">Agendada</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>16 de Agosto de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>Santo Ângelo — RS <em>(presencial)</em></span>
+        </div>
+        <p class="ofic-desc">Técnicas de coleta e preservação de depoimentos orais. Entrevistas com descendentes e pesquisadores da Coluna. Metodologia de história oral aplicada ao patrimônio imaterial.</p>
+        <div class="ofic-tags"><span class="ofic-tag">História oral</span><span class="ofic-tag">Depoimentos</span><span class="ofic-tag">Patrimônio imaterial</span></div>
+        <div class="ofic-actions"><a href="contato.html" class="lnk-ver">Pré-inscrição ↓</a></div>
+      </div>
+    </article>
+
+    <!-- ── SETEMBRO ───────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Setembro</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <article class="oficina-card" data-tipo="online" data-status="proxima" id="ofic-07">
+      <div class="ofic-num">
+        <span class="ofic-num-val">07</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Digitalização de Acervo Histórico</h2>
+          <span class="ofic-status"><span class="status-badge agendada">Agendada</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>20 de Setembro de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M4 7h6M7 4v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><em>Online</em></span>
+        </div>
+        <p class="ofic-desc">Processos de digitalização, metadados e disponibilização de acervos históricos em plataformas digitais abertas. Boas práticas para instituições de memória.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Digitalização</span><span class="ofic-tag">Metadados</span><span class="ofic-tag">Online</span></div>
+        <div class="ofic-actions"><a href="contato.html" class="lnk-ver">Pré-inscrição ↓</a></div>
+      </div>
+    </article>
+
+    <!-- ── OUTUBRO ────────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Outubro</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <article class="oficina-card" data-tipo="presencial" data-status="proxima" id="ofic-08">
+      <div class="ofic-num">
+        <span class="ofic-num-val">08</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Oscar Niemeyer e o Memorial de Palmas</h2>
+          <span class="ofic-status"><span class="status-badge agendada">Agendada</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>18 de Outubro de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>Palmas — TO <em>(presencial)</em></span>
+        </div>
+        <p class="ofic-desc">A trajetória de amizade entre Niemeyer e Prestes e o processo de concepção arquitetônica do memorial de Palmas. Arquitetura como instrumento de memória e política.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Arquitetura</span><span class="ofic-tag">Niemeyer</span><span class="ofic-tag">Patrimônio</span></div>
+        <div class="ofic-actions"><a href="contato.html" class="lnk-ver">Pré-inscrição ↓</a></div>
+      </div>
+    </article>
+
+    <!-- ── NOVEMBRO ───────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Novembro</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <article class="oficina-card" data-tipo="online" data-status="proxima" id="ofic-09">
+      <div class="ofic-num">
+        <span class="ofic-num-val">09</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Mulheres na Coluna Prestes</h2>
+          <span class="ofic-status"><span class="status-badge em-breve">Em breve</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>22 de Novembro de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M4 7h6M7 4v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><em>Online</em></span>
+        </div>
+        <p class="ofic-desc">O papel das mulheres no movimento tenentista e na Coluna Prestes. Com destaque para Olga Benário, Maria Prestes e outras protagonistas esquecidas ou silenciadas pela historiografia tradicional.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Gênero</span><span class="ofic-tag">Olga Benário</span><span class="ofic-tag">Protagonismo feminino</span></div>
+        <div class="ofic-actions"><a href="contato.html" class="lnk-ver">Receber aviso ↓</a></div>
+      </div>
+    </article>
+
+    <!-- ── DEZEMBRO ───────────────────────────────────────────────────────── -->
+    <div class="mes-header">
+      <span class="mes-tag">Dezembro</span>
+      <div class="mes-linha"></div>
+      <span class="mes-ano">2025</span>
+    </div>
+
+    <article class="oficina-card" data-tipo="presencial" data-status="proxima" id="ofic-10">
+      <div class="ofic-num">
+        <span class="ofic-num-val">10</span>
+        <span class="ofic-num-label">Oficina</span>
+      </div>
+      <div class="ofic-corpo">
+        <div class="ofic-header">
+          <h2 class="ofic-titulo">Legado e Atualidade — Encerramento do Ciclo</h2>
+          <span class="ofic-status"><span class="status-badge em-breve">Em breve</span></span>
+        </div>
+        <div class="ofic-meta">
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><strong>13 de Dezembro de 2025</strong></span>
+          <span class="ofic-meta-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 8 4 8s4-5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.2"/><circle cx="7" cy="5" r="1.2" fill="currentColor"/></svg>Santo Ângelo — RS <em>(presencial + online)</em></span>
+        </div>
+        <p class="ofic-desc">Encerramento do Ciclo 2025: o legado da Coluna Prestes no século XXI, síntese dos trabalhos realizados ao longo do ano e lançamento da publicação coletiva do ciclo.</p>
+        <div class="ofic-tags"><span class="ofic-tag">Encerramento</span><span class="ofic-tag">Legado</span><span class="ofic-tag">Publicação</span></div>
+        <div class="ofic-actions"><a href="contato.html" class="lnk-ver">Receber aviso ↓</a></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ INSCRIÇÃO ════════════════════════════════════ -->
+<section class="inscricao-section" id="formulario">
+  <div class="inscricao-grid">
+
+    <!-- Formulário -->
+    <div class="insc-form-wrap">
+      <h2 class="insc-form-titulo">Inscrever-me numa Oficina</h2>
+      <p class="insc-form-sub">Preencha o formulário abaixo. Você receberá a confirmação e o link de acesso por e-mail.</p>
+
+      <div class="form-row">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-input" placeholder="Seu nome completo">
+      </div>
+      <div class="form-row">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" placeholder="seu@email.com">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Telefone / WhatsApp</label>
+        <input type="tel" class="form-input" placeholder="(00) 00000-0000">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Oficina de interesse</label>
+        <select class="form-select">
+          <option value="">Selecione uma oficina…</option>
+          <option value="04">04 — Literatura e Resistência (Jun/2025) · Inscrições abertas</option>
+          <option value="05">05 — Educação Patrimonial (Jul/2025)</option>
+          <option value="06">06 — História Oral e Memória Viva (Ago/2025)</option>
+          <option value="07">07 — Digitalização de Acervo (Set/2025)</option>
+          <option value="08">08 — Oscar Niemeyer e o Memorial (Out/2025)</option>
+          <option value="09">09 — Mulheres na Coluna Prestes (Nov/2025)</option>
+          <option value="10">10 — Legado e Atualidade (Dez/2025)</option>
+          <option value="aviso">Quero receber avisos de todas as oficinas</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Sua relação com o tema</label>
+        <select class="form-select">
+          <option value="">Selecione…</option>
+          <option>Pesquisador / Acadêmico</option>
+          <option>Professor da rede pública</option>
+          <option>Professor da rede privada</option>
+          <option>Estudante universitário</option>
+          <option>Estudante de ensino médio</option>
+          <option>Interessado geral</option>
+          <option>Jornalista / Comunicação</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">Mensagem ou dúvida (opcional)</label>
+        <textarea class="form-textarea" placeholder="Alguma pergunta ou comentário sobre a oficina?"></textarea>
+      </div>
+      <p class="form-nota">* As inscrições são gratuitas. Vagas limitadas. Você receberá confirmação em até 48h.</p>
+      <div style="margin-top:1.5rem;">
+        <button class="btn-prim" style="width:100%;" onclick="alert('Formulário a ser integrado via Contact Form 7 ou WPForms no WordPress.')">Enviar inscrição</button>
+      </div>
+    </div>
+
+    <!-- Info lateral -->
+    <div class="insc-info-wrap">
+      <h3>Próximas oficinas</h3>
+      <ul class="prox-oficinas">
+        <li class="prox-item">
+          <div class="prox-data-box"><div class="prox-dia">14</div><div class="prox-mes">JUN</div></div>
+          <div class="prox-info">
+            <p class="prox-nome">Literatura e Resistência</p>
+            <p class="prox-local">Online · Inscrições abertas · 12 vagas restantes</p>
+          </div>
+        </li>
+        <li class="prox-item">
+          <div class="prox-data-box"><div class="prox-dia">19</div><div class="prox-mes">JUL</div></div>
+          <div class="prox-info">
+            <p class="prox-nome">Educação Patrimonial</p>
+            <p class="prox-local">Itinerante — RS · Pré-inscrições abertas</p>
+          </div>
+        </li>
+        <li class="prox-item">
+          <div class="prox-data-box"><div class="prox-dia">16</div><div class="prox-mes">AGO</div></div>
+          <div class="prox-info">
+            <p class="prox-nome">História Oral e Memória Viva</p>
+            <p class="prox-local">Santo Ângelo — RS · Pré-inscrições abertas</p>
+          </div>
+        </li>
+        <li class="prox-item">
+          <div class="prox-data-box"><div class="prox-dia">20</div><div class="prox-mes">SET</div></div>
+          <div class="prox-info">
+            <p class="prox-nome">Digitalização de Acervo Histórico</p>
+            <p class="prox-local">Online · Em breve</p>
+          </div>
+        </li>
+        <li class="prox-item">
+          <div class="prox-data-box"><div class="prox-dia">18</div><div class="prox-mes">OUT</div></div>
+          <div class="prox-info">
+            <p class="prox-nome">Oscar Niemeyer e o Memorial</p>
+            <p class="prox-local">Palmas — TO · Em breve</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="insc-duvidas">
+        <p>Tem dúvidas sobre as oficinas ou precisa de mais informações? Entre em contato com a equipe do Memorial.</p>
+        <p><a href="/cdn-cgi/l/email-protection#f0939f9e8491849fb09d959d9f8299919c939f9c859e9180829583849583de9f8297de9282"><span class="__cf_email__" data-cfemail="6b0804051f0a1f042b060e060419020a070804071e050a1b190e181f0e184504190c450919">[email&#160;protected]</span></a></p>
+        <p style="margin-top:.5rem; font-size:.85rem;">As oficinas são <strong style="color:#C9A84C;">gratuitas</strong> e abertas ao público em geral. Algumas edições têm vagas limitadas — inscreva-se com antecedência.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ SOBRE O CICLO ════════════════════════════════ -->
+<section class="ciclo-section">
+  <div class="ciclo-grid">
+    <div class="ciclo-texto">
+      <span class="sec-label light">O Projeto</span>
+      <h2 class="sec-title light" style="display:block; margin-bottom:1.5rem;">O Ciclo de Oficinas</h2>
+      <p>O Ciclo de Oficinas do Memorial Coluna Prestes é um programa anual de formação e pesquisa que aproxima o público da história da Coluna Prestes de forma ativa e participativa. Cada edição aborda um aspecto diferente do movimento — do militar ao cultural, do geográfico ao social.</p>
+      <p>As oficinas combinam mediação especializada, trabalho com fontes primárias do acervo, debate aberto e produção coletiva de conhecimento. Ao final do ciclo, os resultados são reunidos em uma publicação que integra o acervo do Memorial.</p>
+      <div class="ciclo-destaque">
+        "O objetivo não é ensinar sobre a Coluna Prestes — é fazer com que as pessoas descubram por si mesmas o que esse movimento significa para o Brasil de hoje."
+      </div>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+        <a href="contato.html" class="btn-prim">Inscrever-me</a>
+        <a href="sobre.html" class="btn-sec">Sobre o Memorial</a>
+      </div>
+    </div>
+    <div class="ciclo-pilares">
+      <div class="ciclo-pilar">
+        <div class="ciclo-pilar-num">01</div>
+        <h4>Pesquisa com Fontes</h4>
+        <p>Cada oficina trabalha diretamente com documentos originais, fotografias e objetos do acervo — tornando a história tangível.</p>
+      </div>
+      <div class="ciclo-pilar">
+        <div class="ciclo-pilar-num">02</div>
+        <h4>Produção Coletiva</h4>
+        <p>Os participantes não são apenas ouvintes — produzem materiais concretos que ampliam o acervo e o conhecimento sobre a Coluna.</p>
+      </div>
+      <div class="ciclo-pilar">
+        <div class="ciclo-pilar-num">03</div>
+        <h4>Acesso Aberto</h4>
+        <p>Todas as oficinas são gratuitas. As edições online ficam gravadas e disponíveis no canal do Memorial para acesso posterior.</p>
+      </div>
+      <div class="ciclo-pilar">
+        <div class="ciclo-pilar-num">04</div>
+        <h4>Publicação Final</h4>
+        <p>Ao fim do ciclo anual, os resultados são compilados em uma publicação coletiva distribuída gratuitamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ CTA FINAL ════════════════════════════════════ -->
+<section class="cta-section">
+  <h2>Faça Parte do Ciclo 2025</h2>
+  <p>Inscreva-se nas próximas oficinas, explore a linha do tempo da Coluna e conheça os Memoriais.</p>
+  <div class="cta-btns">
+    <a href="contato.html" class="btn-prim">Inscrever-me agora</a>
+    <a href="linha-do-tempo.html" class="btn-ghost">Linha do Tempo</a>
+    <a href="memoriais.html" class="btn-ghost">Ver os Memoriais</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">Memorial Coluna Prestes</div>
+      <p>Preservando a memória de uma das maiores marchas revolucionárias da história do Brasil.</p>
+      <p style="margin-top:1rem; font-size:.85rem;">Antiga Estação Ferroviária<br>Santo Ângelo — RS, Brasil</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#"><a href="index.html" style="color:inherit;text-decoration:none;">Início</a></a></li>
+        <li><a href="sobre.html">Sobre o Memorial</a></li>
+        <li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+        <li><a href="memoriais.html">Memoriais</a></li>
+        <li><a href="agenda.html">Agenda de Oficinas</a></li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="biblioteca.html">Biblioteca</a></li>
+        <li><a href="biblioteca.html#referencias">Bibliografia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="agenda.html">Inscrições nas Oficinas</a></li>
+        <li><a href="contato.html">Agendamento de Grupos</a></li>
+        <li><a href="contato.html#imprensa">Imprensa</a></li>
+        <li><a href="contato.html">Parceiros</a></li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:.85rem; color:#555; line-height:1.6;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="50333f3e2431243f103d353d3f2239313c333f3c253e31202235232435237e3f22377e3222">[email&#160;protected]</a><br>Seg–Sex · 9h–17h</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Memorial Coluna Prestes · Todos os direitos reservados</p>
+    <span class="wp-badge">WordPress + Elementor</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Filtro de oficinas ──────────────────────────────────────────────────────
+function filtrar(tipo, btn) {
+  document.querySelectorAll('.filtro-pill').forEach(b => b.classList.remove('ativo'));
+  btn.classList.add('ativo');
+
+  document.querySelectorAll('.oficina-card').forEach(card => {
+    if (tipo === 'todos') {
+      card.style.display = '';
+      return;
+    }
+    const cardTipo   = card.dataset.tipo   || '';
+    const cardStatus = card.dataset.status || '';
+    const match = cardTipo.includes(tipo) || cardStatus.includes(tipo);
+    card.style.display = match ? '' : 'none';
+  });
+
+  // Ocultar cabeçalhos de mês sem cards visíveis
+  document.querySelectorAll('.mes-header').forEach(header => {
+    let proximo = header.nextElementSibling;
+    let temVisivel = false;
+    while (proximo && !proximo.classList.contains('mes-header')) {
+      if (proximo.classList.contains('oficina-card') && proximo.style.display !== 'none') temVisivel = true;
+      proximo = proximo.nextElementSibling;
+    }
+    header.style.display = temVisivel ? '' : 'none';
+  });
+}
+
+// ── Expandir/contrair detalhe ───────────────────────────────────────────────
+function abrirDetalhe(id, link) {
+  const det = document.getElementById(id);
+  if (!det) return;
+  const aberto = det.classList.contains('aberto');
+
+  // Fecha todos
+  document.querySelectorAll('.oficina-detalhe').forEach(d => {
+    d.classList.remove('

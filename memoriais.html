@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memoriais e Espaços Históricos — Memorial Coluna Prestes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --creme: #F5F0E8;
+  --creme-dark: #EAE2D0;
+  --creme-mid: #DDD4BC;
+  --vermelho: #8B1A1A;
+  --vermelho-vivo: #B52B2B;
+  --preto: #141008;
+  --preto-suave: #2A2016;
+  --ouro: #8A6B22;
+  --ouro-claro: #C9A84C;
+  --fonte-titulo: 'Playfair Display', Georgia, serif;
+  --fonte-corpo: 'Crimson Text', Georgia, serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--fonte-corpo); background: var(--creme); color: var(--preto); font-size: 18px; line-height: 1.75; overflow-x: hidden; }
+
+/* ===== NAVBAR ===== */
+nav {
+  background: var(--preto); border-bottom: 3px solid var(--vermelho);
+  position: sticky; top: 0; z-index: 200; padding: 0 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo-main { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2; }
+.nav-logo-sub { font-size: 10px; color: #888; letter-spacing: 4px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.nav-links { display: flex; list-style: none; border-left: 1px solid #2A2416; }
+.nav-links li a {
+  color: #A89880; text-decoration: none; font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 8px 14px; font-family: var(--fonte-corpo);
+  border-right: 1px solid #2A2416; transition: color 0.2s, background 0.2s;
+  height: 68px; display: flex; align-items: center;
+}
+.nav-links li a:hover { color: var(--ouro-claro); background: rgba(201,168,76,0.06); }
+.nav-links li a.ativo { color: var(--ouro-claro); border-bottom: 2px solid var(--vermelho); }
+
+/* ===== BOTÕES ===== */
+.btn-prim { display: inline-block; background: var(--vermelho); color: var(--creme); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: background 0.2s; border: none; cursor: pointer; }
+.btn-prim:hover { background: var(--vermelho-vivo); }
+.btn-sec { display: inline-block; border: 1px solid var(--ouro); color: var(--ouro-claro); padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all 0.2s; background: transparent; cursor: pointer; }
+.btn-sec:hover { background: var(--ouro); color: var(--preto); }
+.btn-ghost { display: inline-block; border: 1px solid rgba(245,240,232,0.25); color: var(--creme); padding: 11px 28px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-family: var(--fonte-corpo); transition: all 0.2s; background: transparent; }
+.btn-ghost:hover { background: rgba(245,240,232,0.1); }
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb { background: var(--preto-suave); border-bottom: 1px solid rgba(201,168,76,0.12); padding: 0.7rem 3rem; }
+.breadcrumb-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--fonte-corpo); }
+.breadcrumb a { color: #666; text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--ouro-claro); }
+.breadcrumb-sep { color: var(--vermelho); font-size: 8px; }
+.breadcrumb-atual { color: var(--ouro-claro); }
+
+/* ===== PAGE HERO ===== */
+.page-hero {
+  background: var(--preto); padding: 4.5rem 3rem;
+  position: relative; overflow: hidden; text-align: center;
+}
+.page-hero::before {
+  content:''; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(139,26,26,0.04) 40px, rgba(139,26,26,0.04) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(139,26,26,0.04) 40px, rgba(139,26,26,0.04) 41px);
+}
+.page-hero-frame { position: absolute; inset: 20px; border: 1px solid rgba(201,168,76,0.12); pointer-events: none; }
+.page-hero-frame::before { content:''; position: absolute; top:-1px; left:10%; right:10%; height:1px; background: linear-gradient(90deg,transparent,var(--ouro),transparent); }
+.page-hero-frame::after  { content:''; position: absolute; bottom:-1px; left:10%; right:10%; height:1px; background: linear-gradient(90deg,transparent,var(--ouro),transparent); }
+.page-hero-content { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.page-eyebrow { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--ouro-claro); margin-bottom: 1rem; font-family: var(--fonte-corpo); opacity: 0.8; }
+.page-hero h1 { font-family: var(--fonte-titulo); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900; color: var(--creme); line-height: 1.1; }
+.page-hero h1 em { color: var(--vermelho-vivo); font-style: italic; display: block; font-size: 0.55em; letter-spacing: 6px; margin-top: 0.4rem; font-weight: 400; }
+.ph-orn { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1.5rem auto; }
+.ph-line { width: 60px; height: 1px; background: var(--vermelho); }
+.ph-diamond { width: 7px; height: 7px; background: var(--vermelho); transform: rotate(45deg); }
+.page-hero p { color: #B0A490; font-size: 1rem; font-style: italic; max-width: 560px; margin: 0 auto; }
+
+/* ===== ÂNCORAS ===== */
+.ancora-nav { background: var(--creme-dark); border-bottom: 1px solid var(--creme-mid); position: sticky; top: 68px; z-index: 100; }
+.ancora-inner { max-width: 1200px; margin: 0 auto; padding: 0 3rem; display: flex; overflow-x: auto; }
+.ancora-inner a { color: var(--preto-suave); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 20px; font-family: var(--fonte-corpo); white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.ancora-inner a:hover { color: var(--vermelho); border-bottom-color: var(--vermelho); }
+
+/* ===== UTILITÁRIOS ===== */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+.sec-label { font-size: 10px; letter-spacing: 6px; text-transform: uppercase; color: var(--vermelho); margin-bottom: 0.8rem; font-family: var(--fonte-corpo); display: block; }
+.sec-label.light { color: var(--ouro-claro); }
+.sec-title { font-family: var(--fonte-titulo); font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 700; color: var(--preto); padding-bottom: 1.2rem; position: relative; margin-bottom: 0.5rem; display: inline-block; }
+.sec-title::after { content:''; position: absolute; bottom:0; left:0; width:40px; height:3px; background: var(--vermelho); }
+.sec-title.light { color: var(--creme); }
+.sec-title.light::after { background: var(--ouro-claro); }
+.sec-title.centro { display:block; text-align:center; }
+.sec-title.centro::after { left:50%; transform:translateX(-50%); }
+p.corpo { color: var(--preto-suave); margin-bottom: 1.2rem; line-height: 1.85; }
+.destaque-borda { border-left: 4px solid var(--vermelho); padding: 0.8rem 1.5rem; font-style: italic; color: var(--vermelho); font-size: 1.05rem; margin: 1.8rem 0; background: rgba(139,26,26,0.04); line-height: 1.6; }
+.orn-hr { display:flex; align-items:center; gap:12px; margin: 2.5rem 0; }
+.orn-hr-line { flex:1; height:1px; background:var(--creme-mid); }
+.orn-hr-diamond { width:7px; height:7px; background:var(--creme-mid); transform:rotate(45deg); flex-shrink:0; }
+
+/* ===== INTRO MAPA ===== */
+.intro-mapa {
+  padding: 5rem 3rem;
+  background: var(--creme);
+}
+.intro-mapa-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+}
+.mapa-brasil {
+  position: relative; background: var(--preto-suave);
+  border: 0.5px solid rgba(201,168,76,0.2);
+  min-height: 480px; display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.mapa-brasil-caption {
+  position: absolute; bottom:0; left:0; right:0;
+  background: rgba(20,16,8,0.92); padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+.mapa-brasil-caption p { font-size: 0.8rem; color: var(--ouro-claro); font-style: italic; margin: 0; }
+
+.pontos-lista { list-style: none; margin-top: 1.5rem; }
+.pontos-lista li {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 0.9rem 0; border-bottom: 0.5px solid var(--creme-mid);
+  cursor: pointer; transition: background 0.15s;
+  padding-left: 0.5rem; padding-right: 0.5rem;
+}
+.pontos-lista li:hover { background: rgba(139,26,26,0.03); }
+.ponto-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; border: 1.5px solid; }
+.ponto-dot.principal { background: var(--vermelho); border-color: var(--ouro-claro); }
+.ponto-dot.secundario { background: var(--ouro); border-color: var(--ouro-claro); }
+.ponto-dot.rota { background: transparent; border-color: var(--creme-mid); }
+.ponto-info {}
+.ponto-nome { font-family: var(--fonte-titulo); font-size: 1rem; color: var(--preto); font-weight: 700; line-height: 1.2; }
+.ponto-uf { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-top: 2px; display: block; }
+.ponto-desc { font-size: 0.85rem; color: var(--preto-suave); margin-top: 4px; line-height: 1.4; }
+
+/* ===== MEMORIAL DESTAQUE (full-width) ===== */
+.mem-destaque {
+  padding: 6rem 3rem;
+  position: relative; overflow: hidden;
+}
+.mem-destaque.dark { background: var(--preto); }
+.mem-destaque.light { background: var(--creme); }
+.mem-destaque.mid   { background: var(--creme-dark); }
+
+.mem-destaque::before {
+  content:''; position: absolute; inset:0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,0.02) 60px, rgba(201,168,76,0.02) 61px);
+  pointer-events: none;
+}
+
+.mem-destaque-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  position: relative;
+}
+.mem-destaque-grid.invertido { }
+.mem-destaque-grid.invertido .mem-texto { order: 2; }
+.mem-destaque-grid.invertido .mem-visual { order: 1; }
+
+/* Numeração do memorial */
+.mem-numero {
+  font-family: var(--fonte-titulo); font-size: 8rem; font-weight: 900;
+  line-height: 1; color: rgba(201,168,76,0.08); position: absolute;
+  top: -1rem; left: -1rem; pointer-events: none; user-select: none;
+}
+.mem-destaque.dark .mem-numero { color: rgba(201,168,76,0.06); }
+
+/* Badge de estado */
+.mem-uf-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 1.2rem;
+}
+.mem-uf-flag {
+  width: 36px; height: 24px; background: var(--vermelho);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--creme); letter-spacing: 1px;
+  font-family: var(--fonte-corpo);
+}
+.mem-uf-nome { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); }
+.mem-destaque.dark .mem-uf-nome { color: var(--ouro-claro); }
+.mem-destaque.dark .sec-label { color: var(--ouro-claro); }
+
+.mem-titulo {
+  font-family: var(--fonte-titulo); font-size: clamp(1.6rem,3vw,2.2rem);
+  font-weight: 700; line-height: 1.2; margin-bottom: 1.4rem;
+}
+.mem-destaque.dark .mem-titulo { color: var(--creme); }
+.mem-destaque.light .mem-titulo, .mem-destaque.mid .mem-titulo { color: var(--preto); }
+
+.mem-texto p { margin-bottom: 1.1rem; line-height: 1.85; }
+.mem-destaque.dark .mem-texto p { color: #C0B49E; }
+.mem-destaque.light .mem-texto p, .mem-destaque.mid .mem-texto p { color: var(--preto-suave); }
+
+/* Stats do memorial */
+.mem-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 0.5px solid; margin: 2rem 0;
+}
+.mem-destaque.dark .mem-stats { border-color: rgba(201,168,76,0.2); }
+.mem-destaque.light .mem-stats, .mem-destaque.mid .mem-stats { border-color: var(--creme-mid); }
+.mem-stat {
+  padding: 1.2rem 1rem; text-align: center;
+  border-right: 0.5px solid;
+}
+.mem-destaque.dark .mem-stat { border-color: rgba(201,168,76,0.15); }
+.mem-destaque.light .mem-stat, .mem-destaque.mid .mem-stat { border-color: var(--creme-mid); }
+.mem-stat:last-child { border-right: none; }
+.mem-stat-val { font-family: var(--fonte-titulo); font-size: 1.8rem; font-weight: 900; line-height: 1; }
+.mem-destaque.dark .mem-stat-val { color: var(--ouro-claro); }
+.mem-destaque.light .mem-stat-val, .mem-destaque.mid .mem-stat-val { color: var(--vermelho); }
+.mem-stat-lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; font-family: var(--fonte-corpo); }
+.mem-destaque.dark .mem-stat-lbl { color: #666; }
+.mem-destaque.light .mem-stat-lbl, .mem-destaque.mid .mem-stat-lbl { color: var(--preto-suave); }
+
+.mem-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+/* Bloco de infos práticas */
+.mem-infos-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: rgba(201,168,76,0.12); border: 0.5px solid rgba(201,168,76,0.15);
+  margin-top: 2rem;
+}
+.mem-info-item {
+  padding: 1.1rem 1.3rem;
+}
+.mem-destaque.dark .mem-info-item { background: #0E0C08; }
+.mem-destaque.light .mem-info-item, .mem-destaque.mid .mem-info-item { background: var(--creme); }
+.mem-info-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-family: var(--fonte-corpo); margin-bottom: 3px; }
+.mem-destaque.dark .mem-info-label { color: var(--vermelho-vivo); }
+.mem-destaque.light .mem-info-label, .mem-destaque.mid .mem-info-label { color: var(--vermelho); }
+.mem-info-valor { font-size: 0.9rem; line-height: 1.5; }
+.mem-destaque.dark .mem-info-valor { color: #B0A490; }
+.mem-destaque.light .mem-info-valor, .mem-destaque.mid .mem-info-valor { color: var(--preto-suave); }
+
+/* Visual do memorial (foto/placeholder) */
+.mem-visual { position: relative; }
+.mem-foto-principal {
+  background: var(--preto-suave); border: 0.5px solid rgba(201,168,76,0.15);
+  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.mem-foto-caption {
+  position: absolute; bottom:0; left:0; right:0;
+  background: rgba(14,12,8,0.9); padding: 0.8rem 1.2rem;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  font-size: 0.78rem; color: var(--ouro-claro); font-style: italic;
+}
+.mem-fotos-mini {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 6px;
+}
+.mem-foto-mini {
+  background: var(--preto-suave); aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center;
+  border: 0.5px solid rgba(201,168,76,0.1); cursor: pointer;
+  transition: border-color 0.2s; overflow: hidden;
+}
+.mem-foto-mini:hover { border-color: var(--ouro); }
+
+/* Niemeyer quote especial */
+.niemeyer-quote {
+  background: var(--preto); border-left: 4px solid var(--ouro-claro);
+  padding: 1.5rem 2rem; margin: 2rem 0;
+  position: relative;
+}
+.niemeyer-quote p { font-family: var(--fonte-titulo); font-size: 1.1rem; font-style: italic; color: var(--ouro-claro); line-height: 1.6; margin: 0; }
+.niemeyer-quote cite { display: block; font-size: 0.8rem; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; font-style: normal; font-family: var(--fonte-corpo); }
+
+/* ===== SEÇÃO ROTA ===== */
+.rota-section { padding: 6rem 3rem; background: var(--preto); position: relative; overflow: hidden; }
+.rota-section::before { content:''; position: absolute; inset:0; background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201,168,76,0.025) 60px, rgba(201,168,76,0.025) 61px); }
+.rota-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; position: relative; }
+
+.estados-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: rgba(201,168,76,0.12); border: 0.5px solid rgba(201,168,76,0.15);
+  margin-top: 2rem;
+}
+.estado-item {
+  background: #0E0C08; padding: 1.2rem 1rem; text-align: center;
+  transition: background 0.2s; cursor: pointer;
+}
+.estado-item:hover { background: rgba(139,26,26,0.12); }
+.estado-sigla { font-family: var(--fonte-titulo); font-size: 1.5rem; font-weight: 900; color: var(--ouro-claro); line-height: 1; }
+.estado-nome { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #666; margin-top: 4px; font-family: var(--fonte-corpo); line-height: 1.3; }
+.estado-ano { font-size: 10px; color: var(--vermelho-vivo); font-family: var(--fonte-corpo); margin-top: 2px; }
+
+.rota-texto p { color: #C0B49E; margin-bottom: 1.1rem; line-height: 1.85; }
+.rota-texto .sec-label { color: var(--ouro-claro); }
+
+/* ===== PONTOS DE MEMÓRIA (cards menores) ===== */
+.pontos-section { padding: 6rem 3rem; background: var(--creme-dark); }
+.pontos-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+.ponto-card { background: var(--creme); border: 0.5px solid var(--creme-mid); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.ponto-card:hover { transform: translateY(-5px); box-shadow: 0 10px 35px rgba(20,16,8,0.1); }
+.ponto-card-img { height: 170px; background: var(--preto-suave); display: flex; align-items: center; justify-content: center; position: relative; }
+.ponto-card-uf { position: absolute; top:12px; right:12px; background: var(--vermelho); color: var(--creme); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 9px; font-family: var(--fonte-corpo); }
+.ponto-card-tipo { position: absolute; bottom:0; left:0; right:0; background: rgba(20,16,8,0.8); padding: 5px 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ouro-claro); font-family: var(--fonte-corpo); border-top: 1px solid rgba(201,168,76,0.15); }
+.ponto-card-body { padding: 1.4rem; }
+.ponto-card-body h3 { font-family: var(--fonte-titulo); font-size: 1.05rem; color: var(--preto); margin-bottom: 0.4rem; line-height: 1.3; }
+.ponto-card-body .cidade { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); font-family: var(--fonte-corpo); margin-bottom: 0.7rem; display: block; }
+.ponto-card-body p { font-size: 0.88rem; color: var(--preto-suave); line-height: 1.55; margin-bottom: 1rem; }
+.lnk-vermelho { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--vermelho); text-decoration: none; font-family: var(--fonte-corpo); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.lnk-vermelho:hover { border-color: var(--vermelho); }
+
+/* ===== COMO VISITAR ===== */
+.visitar-section { padding: 6rem 3rem; background: var(--creme); }
+.visitar-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; margin-top: 3rem; }
+.visitar-card { border: 0.5px solid var(--creme-mid); overflow: hidden; }
+.visitar-header { background: var(--preto); padding: 1.8rem 2rem; display: flex; align-items: flex-start; gap: 1.2rem; border-bottom: 2px solid var(--vermelho); }
+.visitar-header-num { font-family: var(--fonte-titulo); font-size: 3rem; color: rgba(201,168,76,0.2); font-weight: 900; line-height: 1; flex-shrink: 0; }
+.visitar-header-info {}
+.visitar-header h3 { font-family: var(--fonte-titulo); font-size: 1.15rem; color: var(--creme); margin-bottom: 4px; }
+.visitar-header-sub { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ouro-claro); font-family: var(--fonte-corpo); }
+.visitar-body { padding: 1.8rem 2rem; background: var(--creme); }
+.visitar-list { list-style: none; }
+.visitar-list li { padding: 0.7rem 0 0.7rem 1.5rem; border-bottom: 0.5px solid var(--creme-mid); font-size: 0.92rem; color: var(--preto-suave); position: relative; line-height: 1.5; }
+.visitar-list li:last-child { border-bottom: none; }
+.visitar-list li::before { content:'✦'; color: var(--vermelho); font-size: 0.5rem; position: absolute; left:0; top: 1rem; }
+.visitar-list li strong { color: var(--preto); }
+.visitar-mapa { background: var(--preto-suave); height: 200px; display: flex; align-items: center; justify-content: center; border-top: 1px solid rgba(201,168,76,0.1); position: relative; cursor: pointer; transition: background 0.2s; }
+.visitar-mapa:hover { background: var(--preto); }
+.visitar-mapa p { font-size: 0.8rem; color: #555; font-style: italic; position: absolute; bottom: 0.8rem; left:0; right:0; text-align: center; }
+
+/* ===== CTA FINAL ===== */
+.cta-section { background: var(--vermelho); padding: 5rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content:''; position: absolute; inset:0; background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(0,0,0,0.03) 30px, rgba(0,0,0,0.03) 31px); }
+.cta-section > * { position: relative; }
+.cta-section h2 { font-family: var(--fonte-titulo); font-size: clamp(1.6rem,3vw,2.2rem); color: var(--creme); margin-bottom: 0.8rem; }
+.cta-section p { color: rgba(245,240,232,0.8); font-size: 1rem; font-style: italic; margin-bottom: 2.5rem; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ===== FOOTER ===== */
+footer { background: var(--preto); padding: 4rem 3rem 2rem; border-top: 3px solid var(--vermelho); }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 0.5px solid #2A2416; }
+.f-logo { font-family: var(--fonte-titulo); color: var(--ouro-claro); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+.footer-brand p { font-size: 0.9rem; color: #666; line-height: 1.6; }
+.footer-col h4 { font-family: var(--fonte-titulo); color: var(--creme); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 1px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 6px; }
+.footer-col ul li a { color: #666; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--ouro-claro); }
+.footer-bottom { max-width: 1200px; margin: 2rem auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #444; }
+.wp-badge { border: 0.5px solid #333; color: #555; font-size: 10px; padding: 4px 10px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">Memorial Coluna Prestes</span>
+    <span class="nav-logo-sub">1924 · Santo Ângelo · Brasil</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="sobre.html" >Sobre</a></li>
+    <li><a href="linha-do-tempo.html" >Linha do Tempo</a></li>
+    <li><a href="memoriais.html" class="ativo">Memoriais</a></li>
+    <li><a href="agenda.html" >Agenda</a></li>
+    <li><a href="depoimentos.html" >Depoimentos</a></li>
+    <li><a href="biblioteca.html" >Biblioteca</a></li>
+    <li><a href="contato.html" >Contato</a></li>
+  </ul>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb-sep">✦</span>
+    <span class="breadcrumb-atual">Memoriais e Espaços Históricos</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-frame"></div>
+  <div class="page-hero-content">
+    <p class="page-eyebrow">Memória · Patrimônio · História</p>
+    <h1>
+      Memoriais
+      <em>Espaços que Guardam a Marcha</em>
+    </h1>
+    <div class="ph-orn">
+      <div class="ph-line"></div><div class="ph-diamond"></div><div class="ph-line"></div>
+    </div>
+    <p>Conheça os espaços dedicados à preservação da memória da Coluna Prestes — dos memoriais institucionais aos pontos históricos espalhados por todo o Brasil.</p>
+  </div>
+</section>
+
+<!-- ÂNCORAS -->
+<nav class="ancora-nav" aria-label="Seções da página">
+  <div class="ancora-inner">
+    <a href="#mapa">Mapa Geral</a>
+    <a href="#santo-angelo">Santo Ângelo — RS</a>
+    <a href="#palmas">Palmas — TO</a>
+    <a href="#rota">A Rota da Coluna</a>
+    <a href="#pontos">Pontos de Memória</a>
+    <a href="#visitar">Como Visitar</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- INTRO + MAPA GERAL                        -->
+<!-- ══════════════════════════════════════════ -->
+<section id="mapa" class="intro-mapa">
+  <div class="intro-mapa-grid">
+
+    <!-- Mapa placeholder -->
+    <div>
+      <div class="mapa-brasil">
+        <!-- SVG: silhueta do Brasil com pontos de memória -->
+        <svg width="400" height="420" viewBox="0 0 400 420" fill="none">
+          <!-- Contorno simplificado do Brasil -->
+          <path d="M120 30 Q160 20 200 28 Q245 22 275 45 Q305 62 315 95 Q328 130 318 165 Q308 195 315 225 Q325 258 305 290 Q278 325 248 340 Q215 355 182 348 Q148 340 118 318 Q88 295 72 262 Q55 228 58 192 Q55 155 68 120 Q85 75 120 30Z"
+            fill="none" stroke="#3A2C18" stroke-width="1.5"/>
+          <!-- Preenchimento suave -->
+          <path d="M120 30 Q160 20 200 28 Q245 22 275 45 Q305 62 315 95 Q328 130 318 165 Q308 195 315 225 Q325 258 305 290 Q278 325 248 340 Q215 355 182 348 Q148 340 118 318 Q88 295 72 262 Q55 228 58 192 Q55 155 68 120 Q85 75 120 30Z"
+            fill="#1C1408" stroke="none"/>
+          <!-- Rota da Coluna (tracejado vermelho) -->
+          <path d="M118 305 Q115 275 120 248 Q125 218 118 188 Q110 158 122 130 Q135 102 150 90 Q165 78 178 88 Q192 100 198 120 Q204 142 192 158 Q178 176 182 196 Q186 216 178 238 Q170 258 174 278 Q178 298 170 316"
+            fill="none" stroke="#8B1A1A" stroke-width="2.5" stroke-dasharray="7 4" opacity="0.9"/>
+          <!-- Marcadores: Memoriais Principais -->
+          <!-- Santo Ângelo -->
+          <g>
+            <circle cx="118" cy="308" r="9" fill="#8B1A1A" stroke="#C9A84C" stroke-width="2"/>
+            <circle cx="118" cy="308" r="3" fill="#C9A84C"/>
+            <text x="130" y="305" font-size="10" fill="#C9A84C" font-family="Georgia,serif" font-weight="bold">Santo Ângelo</text>
+            <text x="130" y="317" font-size="9" fill="#888" font-family="Georgia,serif">RS · Memorial nº1</text>
+          </g>
+          <!-- Palmas -->
+          <g>
+            <circle cx="195" cy="155" r="9" fill="#8B1A1A" stroke="#C9A84C" stroke-width="2"/>
+            <circle cx="195" cy="155" r="3" fill="#C9A84C"/>
+            <text x="208" y="152" font-size="10" fill="#C9A84C" font-family="Georgia,serif" font-weight="bold">Palmas</text>
+            <text x="208" y="164" font-size="9" fill="#888" font-family="Georgia,serif">TO · Niemeyer</text>
+          </g>
+          <!-- Pontos de rota menores -->
+          <circle cx="122" cy="248" r="5" fill="#8B1A1A" stroke="#666" stroke-width="1" opacity="0.7"/>
+          <text x="130" y="252" font-size="9" fill="#666" font-family="Georgia,serif">PR / MS</text>
+          <circle cx="118" cy="188" r="5" fill="#8B1A1A" stroke="#666" stroke-width="1" opacity="0.7"/>
+          <text x="126" y="192" font-size="9" fill="#666" font-family="Georgia,serif">MT / GO</text>
+          <circle cx="155" cy="92" r="5" fill="#8B1A1A" stroke="#666" stroke-width="1" opacity="0.7"/>
+          <text x="163" y="96" font-size="9" fill="#666" font-family="Georgia,serif">PI / MA / NE</text>
+          <!-- Legenda -->
+          <g transform="translate(18, 370)">
+            <circle cx="6" cy="6" r="6" fill="#8B1A1A" stroke="#C9A84C" stroke-width="1.5"/>
+            <text x="16" y="10" font-size="9" fill="#C9A84C" font-family="Georgia,serif">Memorial</text>
+            <line x1="80" y1="6" x2="100" y2="6" stroke="#8B1A1A" stroke-width="2.5" stroke-dasharray="5 3"/>
+            <text x="104" y="10" font-size="9" fill="#888" font-family="Georgia,serif">Rota da Coluna</text>
+            <circle cx="216" cy="6" r="4" fill="#8B1A1A" stroke="#666" stroke-width="1"/>
+            <text x="224" y="10" font-size="9" fill="#888" font-family="Georgia,serif">Ponto histórico</text>
+          </g>
+        </svg>
+        <div class="mapa-brasil-caption">
+          <p>🗺️ Incorporar mapa interativo (Google Maps / Leaflet) via widget Elementor — exibindo a rota completa e os memoriais clicáveis</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de pontos -->
+    <div>
+      <span class="sec-label">Espaços de Memória</span>
+      <h2 class="sec-title">A Memória da Coluna pelo Brasil</h2>
+      <p class="corpo" style="margin-top:1rem;">A Coluna Prestes percorreu 11 estados brasileiros entre 1924 e 1927. Ao longo da rota, diversas cidades preservam monumentos, placas e espaços dedicados à memória dessa travessia histórica. Os dois memoriais institucionais — em Santo Ângelo/RS e Palmas/TO — são os principais polos de preservação e pesquisa.</p>
+
+      <ul class="pontos-lista" style="margin-top:2rem;">
+        <li>
+          <div class="ponto-dot principal"></div>
+          <div class="ponto-info">
+            <span class="ponto-nome">Memorial Coluna Prestes</span>
+            <span class="ponto-uf">RS · Santo Ângelo · Memorial institucional</span>
+            <p class="ponto-desc">Primeiro memorial do Brasil, instalado na Estação Ferroviária de origem da Coluna. Desde 1996.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ponto-dot principal"></div>
+          <div class="ponto-info">
+            <span class="ponto-nome">Memorial Oscar Niemeyer</span>
+            <span class="ponto-uf">TO · Palmas · Memorial institucional</span>
+            <p class="ponto-desc">Projeto do arquiteto Oscar Niemeyer na Praça dos Girassóis. 570m² e 81 peças originais. Desde 2001.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ponto-dot secundario"></div>
+          <div class="ponto-info">
+            <span class="ponto-nome">Obelisco e Monumento — Catanduvas</span>
+            <span class="ponto-uf">PR · Catanduvas · Monumento histórico</span>
+            <p class="ponto-desc">Local da união entre as tropas gaúchas e paulistas em 1924, marco fundador da Coluna.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ponto-dot secundario"></div>
+          <div class="ponto-info">
+            <span class="ponto-nome">Pontos de Memória — Mato Grosso</span>
+            <span class="ponto-uf">MT · Múltiplos municípios · Rota histórica</span>
+            <p class="ponto-desc">Cidades do Mato Grosso preservam registros da passagem da Coluna em 1925 e 1927.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ponto-dot rota"></div>
+          <div class="ponto-info">
+            <span class="ponto-nome">Municípios da Rota Nordeste</span>
+            <span class="ponto-uf">PI · MA · CE · RN · Rota da marcha</span>
+            <p class="ponto-desc">Cidades sertanejas que a Coluna atravessou em 1926, algumas com monumentos e registros históricos.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ponto-dot rota"></div>
+          <div class="ponto-info">
+            <span class="ponto-nome">Fronteira Brasil–Bolívia</span>
+            <span class="ponto-uf">MT · Região de fronteira · Marco histórico</span>
+            <p class="ponto-desc">Local de cruzamento da fronteira em fevereiro de 1927, fim da marcha no território brasileiro.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- MEMORIAL 1 — SANTO ÂNGELO                 -->
+<!-- ══════════════════════════════════════════ -->
+<section id="santo-angelo" class="mem-destaque dark">
+  <div class="mem-destaque-grid">
+
+    <div class="mem-visual">
+      <div class="mem-foto-principal">
+        <svg width="160" height="130" viewBox="0 0 160 130" fill="none" opacity="0.2">
+          <rect x="10" y="40" width="140" height="80" rx="4" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M10 40 L80 8 L150 40" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <rect x="60" y="60" width="40" height="60" rx="2" fill="#8B1A1A" opacity="0.8"/>
+          <rect x="20" y="60" width="30" height="35" rx="2" fill="none" stroke="#C9A84C" stroke-width="1"/>
+          <rect x="110" y="60" width="30" height="35" rx="2" fill="none" stroke="#C9A84C" stroke-width="1"/>
+          <path d="M10 72 L150 72" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+        </svg>
+        <p class="mem-foto-caption">📷 Fachada da Antiga Estação Ferroviária de Santo Ângelo — sede do Memorial desde 1996</p>
+      </div>
+      <div class="mem-fotos-mini">
+        <div class="mem-foto-mini">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.3"><rect x="2" y="2" width="26" height="20" rx="2" stroke="#C9A84C" stroke-width="1"/><path d="M2 10 L28 10" stroke="#C9A84C" stroke-width="0.8"/></svg>
+        </div>
+        <div class="mem-foto-mini">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.3"><circle cx="15" cy="12" r="8" stroke="#C9A84C" stroke-width="1"/><circle cx="15" cy="12" r="3" fill="#8B1A1A"/></svg>
+        </div>
+        <div class="mem-foto-mini">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.3"><rect x="4" y="3" width="22" height="18" rx="2" stroke="#C9A84C" stroke-width="1"/><path d="M4 10 L26 10 M4 14 L26 14" stroke="#C9A84C" stroke-width="0.7"/></svg>
+        </div>
+      </div>
+      <p style="font-size:0.75rem; color:#555; font-style:italic; text-align:center; margin-top:0.4rem;">📷 Substituir pelas fotografias reais das galerias internas</p>
+    </div>
+
+    <div class="mem-texto" style="position:relative;">
+      <div class="mem-numero">01</div>
+      <div class="mem-uf-badge">
+        <div class="mem-uf-flag">RS</div>
+        <span class="mem-uf-nome">Rio Grande do Sul</span>
+      </div>
+      <span class="sec-label">Memorial Principal</span>
+      <h2 class="mem-titulo">Memorial Coluna Prestes</h2>
+      <p style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#555; font-family:var(--fonte-corpo); margin-bottom:1.5rem;">✦ Santo Ângelo — 1996</p>
+
+      <div class="mem-stats">
+        <div class="mem-stat">
+          <div class="mem-stat-val">1996</div>
+          <div class="mem-stat-lbl">Inauguração</div>
+        </div>
+        <div class="mem-stat">
+          <div class="mem-stat-val">+500</div>
+          <div class="mem-stat-lbl">Documentos</div>
+        </div>
+        <div class="mem-stat">
+          <div class="mem-stat-val">+1.200</div>
+          <div class="mem-stat-lbl">Fotografias</div>
+        </div>
+      </div>
+
+      <p>Instalado na antiga Estação Ferroviária de Santo Ângelo, o Memorial Coluna Prestes é o primeiro e principal espaço de preservação da memória do movimento no Brasil. Não é por acaso: foi exatamente desta estação que, em outubro de 1924, as tropas lideradas pelo Capitão Luiz Carlos Prestes partiram em marcha.</p>
+      <p>O acervo reúne documentos originais, cartas, fotografias históricas, mapas, objetos pessoais e equipamentos militares da época. O conjunto é um dos mais completos sobre o tenentismo e a Coluna Prestes em todo o país.</p>
+
+      <div class="destaque-borda">
+        "Ao preservar a Estação Ferroviária de origem, o Memorial transforma o espaço físico em documento histórico vivo — o ponto de partida e a memória ocupam o mesmo lugar."
+      </div>
+
+      <p>O espaço recebe grupos escolares, pesquisadores, turistas e curiosos. As visitas guiadas são realizadas pela equipe do Memorial, que contextualiza o acervo dentro da história política e social brasileira da Primeira República.</p>
+
+      <div class="mem-infos-grid">
+        <div class="mem-info-item">
+          <p class="mem-info-label">Endereço</p>
+          <p class="mem-info-valor">Antiga Estação Ferroviária<br>Centro, Santo Ângelo — RS</p>
+        </div>
+        <div class="mem-info-item">
+          <p class="mem-info-label">Horários</p>
+          <p class="mem-info-valor">Seg–Sex · 9h–12h e 14h–17h<br>Sáb · 9h–12h</p>
+        </div>
+        <div class="mem-info-item">
+          <p class="mem-info-label">Entrada</p>
+          <p class="mem-info-valor">Gratuita</p>
+        </div>
+        <div class="mem-info-item">
+          <p class="mem-info-label">Acessibilidade</p>
+          <p class="mem-info-valor">Rampa de acesso e<br>banheiro adaptado</p>
+        </div>
+        <div class="mem-info-item">
+          <p class="mem-info-label">Grupos escolares</p>
+          <p class="mem-info-valor">Agendamento prévio<br>por telefone ou e-mail</p>
+        </div>
+        <div class="mem-info-item">
+          <p class="mem-info-label">Estacionamento</p>
+          <p class="mem-info-valor">Disponível nas<br>proximidades</p>
+        </div>
+      </div>
+
+      <div class="mem-btns">
+        <a href="#visitar" class="btn-prim">Como Chegar</a>
+        <a href="#" class="btn-ghost" style="border-color:rgba(201,168,76,0.3); color:var(--ouro-claro);">Agendar Visita</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- MEMORIAL 2 — PALMAS                       -->
+<!-- ══════════════════════════════════════════ -->
+<section id="palmas" class="mem-destaque mid">
+  <div class="mem-destaque-grid invertido">
+
+    <div class="mem-texto" style="position:relative;">
+      <div class="mem-numero" style="color:rgba(139,26,26,0.06);">02</div>
+      <div class="mem-uf-badge">
+        <div class="mem-uf-flag">TO</div>
+        <span class="mem-uf-nome" style="color:var(--vermelho);">Tocantins</span>
+      </div>
+      <span class="sec-label">Memorial Oscar Niemeyer</span>
+      <h2 class="mem-titulo">Memorial Coluna Prestes — Palmas</h2>
+      <p style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#888; font-family:var(--fonte-corpo); margin-bottom:1.5rem;">✦ Palmas, Tocantins — 2001 · Projeto: Oscar Niemeyer</p>
+
+      <div class="mem-stats">
+        <div class="mem-stat">
+          <div class="mem-stat-val">2001</div>
+          <div class="mem-stat-lbl">Inauguração</div>
+        </div>
+        <div class="mem-stat">
+          <div class="mem-stat-val">570m²</div>
+          <div class="mem-stat-lbl">Área expositiva</div>
+        </div>
+        <div class="mem-stat">
+          <div class="mem-stat-val">81</div>
+          <div class="mem-stat-lbl">Peças originais</div>
+        </div>
+      </div>
+
+      <p>Na Praça dos Girassóis de Palmas, uma das maiores praças cívicas do mundo, ergue-se o Memorial Coluna Prestes projetado pelo arquiteto Oscar Niemeyer — amigo pessoal de Luiz Carlos Prestes e um dos maiores nomes da arquitetura mundial do século XX.</p>
+      <p>Com 570m² de área expositiva, o memorial abriga 81 peças originais doadas pela família de Prestes, incluindo objetos pessoais, correspondências, fotografias e documentos inéditos. A escolha de Palmas não é aleatória: o atual estado do Tocantins era, em 1926, o remoto norte de Goiás, uma das regiões mais marcantes da passagem da Coluna.</p>
+
+      <div class="niemeyer-quote">
+        <p>"Prestes foi um homem que lutou pela justiça com uma coragem que poucos têm. É uma honra poder guardar sua memória neste espaço."</p>
+        <cite>— Oscar Niemeyer, sobre o projeto do Memorial de Palmas</cite>
+      </div>
+
+      <p>A arquitetura do memorial dialoga com o estilo orgânico e humanista de Niemeyer. As linhas curvas e o jogo de luz natural criam um ambiente que convida à contemplação — um contraste deliberado com a dureza da realidade que o acervo documenta.</p>
+
+      <div class="mem-infos-grid" style="background:rgba(201,168,76,0.1);">
+        <div class="mem-info-item" style="background:var(--creme);">
+          <p class="mem-info-label">Endereço</p>
+          <p class="mem-info-valor">Praça dos Girassóis, s/n<br>Centro, Palmas — TO</p>
+        </div>
+        <div class="mem-info-item" style="background:var(--creme);">
+          <p class="mem-info-label">Horários</p>
+          <p class="mem-info-valor">Terça–Domingo<br>9h às 18h</p>
+        </div>
+        <div class="mem-info-item" style="background:var(--creme);">
+          <p class="mem-info-label">Entrada</p>
+          <p class="mem-info-valor">Gratuita</p>
+        </div>
+        <div class="mem-info-item" style="background:var(--creme);">
+          <p class="mem-info-label">Acessibilidade</p>
+          <p class="mem-info-valor">Totalmente adaptado<br>para PCDs</p>
+        </div>
+        <div class="mem-info-item" style="background:var(--creme);">
+          <p class="mem-info-label">Visitas guiadas</p>
+          <p class="mem-info-valor">Disponíveis com<br>agendamento prévio</p>
+        </div>
+        <div class="mem-info-item" style="background:var(--creme);">
+          <p class="mem-info-label">Arquiteto</p>
+          <p class="mem-info-valor">Oscar Niemeyer<br>(1907–2012)</p>
+        </div>
+      </div>
+
+      <div class="mem-btns">
+        <a href="#visitar" class="btn-prim">Como Chegar</a>
+        <a href="#" class="btn-sec">Agendar Visita</a>
+      </div>
+    </div>
+
+    <div class="mem-visual">
+      <div class="mem-foto-principal" style="background:#1A1A2A;">
+        <svg width="160" height="130" viewBox="0 0 160 130" fill="none" opacity="0.2">
+          <!-- Forma orgânica estilo Niemeyer -->
+          <path d="M20 100 Q20 40 80 20 Q140 40 140 100 Q140 115 80 120 Q20 115 20 100Z" fill="#1A2A1A" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M40 95 Q40 55 80 40 Q120 55 120 95" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.6"/>
+          <!-- Coluna central estilo obelisco -->
+          <rect x="74" y="15" width="12" height="90" rx="3" fill="#8B1A1A" opacity="0.7"/>
+          <path d="M68 15 L80 5 L92 15" fill="#C9A84C" opacity="0.5"/>
+          <!-- Praça -->
+          <ellipse cx="80" cy="108" rx="55" ry="10" fill="none" stroke="#8A6B22" stroke-width="0.8" opacity="0.5"/>
+        </svg>
+        <p class="mem-foto-caption">📷 Memorial Coluna Prestes — Praça dos Girassóis, Palmas/TO · Projeto Oscar Niemeyer, 2001</p>
+      </div>
+      <div class="mem-fotos-mini">
+        <div class="mem-foto-mini" style="background:#0C0C18;">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.3"><path d="M4 20 Q4 8 15 4 Q26 8 26 20" stroke="#C9A84C" stroke-width="1" fill="none"/></svg>
+        </div>
+        <div class="mem-foto-mini" style="background:#0C0C18;">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.3"><rect x="3" y="4" width="24" height="16" rx="2" stroke="#C9A84C" stroke-width="1"/><path d="M3 10 L27 10" stroke="#C9A84C" stroke-width="0.7"/></svg>
+        </div>
+        <div class="mem-foto-mini" style="background:#0C0C18;">
+          <svg width="30" height="24" viewBox="0 0 30 24" fill="none" opacity="0.3"><ellipse cx="15" cy="14" rx="10" ry="7" stroke="#C9A84C" stroke-width="1"/><line x1="15" y1="3" x2="15" y2="21" stroke="#8B1A1A" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+      <p style="font-size:0.75rem; color:#888; font-style:italic; text-align:center; margin-top:0.4rem;">📷 Substituir pelas fotografias reais do Memorial de Palmas</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- A ROTA DA COLUNA — 11 ESTADOS            -->
+<!-- ══════════════════════════════════════════ -->
+<section id="rota" class="rota-section">
+  <div class="rota-grid">
+
+    <div class="rota-texto">
+      <span class="sec-label">A Rota Histórica</span>
+      <h2 class="sec-title light">11 Estados, Uma Marcha</h2>
+      <p style="margin-top:1rem; color:#C0B49E; line-height:1.85; margin-bottom:1.1rem;">Entre outubro de 1924 e fevereiro de 1927, a Coluna Prestes atravessou 11 estados brasileiros numa travessia de aproximadamente 25.000 quilômetros. Cada estado tem seus pontos de memória — lugares onde a passagem da Coluna deixou marca.</p>
+      <p style="color:#C0B49E; line-height:1.85; margin-bottom:1.1rem;">Ao longo da rota, municípios preservam placas, monumentos, registros em câmaras municipais e tradições orais que mantêm viva a lembrança da marcha. O projeto do Memorial busca mapear e conectar todos esses pontos em uma rede nacional de memória.</p>
+      <div style="border-left:3px solid var(--ouro-claro); padding:0.8rem 1.5rem; background:rgba(201,168,76,0.05); margin:1.8rem 0; font-style:italic; color:var(--ouro-claro); font-size:1rem; line-height:1.6;">
+        "A Coluna não pertence apenas a Santo Ângelo ou a Palmas. Ela pertence a cada cidade que atravessou, a cada família que ajudou, a cada sertanejo que a viu passar."
+      </div>
+      <a href="linha-do-tempo.html" class="btn-sec" style="margin-top:0.5rem;">Ver a Linha do Tempo Completa</a>
+    </div>
+
+    <div>
+      <p style="font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--ouro); font-family:var(--fonte-corpo); margin-bottom:1rem;">Estados percorridos</p>
+      <div class="estados-grid">
+        <div class="estado-item">
+          <div class="estado-sigla">RS</div>
+          <div class="estado-nome">Rio Grande do Sul</div>
+          <div class="estado-ano">Out 1924</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">SC</div>
+          <div class="estado-nome">Santa Catarina</div>
+          <div class="estado-ano">Nov 1924</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">PR</div>
+          <div class="estado-nome">Paraná</div>
+          <div class="estado-ano">Dez 1924</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">MS</div>
+          <div class="estado-nome">Mato Grosso do Sul</div>
+          <div class="estado-ano">Jan–Mar 1925</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">MT</div>
+          <div class="estado-nome">Mato Grosso</div>
+          <div class="estado-ano">Abr 1925</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">GO</div>
+          <div class="estado-nome">Goiás</div>
+          <div class="estado-ano">Jun–Dez 1925</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">TO</div>
+          <div class="estado-nome">Tocantins (N. Goiás)</div>
+          <div class="estado-ano">Jan 1926</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">PI</div>
+          <div class="estado-nome">Piauí</div>
+          <div class="estado-ano">Mar 1926</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">MA</div>
+          <div class="estado-nome">Maranhão</div>
+          <div class="estado-ano">Abr 1926</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">CE</div>
+          <div class="estado-nome">Ceará</div>
+          <div class="estado-ano">Mai 1926</div>
+        </div>
+        <div class="estado-item">
+          <div class="estado-sigla">BA</div>
+          <div class="estado-nome">Bahia</div>
+          <div class="estado-ano">Set 1926</div>
+        </div>
+        <div class="estado-item" style="background:rgba(139,26,26,0.15);">
+          <div class="estado-sigla" style="color:var(--vermelho-vivo);">+</div>
+          <div class="estado-nome">Outros estados<br>da rota</div>
+          <div class="estado-ano">1924–1927</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PONTOS DE MEMÓRIA MENORES                 -->
+<!-- ══════════════════════════════════════════ -->
+<section id="pontos" class="pontos-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="sec-label">Além dos Memoriais</span>
+    <h2 class="sec-title">Pontos de Memória pela Rota</h2>
+    <p class="corpo" style="max-width:700px; margin-top:0.5rem;">Em cada estado atravessado, a passagem da Coluna deixou rastros preservados pela memória local. Conheça alguns dos principais pontos históricos ao longo da rota.</p>
+  </div>
+
+  <div class="pontos-grid">
+
+    <div class="ponto-card">
+      <div class="ponto-card-img" style="background:#1C1008;">
+        <svg width="70" height="55" viewBox="0 0 70 55" fill="none" opacity="0.25">
+          <path d="M8 48 L35 8 L62 48 Z" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <line x1="35" y1="8" x2="35" y2="48" stroke="#8B1A1A" stroke-width="1.5"/>
+        </svg>
+        <span class="ponto-card-uf">PR</span>
+        <p class="ponto-card-tipo">Monumento histórico</p>
+      </div>
+      <div class="ponto-card-body">
+        <h3>Marco da União — Catanduvas</h3>
+        <span class="cidade">Catanduvas — Paraná</span>
+        <p>Local da junção entre as forças gaúchas de Prestes e as tropas paulistas de Miguel Costa em dezembro de 1924, formando oficialmente a Coluna Prestes.</p>
+        <a href="#" class="lnk-vermelho">Ver no mapa →</a>
+      </div>
+    </div>
+
+    <div class="ponto-card">
+      <div class="ponto-card-img" style="background:#0C1018;">
+        <svg width="70" height="55" viewBox="0 0 70 55" fill="none" opacity="0.25">
+          <ellipse cx="35" cy="30" rx="28" ry="18" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M18 42 Q35 15 52 42" fill="#8B1A1A" opacity="0.6"/>
+          <rect x="30" y="8" width="10" height="35" rx="2" fill="#C9A84C" opacity="0.5"/>
+        </svg>
+        <span class="ponto-card-uf">MT</span>
+        <p class="ponto-card-tipo">Ponto histórico</p>
+      </div>
+      <div class="ponto-card-body">
+        <h3>Pontos de Travessia — Araguaia</h3>
+        <span class="cidade">Barra do Garças — Mato Grosso</span>
+        <p>Local da famosa travessia do Rio Araguaia, um dos momentos mais dramáticos da marcha, em que homens e animais cruzaram com a água no pescoço.</p>
+        <a href="#" class="lnk-vermelho">Ver no mapa →</a>
+      </div>
+    </div>
+
+    <div class="ponto-card">
+      <div class="ponto-card-img" style="background:#101808;">
+        <svg width="70" height="55" viewBox="0 0 70 55" fill="none" opacity="0.25">
+          <rect x="8" y="15" width="54" height="35" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
+          <path d="M8 15 L35 5 L62 15" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <rect x="25" y="28" width="20" height="22" rx="2" fill="#8B1A1A" opacity="0.7"/>
+        </svg>
+        <span class="ponto-card-uf">TO</span>
+        <p class="ponto-card-tipo">Memorial regional</p>
+      </div>
+      <div class="ponto-card-body">
+        <h3>Memória no Norte de Goiás</h3>
+        <span class="cidade">Municípios do Tocantins</span>
+        <p>Cidades do antigo norte de Goiás, hoje estado do Tocantins, guardam memórias da passagem da Coluna em janeiro de 1926. O estado homenageia Prestes com o Memorial de Palmas.</p>
+        <a href="#palmas" class="lnk-vermelho">Ver Memorial de Palmas →</a>
+      </div>
+    </div>
+
+    <div class="ponto-card">
+      <div class="ponto-card-img" style="background:#180C08;">
+        <svg width="70" height="55" viewBox="0 0 70 55" fill="none" opacity="0.25">
+          <path d="M10 45 Q20 20 35 12 Q50 20 60 45" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="35" cy="12" r="6" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <line x1="10" y1="45" x2="60" y2="45" stroke="#8B1A1A" stroke-width="1.5"/>
+        </svg>
+        <span class="ponto-card-uf">PI</span>
+        <p class="ponto-card-tipo">Registro histórico</p>
+      </div>
+      <div class="ponto-card-body">
+        <h3>Sertão do Piauí</h3>
+        <span class="cidade">Sertão piauiense — Piauí</span>
+        <p>A passagem da Coluna pelo Piauí em março de 1926 marcou profundamente as comunidades locais. Registros orais e documentos em câmaras municipais preservam a memória do evento.</p>
+        <a href="#" class="lnk-vermelho">Ver no mapa →</a>
+      </div>
+    </div>
+
+    <div class="ponto-card">
+      <div class="ponto-card-img" style="background:#0C1010;">
+        <svg width="70" height="55" viewBox="0 0 70 55" fill="none" opacity="0.25">
+          <rect x="5" y="10" width="60" height="40" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="35" cy="30" r="12" stroke="#C9A84C" stroke-width="1"/>
+          <circle cx="35" cy="30" r="4" fill="#8B1A1A"/>
+          <rect x="18" y="4" width="10" height="8" rx="1" fill="#C9A84C" opacity="0.5"/>
+        </svg>
+        <span class="ponto-card-uf">CE</span>
+        <p class="ponto-card-tipo">Memória oral</p>
+      </div>
+      <div class="ponto-card-body">
+        <h3>Rastros no Ceará</h3>
+        <span class="cidade">Sertão cearense — Ceará</span>
+        <p>No sertão cearense, a memória da Coluna mistura-se às lendas regionais. Famílias de municípios do interior guardam relatos de bisavós que viram os "soldados de Prestes" passar.</p>
+        <a href="#" class="lnk-vermelho">Ver no mapa →</a>
+      </div>
+    </div>
+
+    <div class="ponto-card">
+      <div class="ponto-card-img" style="background:#181010;">
+        <svg width="70" height="55" viewBox="0 0 70 55" fill="none" opacity="0.25">
+          <path d="M5 45 L35 8 L65 45 Z" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="25" cy="35" r="5" fill="#8B1A1A"/>
+          <circle cx="45" cy="35" r="5" fill="#8B1A1A"/>
+          <circle cx="35" cy="22" r="5" fill="#C9A84C" opacity="0.7"/>
+        </svg>
+        <span class="ponto-card-uf">MT</span>
+        <p class="ponto-card-tipo">Marco fronteiriço</p>
+      </div>
+      <div class="ponto-card-body">
+        <h3>Fronteira Brasil–Bolívia</h3>
+        <span class="cidade">Sudoeste do Mato Grosso</span>
+        <p>O ponto de cruzamento da fronteira em fevereiro de 1927 marca o encerramento da marcha no território brasileiro. Um marco simbólico na memória da Coluna.</p>
+        <a href="#" class="lnk-vermelho">Ver no mapa →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Botão ver todos -->
+  <div style="text-align:center; margin-top:3rem;">
+    <a href="#" class="btn-prim">Ver Todos os Pontos Históricos no Mapa</a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════ -->
+<!-- COMO VISITAR OS DOIS MEMORIAIS           -->
+<!-- ══════════════════════════════════════════ -->
+<section id="visitar" class="visitar-section">
+  <div style="max-width:1200px; margin:0 auto;">
+    <span class="sec-label">Planeje sua Visita</span>
+    <h2 class="sec-title">Como Visitar</h2>
+    <p class="corpo" style="max-width:680px; margin-top:0.5rem;">Os dois memoriais institucionais são de acesso gratuito e abertos ao público. Veja abaixo todas as informações para planejar sua visita.</p>
+  </div>
+
+  <div class="visitar-grid">
+
+    <!-- Santo Ângelo -->
+    <div class="visitar-card">
+      <div class="visitar-header">
+        <div class="visitar-header-num">01</div>
+        <div class="visitar-header-info">
+          <h3>Santo Ângelo — RS</h3>
+          <span class="visitar-header-sub">Memorial Coluna Prestes · Estação Ferroviária</span>
+        </div>
+      </div>
+      <div class="visitar-body">
+        <ul class="visitar-list">
+          <li><strong>Endereço:</strong> Antiga Estação Ferroviária, Centro — Santo Ângelo/RS</li>
+          <li><strong>Funcionamento:</strong> Segunda a Sexta · 9h–12h e 14h–17h · Sábado · 9h–12h</li>
+          <li><strong>Entrada:</strong> Gratuita e aberta ao público</li>
+          <li><strong>Grupos escolares:</strong> Agendamento obrigatório por telefone ou e-mail</li>
+          <li><strong>Acessibilidade:</strong> Rampa de acesso e banheiro adaptado para PCDs</li>
+          <li><strong>Estacionamento:</strong> Disponível nas ruas do entorno da Estação</li>
+          <li><strong>Distância de Porto Alegre:</strong> Aprox. 490 km (BR-285 e RS-344)</li>
+        </ul>
+        <div class="visitar-mapa">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.2">
+            <circle cx="30" cy="26" r="18" stroke="#C9A84C" stroke-width="1.5"/>
+            <circle cx="30" cy="26" r="5" fill="#8B1A1A"/>
+            <path d="M30 26 L30 52" stroke="#8B1A1A" stroke-width="2"/>
+          </svg>
+          <p>🗺️ Incorporar Google Maps — Santo Ângelo/RS</p>
+        </div>
+        <div style="padding:1.2rem 0 0; display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <a href="#" class="btn-prim">Abrir no Google Maps</a>
+          <a href="#" class="btn-sec">Agendar Visita</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Palmas -->
+    <div class="visitar-card">
+      <div class="visitar-header">
+        <div class="visitar-header-num">02</div>
+        <div class="visitar-header-info">
+          <h3>Palmas — TO</h3>
+          <span class="visitar-header-sub">Memorial Oscar Niemeyer · Praça dos Girassóis</span>
+        </div>
+      </div>
+      <div class="visitar-body">
+        <ul class="visitar-list">
+          <li><strong>Endereço:</strong> Praça dos Girassóis, s/n — Centro, Palmas/TO</li>
+          <li><strong>Funcionamento:</strong> Terça a Domingo · 9h às 18h</li>
+          <li><strong>Entrada:</strong> Gratuita e aberta ao público</li>
+          <li><strong>Visitas guiadas:</strong> Disponíveis — agendamento antecipado recomendado</li>
+          <li><strong>Acessibilidade:</strong> Totalmente adaptado para pessoas com deficiência</li>
+          <li><strong>Estacionamento:</strong> Amplo estacionamento na Praça dos Girassóis</li>
+          <li><strong>Distância de Brasília:</strong> Aprox. 970 km (BR-020 e TO-010)</li>
+        </ul>
+        <div class="visitar-mapa">
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" opacity="0.2">
+            <circle cx="30" cy="26" r="18" stroke="#C9A84C" stroke-width="1.5"/>
+            <circle cx="30" cy="26" r="5" fill="#8B1A1A"/>
+            <path d="M30 26 L30 52" stroke="#8B1A1A" stroke-width="2"/>
+          </svg>
+          <p>🗺️ Incorporar Google Maps — Palmas/TO</p>
+        </div>
+        <div style="padding:1.2rem 0 0; display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <a href="#" class="btn-prim">Abrir no Google Maps</a>
+          <a href="#" class="btn-sec">Agendar Visita</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2>Conheça a História que Esses Espaços Guardam</h2>
+  <p>Explore a linha do tempo da marcha, participe das oficinas e deixe sua contribuição para a memória da Coluna Prestes.</p>
+  <div class="cta-btns">
+    <a href="linha-do-tempo.html" class="btn-prim">Linha do Tempo</a>
+    <a href="#" class="btn-ghost">Agenda de Oficinas</a>
+    <a href="sobre.html" class="btn-ghost">Sobre o Memorial</a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer id="contato">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">Memorial Coluna Prestes</div>
+      <p>Preservando a memória de uma das maiores marchas revolucionárias da história do Brasil.</p>
+      <p style="margin-top:1rem; font-size:0.85rem;">Antiga Estação Ferroviária<br>Santo Ângelo — RS, Brasil</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#"><a href="index.html" style="color:inherit;text-decoration:none;">Início</a></a></li>
+        <li><a href="sobre.html">Sobre o Memorial</a></li>
+        <li><a href="linha-do-tempo.html">Linha do Tempo</a></li>
+        <li><a href="memoriais.html">Memoriais</a></li>
+        <li><a href="agenda.html">Agenda de Oficinas</a></li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="biblioteca.html">Biblioteca</a></li>
+        <li><a href="biblioteca.html#referencias">Bibliografia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informações</h4>
+      <ul>
+        <li><a href="contato.html#horarios">Horários de Visita</a></li>
+        <li><a href="contato.html">Agendamento de Grupos</a></li>
+        <li><a href="contato.html#imprensa">Imprensa</a></li>
+        <li><a href="contato.html">Parceiros</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:0.85rem; color:#555; line-height:1.6;">
+        Santo Ângelo: Seg–Sex · 9h–12h / 14h–17h · Sáb · 9h–12h<br>
+        Palmas: Ter–Dom · 9h–18h
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Memorial Coluna Prestes · Todos os direitos reservados</p>
+    <span class="wp-badge">WordPress + Elementor</span>
+  </div>
+</footer>
+
+</body>
+</html>
